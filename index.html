@@ -713,13 +713,13 @@
 
   /* Orqa tomon: Sharqona zamonaviy lokatsiya dizayni */
   .card-back {
-    background: linear-gradient(135deg, #0f1e1a 0%, #050b09 100%); /* To'q zumrad fon */
-    border: 1px solid rgba(212, 175, 55, 0.3); /* Nozik oltin ramka */
-    transform: rotateY(180deg); /* Orqa tomon boshida teskari turadi */
+    background: linear-gradient(135deg, #0f1e1a 0%, #050b09 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 30px;
+    padding: 16px; /* TO'G'RILANDI: Paddingni 30px dan 16px ga kamaytirdik, shunda ichki elementlarga joy ko'payadi */
     box-sizing: border-box;
   }
 
@@ -736,7 +736,6 @@
     width: 100%;
     height: 100%;
     border: none;
-    filter: grayscale(1) invert(0.9) sepia(0.2); /* Xaritani to'q va oltin rangga moslash */
   }
 
   .card-back-footer {
@@ -744,6 +743,7 @@
     justify-content: space-between;
     align-items: center;
     color: #e5e7eb;
+    margin-top: 10px; /* Qo'shimcha nafas olish joyi */
   }
 
   .btn-route {
@@ -1613,7 +1613,7 @@
       <div class="city-card-inner">
         
         <div class="card-front">
-          <div class="city-card-bg" style="background-image: url('assets/termiz.jpg')"></div>
+          <div class="city-card-bg" style="background-image: url('assets/surxondaryo.jpg')"></div>
           <div class="city-card-overlay"></div>
           <div class="city-card-content">
             <div class="city-card-num">03</div>
@@ -2058,28 +2058,36 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     // City Card aylanish logikasi (Aqlli akkordeon tizimi)
-  document.querySelectorAll('.city-card').forEach(card => {
-    card.addEventListener('click', function(e) {
-      // Agar xarita (iframe) yoki uning ichidagi elementlar bosilsa, karta aylanib ketmasligi uchun
-      if (e.target.tagName === 'IFRAME') return; 
+    // City Card aylanish logikasi (Xarita himoyasi bilan)
+    document.querySelectorAll('.city-card').forEach(card => {
+      card.addEventListener('click', function(e) {
 
-      // Agar hozir bosilgan karta allaqachon ochiq bo'lsa - uni qaytarib yopamiz
-      if (this.classList.contains('is-flipped')) {
-        this.classList.remove('is-flipped');
-      } 
-      // Agar yangi (yopiq) karta bosilgan bo'lsa:
-      else {
-        // 1. Oldin ochilgan barcha kartalardan 'is-flipped' klassini olib tashlaymiz (yopamiz)
-        document.querySelectorAll('.city-card').forEach(otherCard => {
-          otherCard.classList.remove('is-flipped');
-        });
-
-        // 2. Faqat hozir bosilgan yangi kartaga klass qo'shib ochamiz
-        this.classList.add('is-flipped');
-      }
+        // 1. Agar klik IFRAME (xarita) ichida sodir bo'lsa, mutloqo hech narsa qilma
+        if (e.target.tagName === 'IFRAME') return;
+      
+        // 2. Agar klik xarita konteyneriga (.map-container) tegishli bo'lsa, aylanishni to'xtat
+        if (e.target.closest('.map-container')) return;
+      
+        // 3. Agar "Yopish" (btn-route) tugmasi bosilsa, kartani majburan yop
+        if (e.target.classList.contains('btn-route')) {
+          this.classList.remove('is-flipped');
+          return;
+        }
+      
+        // --- AGAR KARTANING BOSHQA JOYI BOSILSA (AKKORDEON MANTIQI) ---
+        if (this.classList.contains('is-flipped')) {
+          // Ochiq bo'lsa, yopamiz
+          this.classList.remove('is-flipped');
+        } else {
+          // Boshqalarini yopib, buni ochamiz
+          document.querySelectorAll('.city-card').forEach(otherCard => {
+            otherCard.classList.remove('is-flipped');
+          });
+          this.classList.add('is-flipped');
+        }
+      });
     });
   });
-});
 
   // Scroll fade-in
   const observer = new IntersectionObserver((entries) => {
