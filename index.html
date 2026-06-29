@@ -2048,12 +2048,26 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    // City Card aylanish logikasi (Aqlli akkordeon tizimi)
   document.querySelectorAll('.city-card').forEach(card => {
     card.addEventListener('click', function(e) {
-      // Agar xarita ichidagi biron narsa bosilsa, karta aylanib ketmasligi uchun
+      // Agar xarita (iframe) yoki uning ichidagi elementlar bosilsa, karta aylanib ketmasligi uchun
       if (e.target.tagName === 'IFRAME') return; 
-      
-      this.classList.toggle('is-flipped');
+    
+      // Agar hozir bosilgan karta allaqachon ochiq bo'lsa - uni qaytarib yopamiz
+      if (this.classList.contains('is-flipped')) {
+        this.classList.remove('is-flipped');
+      } 
+      // Agar yangi (yopiq) karta bosilgan bo'lsa:
+      else {
+        // 1. Oldin ochilgan barcha kartalardan 'is-flipped' klassini olib tashlaymiz (yopamiz)
+        document.querySelectorAll('.city-card').forEach(otherCard => {
+          otherCard.classList.remove('is-flipped');
+        });
+        
+        // 2. Faqat hozir bosilgan yangi kartaga klass qo'shib ochamiz
+        this.classList.add('is-flipped');
+      }
     });
   });
 });
