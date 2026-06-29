@@ -505,9 +505,88 @@
   .city-card {
     position: relative;
     height: 560px;
-    overflow: hidden;
     cursor: pointer;
+    perspective: 1500px;
   }
+
+  .city-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); /* Yumshoq aylanish */
+  }
+
+  .city-card.is-flipped .city-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Orqa tomoni aylanganda ko'rinmasligi uchun */
+    backface-visibility: hidden;
+    border-radius: 16px; /* Loyihangiz dizayniga qarab */
+    overflow: hidden;
+  }
+
+  /* Old tomon (Sizda bor bo'lgan stil) */
+  .card-front {
+    background: #111; /* Zaxira fon */
+  }
+
+  /* Orqa tomon: Sharqona zamonaviy lokatsiya dizayni */
+  .card-back {
+    background: linear-gradient(135deg, #0f1e1a 0%, #050b09 100%); /* To'q zumrad fon */
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Nozik oltin ramka */
+    transform: rotateY(180deg); /* Orqa tomon boshida teskari turadi */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  /* Orqa tomondagi xarita yoki interfeys elementlari uchun */
+  .map-container {
+    width: 100%;
+    height: 70%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(1) invert(0.9) sepia(0.2); /* Xaritani to'q va oltin rangga moslash */
+  }
+
+  .card-back-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e5e7eb;
+  }
+
+  .btn-route {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-route:hover {
+    background: #d4af37;
+    color: #000;
+  }
+
   /* Background image via inline style */
   .city-card-bg {
     position: absolute;
@@ -1265,6 +1344,7 @@
 </section>
 
 <!-- SHAHARLAR SAYOHATI -->
+<!-- SHAHARLAR SAYOHATI -->
 <section class="journey" id="shaharlar">
   <div class="journey-inner">
     <div class="journey-header fade-up">
@@ -1277,18 +1357,35 @@
   <div class="cities-track">
     <!-- Toshkent -->
     <div class="city-card fade-up">
-      <div class="city-card-bg" style="background-image: url('assets/toshkent.jpg')"></div>
-      <div class="city-card-overlay"></div>
-      <div class="city-card-content">
-        <div class="city-card-num">01</div>
-        <div>
-          <div class="city-card-date">6–8 Июль · 1–3 кун</div>
-          <div class="city-card-name">Тошкент</div>
-          <div class="city-card-desc">Форумнинг асосий маскани. Ислом цивилизацияси маркази биносида ялпи мажлислар ва расмий очилиш маросими.</div>
-          <div class="city-card-tags">
-            <span>7 Ялпи мажлис</span>
-            <span>Расмий очилиш</span>
-            <span>Маданий дастур</span>
+      <div class="city-card-inner">
+        <div class="card-front">
+          <div class="city-card-bg" style="background-image: url('assets/toshkent.jpg')"></div>
+          <div class="city-card-overlay"></div>
+          <div class="city-card-content">
+            <div class="city-card-num">01</div>
+            <div>
+              <div class="city-card-date">6–8 Июль · 1–3 кун</div>
+              <div class="city-card-name">Тошкент</div>
+              <div class="city-card-desc">Форумнинг асосий маскани. Ислом цивилизацияси маркази биносида ялпи мажлислар ва расмий очилиш маросими.</div>
+              <div class="city-card-tags">
+                <span>7 Ялпи мажлис</span>
+                <span>Расмий очилиш</span>
+                <span>Маданий дастур</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.123456789!2d69.2401!3d41.3268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE5JzM2LjUiTiA2OcKwMTQnMjQuNCJF!5e0!3m2!1suz!2s!4v1625000000000"></iframe>
+          </div>
+
+          <div class="card-back-footer">
+            <div>
+              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;">Ислом цивилизацияси маркази</h4>
+              <p style="color: #a3a3a3; margin: 0; font-size: 13px;">Тошкент ш., Олмазор тумани</p>
+            </div>
+            <button class="btn-route">Yopish</button>
           </div>
         </div>
       </div>
@@ -1296,18 +1393,35 @@
 
     <!-- Samarqand -->
     <div class="city-card fade-up">
-      <div class="city-card-bg" style="background-image: url('assets/samarqand.jpg')"></div>
-      <div class="city-card-overlay"></div>
-      <div class="city-card-content">
-        <div class="city-card-num">02</div>
-        <div>
-          <div class="city-card-date">9–10 Июль · 4–5 кун</div>
-          <div class="city-card-name">Самарқанд</div>
-          <div class="city-card-desc">Имом Бухорий ва Имом Мотуридийга бағишланган халқаро конференциялар. "Боқий шаҳар" мажмуаси.</div>
-          <div class="city-card-tags">
-            <span>2 Конференция</span>
-            <span>Имом Бухорий мажмуаси</span>
-            <span>Чокардиза</span>
+      <div class="city-card-inner">
+        <div class="card-front">
+          <div class="city-card-bg" style="background-image: url('assets/samarqand.jpg')"></div>
+          <div class="city-card-overlay"></div>
+          <div class="city-card-content">
+            <div class="city-card-num">02</div>
+            <div>
+              <div class="city-card-date">9–10 Июль · 4–5 кун</div>
+              <div class="city-card-name">Самарқанд</div>
+              <div class="city-card-desc">Имом Бухорий ва Имом Мотуридийга бағишланган халқаро конференциялар. "Боқий шаҳар" мажмуаси.</div>
+              <div class="city-card-tags">
+                <span>2 Конференция</span>
+                <span>Имом Бухорий мажмуаси</span>
+                <span>Чокардиза</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.123456789!2d69.2401!3d41.3268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE5JzM2LjUiTiA2OcKwMTQnMjQuNCJF!5e0!3m2!1suz!2s!4v1625000000000"></iframe>
+          </div>
+
+          <div class="card-back-footer">
+            <div>
+              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;">Ислом цивилизацияси маркази</h4>
+              <p style="color: #a3a3a3; margin: 0; font-size: 13px;">Тошкент ш., Олмазор тумани</p>
+            </div>
+            <button class="btn-route">Yopish</button>
           </div>
         </div>
       </div>
@@ -1315,18 +1429,35 @@
 
     <!-- Surxondaryo -->
     <div class="city-card fade-up">
-      <div class="city-card-bg" style="background-image: url('assets/surxondaryo.jpg')"></div>
-      <div class="city-card-overlay"></div>
-      <div class="city-card-content">
-        <div class="city-card-num">03</div>
-        <div>
-          <div class="city-card-date">9–10 Июль · 4–5 кун</div>
-          <div class="city-card-name">Термиз</div>
-          <div class="city-card-desc">Термиз ҳадис мактаби конференцияси. Ҳаким Термизий ва Имом Термизий зиёратгоҳлари.</div>
-          <div class="city-card-tags">
-            <span>1 Конференция</span>
-            <span>Ҳаким Термизий</span>
-            <span>Илмий–тадқиқот маркази</span>
+      <div class="city-card-inner">
+        <div class="card-front">
+          <div class="city-card-bg" style="background-image: url('assets/surxondaryo.jpg')"></div>
+          <div class="city-card-overlay"></div>
+          <div class="city-card-content">
+            <div class="city-card-num">03</div>
+            <div>
+              <div class="city-card-date">9–10 Июль · 4–5 кун</div>
+              <div class="city-card-name">Термиз</div>
+              <div class="city-card-desc">Термиз ҳадис мактаби конференцияси. Ҳаким Термизий ва Имом Термизий зиёратгоҳлари.</div>
+              <div class="city-card-tags">
+                <span>1 Конференция</span>
+                <span>Ҳаким Термизий</span>
+                <span>Илмий–тадқиқот маркази</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.123456789!2d69.2401!3d41.3268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE5JzM2LjUiTiA2OcKwMTQnMjQuNCJF!5e0!3m2!1suz!2s!4v1625000000000"></iframe>
+          </div>
+          
+          <div class="card-back-footer">
+            <div>
+              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;">Ислом цивилизацияси маркази</h4>
+              <p style="color: #a3a3a3; margin: 0; font-size: 13px;">Тошкент ш., Олмазор тумани</p>
+            </div>
+            <button class="btn-route">Yopish</button>
           </div>
         </div>
       </div>
@@ -1717,6 +1848,17 @@
     document.getElementById(id).classList.add('active');
     (el || event.target).classList.add('active');
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.city-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Agar xarita ichidagi biron narsa bosilsa, karta aylanib ketmasligi uchun
+      if (e.target.tagName === 'IFRAME') return; 
+      
+      this.classList.toggle('is-flipped');
+    });
+  });
+});
 
   // Scroll fade-in
   const observer = new IntersectionObserver((entries) => {
