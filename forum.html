@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Халқаро Ислом Цивилизацияси Форуми · 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A1628;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --cream: #F8F5EE;
+    --cream-dark: #EDE8DC;
+    --mist: #8A9BB5;
+    --bronze: #7B5C2E;
+    --white: #FFFFFF;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── GEOMETRIC CANVAS ── */
+  .geo-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .geo-canvas svg {
+    position: absolute;
+    opacity: 0.045;
+  }
+  .geo-top { top: -10vh; right: -10vw; width: 55vw; animation: slowSpin 120s linear infinite; }
+  .geo-mid { bottom: 20vh; left: -15vw; width: 50vw; animation: slowSpin 90s linear infinite reverse; }
+
+  @keyframes slowSpin { to { transform: rotate(360deg); } }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,22,40,0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .nav-emblem {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 3px;
+  }
+  .nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.82rem;
+    line-height: 1.3;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-date {
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    border: 1px solid var(--glass-border);
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  /* Carousel slides */
+  .hero-slides {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.4s ease-in-out;
+  }
+  .hero-slide.active { opacity: 1; }
+
+  /* Dark overlay on every slide */
+  .hero-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(6,14,26,0.92) 0%, rgba(6,14,26,0.55) 50%, rgba(6,14,26,0.40) 100%),
+      linear-gradient(to right, rgba(6,14,26,0.3) 0%, transparent 60%);
+  }
+
+  /* Dot indicators */
+  .hero-dots {
+    position: absolute;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.6rem;
+    z-index: 3;
+  }
+  .hero-dot {
+    width: 28px; height: 2px;
+    background: rgba(201,168,76,0.35);
+    cursor: pointer;
+    transition: all 0.35s;
+    border: none;
+    padding: 0;
+  }
+  .hero-dot.active {
+    background: var(--gold);
+    width: 48px;
+  }
+
+  /* Slide location label */
+  .hero-slide-label {
+    position: absolute;
+    bottom: 7.5rem;
+    right: 4rem;
+    z-index: 3;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.5s;
+  }
+  .hero-slide-label::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: rgba(201,168,76,0.4);
+  }
+
+  .hero-bg { display: none; }
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(201,168,76,0.07) 1px, transparent 0);
+    background-size: 44px 44px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    padding: 0 2rem;
+    animation: heroIn 1.2s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid var(--glass-border);
+    padding: 0.45rem 1.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.4rem;
+    background: rgba(201,168,76,0.05);
+    animation: heroIn 1.2s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .hero-badge::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+  .hero-badge::after {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+    animation: heroIn 1.2s 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.95rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: var(--mist);
+    margin-bottom: 2.8rem;
+    animation: heroIn 1.2s 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    animation: heroIn 1.2s 0.65s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .hero-meta-item {
+    text-align: center;
+  }
+  .hero-meta-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-meta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--mist);
+    margin-top: 0.2rem;
+  }
+  .hero-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--glass-border);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.5;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint span {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .scroll-hint-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+  }
+  .gold-line {
+    width: 48px; height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 1.4rem 0 2.2rem;
+  }
+
+  /* ── MAQSAD ── */
+  .maqsad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 92vh;
+    overflow: hidden;
+  }
+
+  /* Left: text panel */
+  .maqsad-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7rem 5rem 7rem 6rem;
+    background: var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+  .maqsad-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+  .maqsad-lead {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(248,245,238,0.72);
+    margin-bottom: 3.5rem;
+    max-width: 460px;
+  }
+
+  /* Stats row */
+  .maqsad-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--glass-border);
+    border: 1px solid var(--glass-border);
+    max-width: 420px;
+  }
+  .maqsad-stat {
+    padding: 1.6rem 1.4rem;
+    background: var(--ink);
+    transition: background 0.3s;
+  }
+  .maqsad-stat:hover { background: rgba(201,168,76,0.06); }
+  .maqsad-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .maqsad-stat-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--mist);
+  }
+
+  /* Right: image panel */
+  .maqsad-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .maqsad-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 8s ease;
+  }
+  .maqsad-right:hover img { transform: scale(1.04); }
+  .maqsad-right-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, rgba(6,14,26,0.35) 0%, transparent 50%),
+      linear-gradient(to top, rgba(6,14,26,0.6) 0%, transparent 40%);
+  }
+  .maqsad-right-caption {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    right: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.2);
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .maqsad-cap-item {
+    padding: 1.2rem 1rem;
+    background: rgba(6,14,26,0.75);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .maqsad-cap-item:hover { background: rgba(201,168,76,0.12); }
+  .maqsad-cap-icon { color: var(--gold); margin-bottom: 0.5rem; }
+  .maqsad-cap-icon svg { width: 22px; height: 22px; }
+  .maqsad-cap-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--white);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .maqsad-cap-sub {
+    font-size: 0.65rem;
+    color: rgba(138,155,181,0.8);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .maqsad {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .maqsad-left {
+      padding: 4rem 2rem;
+    }
+    .maqsad-left::after { display: none; }
+    .maqsad-right { min-height: 50vh; }
+    .maqsad-right-caption { grid-template-columns: repeat(2,1fr); }
+  }
+
+  /* ══════════════════════════════════════
+     CITIES JOURNEY — Full-bleed image cards
+  ══════════════════════════════════════ */
+  .journey {
+    padding: 8rem 0;
+    background: linear-gradient(180deg, rgba(6,14,26,1) 0%, rgba(10,22,40,1) 100%);
+    overflow: hidden;
+  }
+  .journey-inner { max-width: 1400px; margin: 0 auto; padding: 0 4rem; }
+  .journey-header { text-align: center; margin-bottom: 5rem; }
+  .journey-header .gold-line { margin: 1.4rem auto 0; }
+
+  /* Three city cards side by side */
+  .cities-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .city-card {
+    position: relative;
+    height: 560px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  /* Background image via inline style */
+  .city-card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .city-card:hover .city-card-bg { transform: scale(1.08); }
+
+  /* Heavy gradient overlay */
+  .city-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(6,14,26,0.97) 0%,
+      rgba(6,14,26,0.6) 45%,
+      rgba(6,14,26,0.15) 100%
+    );
+    transition: background 0.5s;
+  }
+  .city-card:hover .city-card-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(6,14,26,0.98) 0%,
+      rgba(6,14,26,0.7) 50%,
+      rgba(6,14,26,0.25) 100%
+    );
+  }
+
+  /* Gold top border that animates on hover */
+  .city-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    z-index: 3;
+  }
+  .city-card:hover::before { transform: scaleX(1); }
+
+  .city-card-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.8rem 2.4rem;
+  }
+
+  .city-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: rgba(201,168,76,0.08);
+    line-height: 1;
+    position: absolute;
+    top: 2rem; right: 2rem;
+    transition: color 0.4s;
+  }
+  .city-card:hover .city-card-num { color: rgba(201,168,76,0.15); }
+
+  .city-card-date {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .city-card-date::before {
+    content: '';
+    width: 16px; height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .city-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .city-card-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: rgba(248,245,238,0.65);
+    max-width: 280px;
+    margin-bottom: 1.6rem;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: all 0.5s 0.1s;
+  }
+  .city-card:hover .city-card-desc { opacity: 1; transform: translateY(0); }
+
+  .city-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .city-card-tags span {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.3rem 0.8rem;
+    background: rgba(201,168,76,0.05);
+    backdrop-filter: blur(4px);
+    transition: background 0.3s;
+  }
+  .city-card:hover .city-card-tags span { background: rgba(201,168,76,0.12); }
+
+  /* ══════════════════════════════════════
+     DASTUR — Dark editorial layout
+  ══════════════════════════════════════ */
+  .dastur {
+    padding: 8rem 0;
+    background: #060E1A;
+  }
+  .dastur-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+  .dastur-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .dastur-header-left {}
+  .dastur-header-left .gold-line { margin-bottom: 0; }
+  .dastur-header-right {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--mist);
+    max-width: 400px;
+    justify-self: end;
+    text-align: right;
+  }
+
+  /* Day selector — vertical sidebar style */
+  .dastur-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    border: 1px solid var(--glass-border);
+  }
+
+  .days-sidebar {
+    border-right: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+  }
+  .day-tab {
+    padding: 1.4rem 1.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mist);
+    cursor: pointer;
+    transition: all 0.25s;
+    border: none;
+    border-bottom: 1px solid var(--glass-border);
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .day-tab:last-child { border-bottom: none; }
+  .day-tab-date {
+    font-size: 0.6rem;
+    color: rgba(138,155,181,0.5);
+    letter-spacing: 0.08em;
+    text-transform: none;
+    font-weight: 400;
+  }
+  .day-tab::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+  }
+  .day-tab.active, .day-tab:hover {
+    background: rgba(201,168,76,0.06);
+    color: var(--gold);
+  }
+  .day-tab.active::before { transform: scaleY(1); }
+
+  .days-content { overflow: hidden; }
+  .day-panel { display: none; padding: 2.5rem 3rem; }
+  .day-panel.active { display: block; }
+
+  .day-location {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .day-location svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+  .day-location span {
+    font-size: 0.75rem;
+    color: var(--mist);
+    letter-spacing: 0.06em;
+  }
+
+  .schedule-list { display: flex; flex-direction: column; }
+  .schedule-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(201,168,76,0.06);
+    align-items: start;
+    transition: all 0.2s;
+  }
+  .schedule-item:last-child { border-bottom: none; }
+  .schedule-item:hover {
+    background: rgba(201,168,76,0.03);
+    padding-left: 0.8rem;
+    margin-left: -0.8rem;
+    padding-right: 0.8rem;
+    margin-right: -0.8rem;
+  }
+  .schedule-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    color: var(--gold);
+    padding-top: 0.15rem;
+    letter-spacing: 0.03em;
+    opacity: 0.8;
+  }
+  .schedule-event {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(248,245,238,0.78);
+  }
+  .schedule-event strong {
+    color: var(--white);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.88rem;
+  }
+  .session-badge {
+    display: inline-block;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 0.18rem 0.6rem;
+    margin-bottom: 0.45rem;
+  }
+
+  /* ══════════════════════════════════════
+     SESSIYALAR — Bento-grid style
+  ══════════════════════════════════════ */
+  .sessions {
+    padding: 8rem 0;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .sessions::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .sessions-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+  .sessions-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .sessions-header-right {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* Bento grid: 2 wide + 4 smaller */
+  .sessions-bento {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Kartalar orasidagi masofa */
+    justify-content: center; /* Mana shu xossa oxirgi qatorni o'rtaga tekislaydi */
+    width: 100%;
+  }
+
+  .s-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 2.4rem 2.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+  }
+  .s-card-wide {
+    flex: 1 1 calc(50% - 10px); /* 2 tasi bir qatorni to'liq oladi */
+    min-width: 300px;
+  }
+  .s-card-narrow {
+    flex: 1 1 calc(33.333% - 14px); /* 3 tasi bir qatorga joylashadi */
+    min-width: 250px;
+  }
+
+  .s-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .s-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); }
+  .s-card:hover::before { opacity: 1; }
+
+  .s-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; }
+  .s-card-roman {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.25rem 0.6rem;
+    display: inline-block;
+  }
+  .s-card-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.4;
+    margin-top: 0.3rem;
+  }
+  .s-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+  .s-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    color: var(--mist);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: auto;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(201,168,76,0.08);
+  }
+  .s-card-footer::before {
+    content: '';
+    width: 12px; height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER — Premium dark footer
+  ══════════════════════════════════════ */
+  footer {
+    background: #040C18;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  /* Big quote banner */
+  .footer-quote {
+    padding: 5rem 4rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    position: relative;
+  }
+  .footer-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-style: italic;
+    color: rgba(248,245,238,0.5);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .footer-quote-text em { color: var(--gold); font-style: normal; }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .footer-col-wrap {
+    padding: 4rem 3rem;
+    border-right: 1px solid rgba(201,168,76,0.08);
+  }
+  .footer-col-wrap:last-child { border-right: none; }
+
+  .footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .footer-logo-img {
+    width: 44px; height: 44px;
+    object-fit: contain;
+    border-radius: 3px;
+  }
+  .footer-logo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .footer-brand-desc {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: rgba(138,155,181,0.7);
+    max-width: 300px;
+    margin-bottom: 2rem;
+  }
+
+  /* Date badge in footer */
+  .footer-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid var(--glass-border);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+  }
+  .footer-date-badge span { opacity: 0.5; }
+
+  .footer-col-title {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: rgba(201,168,76,0.6);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+  .footer-col-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .footer-col-list li {
+    font-size: 0.78rem;
+    color: rgba(138,155,181,0.65);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    line-height: 1.5;
+    transition: color 0.2s;
+  }
+  .footer-col-list li:hover { color: var(--cream); }
+  .footer-col-list li:last-child { border-bottom: none; }
+
+  /* Bottom bar */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem 4rem;
+  }
+  .footer-bottom-left {
+    font-size: 0.68rem;
+    color: rgba(138,155,181,0.35);
+    letter-spacing: 0.05em;
+  }
+  .footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .footer-bottom-flag {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(138,155,181,0.35);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .footer-bottom-flag::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: rgba(201,168,76,0.3);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .journey-inner, .dastur-inner, .sessions-inner { padding: 0 1.5rem; }
+    .cities-track { grid-template-columns: 1fr; }
+    .city-card { height: 360px; }
+    .city-card-desc { opacity: 1; transform: none; }
+    .dastur-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .dastur-header-right { text-align: left; }
+    .dastur-layout { grid-template-columns: 1fr; }
+    .days-sidebar { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--glass-border); }
+    .day-tab { border-bottom: none; border-right: 1px solid var(--glass-border); white-space: nowrap; }
+    .day-tab::before { top: auto; bottom: 0; left: 0; right: 0; width: auto; height: 2px; transform: scaleX(0); }
+    .day-tab.active::before { transform: scaleX(1); }
+    .sessions-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .sessions-bento { grid-template-columns: 1fr; }
+    .s-card-wide, .s-card-narrow { grid-column: span 1; }
+    .footer-main { grid-template-columns: 1fr; }
+    .footer-col-wrap { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.08); padding: 2.5rem 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; padding: 1.5rem 2rem; text-align: center; }
+    .hero-meta { gap: 1.5rem; }
+  }
+
+  /* ── FADE IN SCROLL ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.22,1,0.36,1);
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- Geometric background -->
+<div class="geo-canvas">
+  <svg class="geo-top" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#C9A84C" stroke-width="0.5">
+      <!-- 8-pointed Islamic star -->
+      <polygon points="300,60 340,200 460,200 370,280 400,420 300,340 200,420 230,280 140,200 260,200" fill="none"/>
+      <circle cx="300" cy="300" r="240" fill="none"/>
+      <circle cx="300" cy="300" r="200" fill="none"/>
+      <circle cx="300" cy="300" r="160" fill="none"/>
+      <circle cx="300" cy="300" r="120" fill="none"/>
+      <line x1="60" y1="300" x2="540" y2="300"/>
+      <line x1="300" y1="60" x2="300" y2="540"/>
+      <line x1="130" y1="130" x2="470" y2="470"/>
+      <line x1="470" y1="130" x2="130" y2="470"/>
+      <polygon points="300,100 400,150 440,260 390,370 290,410 190,370 150,260 190,150" fill="none"/>
+      <polygon points="300,140 380,180 410,265 375,355 290,385 205,355 175,265 205,180" fill="none"/>
+    </g>
+  </svg>
+  <svg class="geo-mid" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#C9A84C" stroke-width="0.5">
+      <circle cx="250" cy="250" r="200" fill="none"/>
+      <circle cx="250" cy="250" r="150" fill="none"/>
+      <circle cx="250" cy="250" r="100" fill="none"/>
+      <polygon points="250,50 310,190 460,190 340,280 390,440 250,350 110,440 160,280 40,190 190,190" fill="none"/>
+      <line x1="50" y1="250" x2="450" y2="250"/>
+      <line x1="250" y1="50" x2="250" y2="450"/>
+      <line x1="109" y1="109" x2="391" y2="391"/>
+      <line x1="391" y1="109" x2="109" y2="391"/>
+    </g>
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="assets/logo.png" alt="Forum logo" class="nav-emblem">
+    <div class="nav-title">
+      Ислом Цивилизацияси<br>I Халқаро Форуми
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#forum">Форум</a></li>
+    <li><a href="#shaharlar">Шаҳарлар</a></li>
+    <li><a href="#dastur">Дастур</a></li>
+    <li><a href="#sessiyalar">Сессиялар</a></li>
+  </ul>
+  <div class="nav-date">7–11 Июль 2026</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image: url('assets/toshkent.jpg')"></div>
+    <div class="hero-slide" style="background-image: url('assets/samarqand.jpg')"></div>
+    <div class="hero-slide" style="background-image: url('assets/surxondaryo.jpg')"></div>
+  </div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">I Халқаро Форум · Ўзбекистон · 2026</div>
+    <h1 class="hero-title">
+      Ислом Цивилизацияси:<br>
+      <em>Тинчлик, Бағрикенглик</em><br>
+      ва Илм–маърифат йўли
+    </h1>
+    <p class="hero-subtitle">
+      Тошкент · Самарқанд · Термиз — беш кун, уч шаҳар, битта буюк мерос
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">5</span>
+        <span class="hero-meta-label">Кун</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">3</span>
+        <span class="hero-meta-label">Шаҳар</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">7+</span>
+        <span class="hero-meta-label">Ялпи мажлис</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">3</span>
+        <span class="hero-meta-label">Конференция</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-slide-label" id="slideLabel">Тошкент</div>
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="goSlide(0)"></button>
+    <button class="hero-dot" onclick="goSlide(1)"></button>
+    <button class="hero-dot" onclick="goSlide(2)"></button>
+  </div>
+</section>
+
+<!-- FORUM HAQIDA -->
+<section class="maqsad" id="forum">
+  <!-- LEFT: Text -->
+  <div class="maqsad-left fade-up">
+    <p class="section-label">Форум ҳақида</p>
+    <h2 class="section-title">Цивилизацияларни боғлайдиган платформа</h2>
+    <div class="gold-line"></div>
+    <p class="maqsad-lead">
+      I Халқаро Ислом Цивилизацияси Форуми Ўзбекистон Республикаси раҳбарияти
+      ташаббуси билан ташкил этилади. Форум ислом цивилизациясининг бой маънавий
+      ва интеллектуал меросини тадқиқ қилиш, тинчлик ва диалогни мустаҳкамлаш
+      мақсадида дунёнинг турли мамлакатларидан олимлар, мутахассислар ва давлат
+      арбобларини бир жойга тўплайди.
+    </p>
+    <div class="maqsad-stats">
+      <div class="maqsad-stat">
+        <span class="maqsad-stat-value">5</span>
+        <span class="maqsad-stat-label">Кун давомида</span>
+      </div>
+      <div class="maqsad-stat">
+        <span class="maqsad-stat-value">3</span>
+        <span class="maqsad-stat-label">Шаҳар</span>
+      </div>
+      <div class="maqsad-stat">
+        <span class="maqsad-stat-value">7+</span>
+        <span class="maqsad-stat-label">Ялпи мажлис</span>
+      </div>
+      <div class="maqsad-stat">
+        <span class="maqsad-stat-value">3</span>
+        <span class="maqsad-stat-label">Халқаро конференция</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Image -->
+  <div class="maqsad-right">
+    <img src="assets/samarqand.jpg" alt="Самарқанд — Ислом цивилизацияси маркази">
+    <div class="maqsad-right-overlay"></div>
+    <div class="maqsad-right-caption">
+      <div class="maqsad-cap-item">
+        <div class="maqsad-cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="maqsad-cap-title">Илм–Фан</span>
+        <span class="maqsad-cap-sub">Интеллектуал мерос</span>
+      </div>
+      <div class="maqsad-cap-item">
+        <div class="maqsad-cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <span class="maqsad-cap-title">Тинчлик</span>
+        <span class="maqsad-cap-sub">Маданиятлар мулоқоти</span>
+      </div>
+      <div class="maqsad-cap-item">
+        <div class="maqsad-cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="maqsad-cap-title">Бирлик</span>
+        <span class="maqsad-cap-sub">Халқаро олимлар</span>
+      </div>
+      <div class="maqsad-cap-item">
+        <div class="maqsad-cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="maqsad-cap-title">Мерос</span>
+        <span class="maqsad-cap-sub">Ислом санъати</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHAHARLAR SAYOHATI -->
+<section class="journey" id="shaharlar">
+  <div class="journey-inner">
+    <div class="journey-header fade-up">
+      <p class="section-label">Маршрут</p>
+      <h2 class="section-title">Уч Шаҳар — Бир Сафар</h2>
+      <div class="gold-line"></div>
+    </div>
+  </div>
+
+  <div class="cities-track">
+    <!-- Toshkent -->
+    <div class="city-card fade-up">
+      <div class="city-card-bg" style="background-image: url('assets/toshkent.jpg')"></div>
+      <div class="city-card-overlay"></div>
+      <div class="city-card-content">
+        <div class="city-card-num">01</div>
+        <div>
+          <div class="city-card-date">6–8 Июль · 1–3 кун</div>
+          <div class="city-card-name">Тошкент</div>
+          <div class="city-card-desc">Форумнинг асосий маскани. Ислом цивилизацияси маркази биносида ялпи мажлислар ва расмий очилиш маросими.</div>
+          <div class="city-card-tags">
+            <span>7 Ялпи мажлис</span>
+            <span>Расмий очилиш</span>
+            <span>Маданий дастур</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Samarqand -->
+    <div class="city-card fade-up">
+      <div class="city-card-bg" style="background-image: url('assets/samarqand.jpg')"></div>
+      <div class="city-card-overlay"></div>
+      <div class="city-card-content">
+        <div class="city-card-num">02</div>
+        <div>
+          <div class="city-card-date">9–10 Июль · 4–5 кун</div>
+          <div class="city-card-name">Самарқанд</div>
+          <div class="city-card-desc">Имом Бухорий ва Имом Мотуридийга бағишланган халқаро конференциялар. "Боқий шаҳар" мажмуаси.</div>
+          <div class="city-card-tags">
+            <span>2 Конференция</span>
+            <span>Имом Бухорий мажмуаси</span>
+            <span>Чокардиза</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Surxondaryo -->
+    <div class="city-card fade-up">
+      <div class="city-card-bg" style="background-image: url('assets/surxondaryo.jpg')"></div>
+      <div class="city-card-overlay"></div>
+      <div class="city-card-content">
+        <div class="city-card-num">03</div>
+        <div>
+          <div class="city-card-date">9–10 Июль · 4–5 кун</div>
+          <div class="city-card-name">Термиз</div>
+          <div class="city-card-desc">Термиз ҳадис мактаби конференцияси. Ҳаким Термизий ва Имом Термизий зиёратгоҳлари.</div>
+          <div class="city-card-tags">
+            <span>1 Конференция</span>
+            <span>Ҳаким Термизий</span>
+            <span>Илмий–тадқиқот маркази</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dastur" id="dastur">
+  <div class="dastur-inner">
+    <div class="dastur-header fade-up">
+      <div class="dastur-header-left">
+        <p class="section-label">Тафсилий жадвал</p>
+        <h2 class="section-title">Форум Дастури</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="dastur-header-right">
+        2026 йил 6–11 июль кунлари<br>
+        Тошкент · Самарқанд · Термиз<br>
+        Ислом цивилизацияси маркази
+      </div>
+    </div>
+
+    <div class="dastur-layout">
+      <!-- Vertical day tabs -->
+      <div class="days-sidebar">
+        <button class="day-tab active" onclick="showDay('day1', this)">
+          1-кун
+          <span class="day-tab-date">6 Июль · Тошкент</span>
+        </button>
+        <button class="day-tab" onclick="showDay('day2', this)">
+          2-кун
+          <span class="day-tab-date">7 Июль · Тошкент</span>
+        </button>
+        <button class="day-tab" onclick="showDay('day3', this)">
+          3-кун
+          <span class="day-tab-date">8 Июль · Тошкент</span>
+        </button>
+        <button class="day-tab" onclick="showDay('day4', this)">
+          4-кун
+          <span class="day-tab-date">9 Июль · Самарқанд / Термиз</span>
+        </button>
+        <button class="day-tab" onclick="showDay('day5', this)">
+          5-кун
+          <span class="day-tab-date">10 Июль · Зиёратгоҳлар</span>
+        </button>
+        <button class="day-tab" onclick="showDay('day6', this)">
+          6-кун
+          <span class="day-tab-date">11 Июль · Кузатиш</span>
+        </button>
+      </div>
+
+      <div class="days-content">
+        <!-- KUN 1 -->
+        <div class="day-panel active" id="day1">
+          <div class="day-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>6 Июль, 2026 · Тошкент шаҳри</span>
+          </div>
+          <div class="schedule-list">
+            <div class="schedule-item"><div class="schedule-time">Жадвал б-ча</div><div class="schedule-event">Иштирокчиларни Тошкент халқаро аэропортида кутиб олиш. Меҳмонхонага жойлаштириш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">Кун давомида</div><div class="schedule-event">Иштирокчиларни Ислом цивилизацияси маркази музей экспозицияси билан таништириш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">12:00–20:00</div><div class="schedule-event">Форум иштирокчиларини рўйхатдан ўтказиш ва ОАВни аккредитация қилиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">15:00–17:00</div><div class="schedule-event">Ташкилотчилар ва халқаро ҳамкорларнинг мувофиқлаштирувчи йиғилиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">18:00–19:00</div><div class="schedule-event">Икки томонлама учрашувлар ва музокаралар.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Расмий қабул маросими</strong>Ташкилотчилар номидан расмий қабул маросими.</div></div>
+          </div>
+        </div>
+
+        <!-- KUN 2 -->
+        <div class="day-panel" id="day2">
+          <div class="day-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>7 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази</span>
+          </div>
+          <div class="schedule-list">
+            <div class="schedule-item"><div class="schedule-time">08:30–09:00</div><div class="schedule-event">Иштирокчиларни рўйхатдан ўтказиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">09:00–09:20</div><div class="schedule-event"><strong>🎖 Тантанали очилиш маросими</strong>Ўзбекистон Республикаси Президентининг Форум иштирокчиларига табриги.</div></div>
+            <div class="schedule-item"><div class="schedule-time">09:20–09:30</div><div class="schedule-event">Тақдимот фильми намойиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">09:30–10:00</div><div class="schedule-event">Табрик сўзлари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">10:30–12:00</div><div class="schedule-event"><span class="session-badge">I Ялпи мажлис</span><strong>"Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">12:30–13:00</div><div class="schedule-event">Пешин намози. "Ҳазрати Имом жоме" масжиди.</div></div>
+            <div class="schedule-item"><div class="schedule-time">13:00–14:00</div><div class="schedule-event">Тушлик.</div></div>
+            <div class="schedule-item"><div class="schedule-time">14:00–15:40</div><div class="schedule-event"><span class="session-badge">II Ялпи мажлис</span><strong>"Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси"</strong>Илмий, маънавий ва маданий мерос трансформацияси.</div></div>
+            <div class="schedule-item"><div class="schedule-time">16:00–17:00</div><div class="schedule-event"><span class="session-badge">III Ялпи мажлис</span><strong>"Ислом цивилизациясининг маънавий мероси"</strong>Ҳадис, фиқҳ, илоҳиёт ва маърифат.</div></div>
+            <div class="schedule-item"><div class="schedule-time">17:00–18:00</div><div class="schedule-event"><span class="session-badge">IV Ялпи мажлис</span><strong>"Ислом цивилизациясида инклюзив интеллектуал салоҳият"</strong>Тарихий моделлар ва замонавий талқинлари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Тантанали қабул маросими</strong>Ўзбекистондаги Ислом цивилизацияси маркази номидан.</div></div>
+          </div>
+        </div>
+
+        <!-- KUN 3 -->
+        <div class="day-panel" id="day3">
+          <div class="day-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>8 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази</span>
+          </div>
+          <div class="schedule-list">
+            <div class="schedule-item"><div class="schedule-time">09:00–10:40</div><div class="schedule-event"><span class="session-badge">V Ялпи мажлис</span><strong>"Ислом цивилизациясида илм–фан, таълим ва интеллектуал мерос"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">11:00–12:30</div><div class="schedule-event"><span class="session-badge">VI Ялпи мажлис</span><strong>"Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида"</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">12:30–14:00</div><div class="schedule-event">Тушлик.</div></div>
+            <div class="schedule-item"><div class="schedule-time">14:00–15:40</div><div class="schedule-event"><span class="session-badge">VII Ялпи мажлис</span><strong>"Замонавий медиамаконда ислом цивилизацияси"</strong>Маданиятлар мулоқоти, рақамли коммуникация ва ижтимоий маърифат.</div></div>
+            <div class="schedule-item"><div class="schedule-time">16:00–17:30</div><div class="schedule-event"><span class="session-badge">VIII Ялпи мажлис</span><strong>"Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари"</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">17:30–17:40</div><div class="schedule-event">Форум якунларига бағишланган фильм намойиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">17:40–18:20</div><div class="schedule-event"><strong>📜 Меморандум ва битимларни имзолаш маросими</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">18:20–18:40</div><div class="schedule-event">Ўзбекистон Президентига йўлланган мурожаатни ўқиб эшиттириш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">18:40–19:00</div><div class="schedule-event"><strong>🏁 Форумнинг ёпилиши</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Маданий дастур</strong>Ўзбекистоннинг бой миллий анъаналари, мусиқаси, ҳунармандчилиги ва гастрономиясига бағишланган дастур.</div></div>
+          </div>
+        </div>
+
+        <!-- KUN 4 -->
+        <div class="day-panel" id="day4">
+          <div class="day-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>9 Июль, 2026 · Самарқанд ва Термиз шаҳарлари</span>
+          </div>
+          <div class="schedule-list">
+            <div class="schedule-item"><div class="schedule-time">06:10–08:23</div><div class="schedule-event">Самарқандга жўнаб кетиш. Меҳмонхонага етиб бориш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">10:00–17:30</div><div class="schedule-event"><span class="session-badge">I Халқаро конференция · Самарқанд</span><strong>"Имом ал-Бухорийнинг "ал-Жомиъ ас-Саҳиҳ" асари – уммат китоби"</strong>"Боқий шаҳар" мажмуаси. 5 та шўъба йиғилиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">10:00–17:30</div><div class="schedule-event"><span class="session-badge">II Халқаро конференция · Самарқанд</span><strong>"Имом Мотуридий мероси: ислом цивилизациясининг мўътадиллик ва ақл–идрок пойдевори"</strong>"Минион" меҳмонхонаси. Мотуридийлик бўйича халқаро танлов ғолибларини тақдирлаш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">06:30–17:30</div><div class="schedule-event"><span class="session-badge">III Халқаро конференция · Термиз</span><strong>"Термиз ҳадис мактаби: алломалар мероси ва замонавий тадқиқотлар"</strong>Термиз Давлат Университети. 3 та шўъба йиғилиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Расмий қабуллар</strong>Самарқанд вилояти ҳокими ва Сурхондарё вилояти ҳокими номидан.</div></div>
+          </div>
+        </div>
+
+        <!-- KUN 5 -->
+        <div class="day-panel" id="day5">
+          <div class="day-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>10 Июль, 2026 · Самарқанд ва Сурхондарё вилоятлари</span>
+          </div>
+          <div class="schedule-list">
+            <div class="schedule-item"><div class="schedule-time">08:00–13:30</div><div class="schedule-event"><span class="session-badge">Самарқанд вилояти</span><strong>Имом Бухорий мажмуасига зиёрат</strong>Инновацион музей экскурсияси. Ҳадис илми мактаби билан танишув.</div></div>
+            <div class="schedule-item"><div class="schedule-time">14:30–16:00</div><div class="schedule-event"><strong>"Чокардиза" зиёратгоҳи</strong>Имом Мотуридий мақбараси зиёрати.</div></div>
+            <div class="schedule-item"><div class="schedule-time">08:00–16:00</div><div class="schedule-event"><span class="session-badge">Сурхондарё вилояти</span><strong>Ҳаким Термизий ва Имом Термизий зиёратгоҳлари</strong>Имом Термизий халқаро илмий–тадқиқот маркази фаолияти билан танишиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">16:30–18:00</div><div class="schedule-event">Меҳмонларни Тошкент шаҳрига кузатиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Якунловчи маданий дастур ва кечки овқат</strong></div></div>
+          </div>
+        </div>
+
+        <!-- KUN 6 -->
+        <div class="day-panel" id="day6">
+          <div class="day-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>11 Июль, 2026 · Тошкент ва Самарқанд шаҳарлари</span>
+          </div>
+          <div class="schedule-list">
+            <div class="schedule-item"><div class="schedule-time">Жадвал б-ча</div><div class="schedule-event"><strong>Хорижлик меҳмонларни кузатиш</strong>Тошкент халқаро аэропорти ва Тошкент Шимолий вокзалида кузатиш маросими.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSIYALAR — Bento grid -->
+<section class="sessions" id="sessiyalar">
+  <div class="sessions-inner">
+    <div class="sessions-header fade-up">
+      <div>
+        <p class="section-label">Асосий мавзулар</p>
+        <h2 class="section-title">Ялпи Мажлис Сессиялари</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="sessions-header-right">
+        Тошкент<br>
+        7–8 Июль 2026<br>
+        Ислом Цивилизацияси Маркази
+      </div>
+    </div>
+
+    <div class="sessions-bento">
+      <!-- Wide cards (span 3) -->
+      <div class="s-card s-card-wide fade-up">
+        <div>
+          <div class="s-card-top">
+            <span class="s-card-roman">I</span>
+            <div class="s-card-dot"></div>
+          </div>
+          <div class="s-card-title">Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси</div>
+        </div>
+        <div class="s-card-footer">Тошкент · 7 Июль · Эрталаб</div>
+      </div>
+
+      <div class="s-card s-card-wide fade-up">
+        <div>
+          <div class="s-card-top">
+            <span class="s-card-roman">II</span>
+            <div class="s-card-dot"></div>
+          </div>
+          <div class="s-card-title">Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси: илмий, маънавий ва маданий мерос трансформацияси</div>
+        </div>
+        <div class="s-card-footer">Тошкент · 7 Июль · Тушдан кейин</div>
+      </div>
+
+      <!-- Narrow cards (span 2) -->
+      <div class="s-card s-card-narrow fade-up">
+        <div>
+          <div class="s-card-top">
+            <span class="s-card-roman">III</span>
+            <div class="s-card-dot"></div>
+          </div>
+          <div class="s-card-title">Ислом цивилизациясининг маънавий мероси: ҳадис, фиқҳ, илоҳиёт ва маърифат</div>
+        </div>
+        <div class="s-card-footer">Тошкент · 7 Июль</div>
+      </div>
+
+      <div class="s-card s-card-narrow fade-up">
+        <div>
+          <div class="s-card-top">
+            <span class="s-card-roman">IV</span>
+            <div class="s-card-dot"></div>
+          </div>
+          <div class="s-card-title">Ислом цивилизациясида инклюзив интеллектуал салоҳият: тарихий моделлар ва замонавий талқинлари</div>
+        </div>
+        <div class="s-card-footer">Тошкент · 7–8 Июль</div>
+      </div>
+
+      <div class="s-card s-card-narrow fade-up">
+        <div>
+          <div class="s-card-top">
+            <span class="s-card-roman">V</span>
+            <div class="s-card-dot"></div>
+          </div>
+          <div class="s-card-title">Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида</div>
+        </div>
+        <div class="s-card-footer">Тошкент · 8 Июль</div>
+      </div>
+
+      <div class="s-card s-card-narrow fade-up">
+        <div>
+          <div class="s-card-top">
+            <span class="s-card-roman">VI</span>
+            <div class="s-card-dot"></div>
+          </div>
+          <div class="s-card-title">Замонавий медиамаконда ислом цивилизацияси: маданиятлар мулоқоти ва рақамли коммуникация</div>
+        </div>
+        <div class="s-card-footer">Тошкент · 8 Июль</div>
+      </div>
+
+      <div class="s-card s-card-narrow fade-up">
+        <div>
+          <div class="s-card-top">
+            <span class="s-card-roman">VII</span>
+            <div class="s-card-dot"></div>
+          </div>
+          <div class="s-card-title">Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари</div>
+        </div>
+        <div class="s-card-footer">Тошкент · 8 Июль</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <!-- Epigraph -->
+  <div class="footer-quote fade-up">
+    <p class="footer-quote-text">
+      "Ислом цивилизацияси — <em>тинчлик, бағрикенглик</em> ва илм–маърифат йўли.
+      Бу мерос бутун башариятнинг умумий бойлигидир."
+    </p>
+  </div>
+
+  <!-- Main columns -->
+  <div class="footer-main">
+    <div class="footer-col-wrap fade-up">
+      <div class="footer-logo-wrap">
+        <img src="assets/logo.png" alt="Forum logotipi" class="footer-logo-img">
+        <div class="footer-logo-title">
+          Ислом Цивилизацияси<br>I Халқаро Форуми
+        </div>
+      </div>
+      <p class="footer-brand-desc">
+        "Ислом цивилизацияси: тинчлик, бағрикенглик ва илм–маърифат йўли" мавзусидаги
+        халқаро форум 2026 йил 7–11 июль кунлари Ўзбекистоннинг уч шаҳрида бўлиб ўтади.
+      </p>
+        <div class="footer-date-badge" style="
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 6px 16px;
+          background: linear-gradient(135deg, #11221e 0%, #06100e 100%);
+          border: 1px solid rgba(212, 175, 55, 0.3); /* Nozik oltin ramka */
+          border-radius: 20px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          font-family: 'Inter', 'Noto Sans', sans-serif;
+      ">
+        <!-- Sharqona geometric yulduz ichidagi kalendar ikonasi -->
+        <span style="display: flex; align-items: center; justify-content: center; color: #d4af37;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path>
+            <path d="M16 2v4"></path>
+            <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+            <path d="M3 10h18"></path>
+          </svg>
+        </span>
+
+        <span style="
+            color: #e5e7eb;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        ">7–11 Июль 2026</span>
+      </div>
+    </div>
+
+    <div class="footer-col-wrap fade-up">
+      <div class="footer-col-title">Асосий жойлар</div>
+      <ul class="footer-col-list">
+        <li>Ислом цивилизацияси маркази · Тошкент</li>
+        <li>"Боқий шаҳар" мажмуаси · Самарқанд</li>
+        <li>Термиз Давлат Университети</li>
+        <li>Имом Бухорий мажмуаси</li>
+        <li>Чокардиза зиёратгоҳи</li>
+        <li>Ҳаким Термизий мажмуаси</li>
+      </ul>
+    </div>
+
+    <div class="footer-col-wrap fade-up">
+      <div class="footer-col-title">Конференциялар</div>
+      <ul class="footer-col-list">
+        <li>Имом Бухорий: ал-Жомиъ ас-Саҳиҳ</li>
+        <li>Имом Мотуридий мероси</li>
+        <li>Термиз ҳадис мактаби</li>
+      </ul>
+      <br>
+      <div class="footer-col-title">Натижалар</div>
+      <ul class="footer-col-list">
+        <li>7+ Ялпи мажлис</li>
+        <li>Меморандум имзолаш</li>
+        <li>Халқаро танлов тақдири</li>
+      </ul>
+    </div>
+
+    <div class="footer-col-wrap fade-up">
+      <div class="footer-col-title">Ташкилотчилар</div>
+      <ul class="footer-col-list">
+        <li>Ўзбекистон Республикаси</li>
+        <li>Ислом Цивилизацияси Маркази</li>
+        <li>Дини Ишлар Қўмитаси</li>
+        <li>Самарқанд вилояти ҳокимлиги</li>
+        <li>Сурхондарё вилояти ҳокимлиги</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      © 2026 · I Халқаро Ислом Цивилизацияси Форуми · Барча ҳуқуқлар ҳимояланган
+    </div>
+    <div class="footer-bottom-right">
+      <div class="footer-bottom-flag">Ўзбекистон Республикаси</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Carousel
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  const labels = ['Тошкент', 'Самарқанд', 'Сурхондарё'];
+  const labelEl = document.getElementById('slideLabel');
+  let current = 0;
+  let timer;
+
+  function goSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    labelEl.textContent = labels[current];
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 5000);
+  }
+
+  function nextSlide() {
+    goSlide((current + 1) % slides.length);
+  }
+
+  timer = setInterval(nextSlide, 5000);
+
+  // Day tabs
+  function showDay(id, el) {
+    document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    (el || event.target).classList.add('active');
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(6,14,26,0.96)';
+    } else {
+      nav.style.background = 'rgba(10,22,40,0.88)';
+    }
+  });
+</script>
+</body>
+</html>
