@@ -105,31 +105,129 @@
     padding: 0.4rem 1rem;
     border-radius: 2px;
   }
+  /* ── LANGUAGE SWITCH DROPDOWN ── */
   .lang-switch {
+    position: relative;
+    margin-left: 1.2rem;
+  }
+  .lang-dropdown-trigger {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    margin-left: 1.2rem;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--glass-border);
-    border-radius: 2px;
-    padding: 0.2rem;
-  }
-  .lang-btn {
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    color: var(--cream);
+    cursor: pointer;
     font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .lang-dropdown-trigger:hover {
+    background: rgba(201, 168, 76, 0.1);
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+    box-shadow: 0 0 12px rgba(201, 168, 76, 0.15);
+  }
+  .lang-dropdown-trigger .active-flag {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 13px;
+    border-radius: 1px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .lang-dropdown-trigger .active-flag svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .lang-dropdown-trigger .chevron-icon {
+    transition: transform 0.25s ease;
+    opacity: 0.7;
+    margin-left: 0.1rem;
+  }
+  .lang-switch.open .lang-dropdown-trigger .chevron-icon {
+    transform: rotate(180deg);
+  }
+  .lang-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: rgba(10, 22, 40, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 6px;
+    width: 150px;
+    padding: 0.4rem;
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 
+                0 0 15px rgba(201, 168, 76, 0.1);
+    z-index: 1000;
+  }
+  .lang-switch.open .lang-dropdown-menu {
+    display: flex;
+    animation: slideDownFade 0.2s forwards cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes slideDownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .lang-dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     background: transparent;
     border: none;
     color: var(--mist);
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    padding: 0.35rem 0.6rem;
-    border-radius: 2px;
+    padding: 0.45rem 0.6rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.25s;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    text-align: left;
+    transition: all 0.2s ease;
   }
-  .lang-btn:hover { color: var(--gold-light); }
-  .lang-btn.active {
-    background: var(--gold-dim);
+  .lang-dropdown-item:hover {
+    background: rgba(201, 168, 76, 0.12);
+    color: var(--gold-light);
+  }
+  .lang-dropdown-item.active {
+    background: rgba(201, 168, 76, 0.2);
     color: var(--gold);
+    font-weight: 500;
+  }
+  .lang-dropdown-item .flag-wrapper {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 13px;
+    border-radius: 1px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .lang-dropdown-item .flag-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .lang-dropdown-item .lang-text {
+    flex-grow: 1;
   }
   @media (max-width: 900px) {
     .lang-switch { margin-left: 0.4rem; }
@@ -1618,9 +1716,68 @@
   </ul>
   <div class="nav-date" data-i18n="nav.date">7–11 Июль 2026</div>
   <div class="lang-switch" id="langSwitch">
-    <button class="lang-btn active" data-lang="uz">UZ</button>
-    <button class="lang-btn" data-lang="ru">RU</button>
-    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-dropdown-trigger" id="langDropdownTrigger" aria-expanded="false" aria-haspopup="true">
+      <span class="active-flag" id="activeFlag"></span>
+      <span class="active-label" id="activeLabel">UZ</span>
+      <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12">
+        <path d="M7 10l5 5 5-5H7z" fill="currentColor"/>
+      </svg>
+    </button>
+    <ul class="lang-dropdown-menu" id="langDropdownMenu">
+      <li>
+        <button class="lang-dropdown-item" data-lang="uz">
+          <span class="flag-wrapper">
+            <svg class="flag-icon" viewBox="0 0 24 16">
+              <rect width="24" height="5" fill="#0099B5" />
+              <rect y="5" width="24" height="0.5" fill="#E21C26" />
+              <rect y="5.5" width="24" height="5" fill="#FFFFFF" />
+              <rect y="10.5" width="24" height="0.5" fill="#E21C26" />
+              <rect y="11" width="24" height="5" fill="#00B159" />
+              <path d="M 3.2 1 A 1.4 1.4 0 1 0 4.8 3.2 A 1.1 1.1 0 1 1 3.2 1 Z" fill="#FFFFFF" />
+              <circle cx="6" cy="1.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="7" cy="1.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="8" cy="1.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="5.5" cy="2.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="6.5" cy="2.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="7.5" cy="2.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="8.5" cy="2.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="5" cy="3.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="6" cy="3.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="7" cy="3.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="8" cy="3.5" r="0.25" fill="#FFFFFF" />
+              <circle cx="9" cy="3.5" r="0.25" fill="#FFFFFF" />
+            </svg>
+          </span>
+          <span class="lang-text">O'zbekcha</span>
+        </button>
+      </li>
+      <li>
+        <button class="lang-dropdown-item" data-lang="ru">
+          <span class="flag-wrapper">
+            <svg class="flag-icon" viewBox="0 0 24 16">
+              <rect width="24" height="5.33" fill="#FFFFFF" />
+              <rect y="5.33" width="24" height="5.33" fill="#0039A6" />
+              <rect y="10.66" width="24" height="5.34" fill="#D52B1E" />
+            </svg>
+          </span>
+          <span class="lang-text">Русский</span>
+        </button>
+      </li>
+      <li>
+        <button class="lang-dropdown-item" data-lang="en">
+          <span class="flag-wrapper">
+            <svg class="flag-icon" viewBox="0 0 24 16">
+              <rect width="24" height="16" fill="#012169"/>
+              <path d="M0 0 L24 16 M24 0 L0 16" stroke="#fff" stroke-width="2.4"/>
+              <path d="M0 0 L24 16 M24 0 L0 16" stroke="#C8102E" stroke-width="1.4"/>
+              <path d="M12 0 v16 M0 8 h24" stroke="#fff" stroke-width="4.4"/>
+              <path d="M12 0 v16 M0 8 h24" stroke="#C8102E" stroke-width="2.4"/>
+            </svg>
+          </span>
+          <span class="lang-text">English</span>
+        </button>
+      </li>
+    </ul>
   </div>
 </nav>
 
@@ -2936,6 +3093,22 @@
   let currentLang = localStorage.getItem('forumLang') || 'uz';
   function T() { return TRANSLATIONS[currentLang]; }
 
+  function updateActiveLanguageUI() {
+    const activeItem = document.querySelector(`.lang-dropdown-item[data-lang="${currentLang}"]`);
+    if (activeItem) {
+      const flagSvg = activeItem.querySelector('.flag-icon').cloneNode(true);
+      const activeFlagContainer = document.getElementById('activeFlag');
+      if (activeFlagContainer) {
+        activeFlagContainer.innerHTML = '';
+        activeFlagContainer.appendChild(flagSvg);
+      }
+      const activeLabel = document.getElementById('activeLabel');
+      if (activeLabel) {
+        activeLabel.textContent = currentLang.toUpperCase();
+      }
+    }
+  }
+
   function applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -2949,9 +3122,10 @@
     });
     const htmlRoot = document.getElementById('html-root');
     if (htmlRoot) htmlRoot.setAttribute('lang', currentLang);
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    document.querySelectorAll('.lang-dropdown-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.lang === currentLang);
     });
+    updateActiveLanguageUI();
   }
 
   const PAGE_TITLES = {
@@ -2978,8 +3152,47 @@
     }
   }
 
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  // Dropdown toggle and outside click closing
+  const langSwitch = document.getElementById('langSwitch');
+  const trigger = document.getElementById('langDropdownTrigger');
+  
+  function toggleDropdown() {
+    if (!trigger || !langSwitch) return;
+    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', !isExpanded);
+    langSwitch.classList.toggle('open', !isExpanded);
+  }
+  
+  function closeDropdown() {
+    if (!trigger || !langSwitch) return;
+    trigger.setAttribute('aria-expanded', 'false');
+    langSwitch.classList.remove('open');
+  }
+  
+  if (trigger) {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
+  }
+  
+  document.addEventListener('click', (e) => {
+    if (langSwitch && !langSwitch.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDropdown();
+    }
+  });
+
+  document.querySelectorAll('.lang-dropdown-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setLanguage(btn.dataset.lang);
+      closeDropdown();
+    });
   });
 
 </script>
