@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="uz" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,6 +104,35 @@
     border: 1px solid var(--glass-border);
     padding: 0.4rem 1rem;
     border-radius: 2px;
+  }
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: 1.2rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 2px;
+    padding: 0.2rem;
+  }
+  .lang-btn {
+    font-family: 'Inter', sans-serif;
+    background: transparent;
+    border: none;
+    color: var(--mist);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 0.35rem 0.6rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .lang-btn:hover { color: var(--gold-light); }
+  .lang-btn.active {
+    background: var(--gold-dim);
+    color: var(--gold);
+  }
+  @media (max-width: 900px) {
+    .lang-switch { margin-left: 0.4rem; }
   }
 
   /* ── HERO ── */
@@ -1577,17 +1606,22 @@
 <nav>
   <div class="nav-logo">
     <img src="assets/logo.png" alt="Forum logo" class="nav-emblem">
-    <div class="nav-title">
+    <div class="nav-title" data-i18n="nav.brand">
       Ислом Цивилизацияси<br>I Халқаро Форуми
     </div>
   </div>
   <ul class="nav-links">
-    <li><a href="#forum">Форум</a></li>
-    <li><a href="#shaharlar">Шаҳарлар</a></li>
-    <li><a href="#dastur">Дастур</a></li>
-    <li><a href="#sessiyalar">Сессиялар</a></li>
+    <li><a href="#forum" data-i18n="nav.forum">Форум</a></li>
+    <li><a href="#shaharlar" data-i18n="nav.cities">Шаҳарлар</a></li>
+    <li><a href="#dastur" data-i18n="nav.program">Дастур</a></li>
+    <li><a href="#sessiyalar" data-i18n="nav.sessions">Сессиялар</a></li>
   </ul>
-  <div class="nav-date">7–11 Июль 2026</div>
+  <div class="nav-date" data-i18n="nav.date">7–11 Июль 2026</div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="lang-btn active" data-lang="uz">UZ</button>
+    <button class="lang-btn" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -1599,38 +1633,38 @@
   </div>
   <div class="hero-pattern"></div>
   <div class="hero-content">
-    <div class="hero-badge">I Халқаро Форум · Ўзбекистон · 2026</div>
-    <h1 class="hero-title">
+    <div class="hero-badge" data-i18n="hero.badge">I Халқаро Форум · Ўзбекистон · 2026</div>
+    <h1 class="hero-title" data-i18n="hero.title">
       Ислом Цивилизацияси:<br>
       <em>Тинчлик, Бағрикенглик</em><br>
       ва Илм–маърифат йўли
     </h1>
-    <p class="hero-subtitle">
+    <p class="hero-subtitle" data-i18n="hero.subtitle">
       Тошкент · Самарқанд · Термиз — беш кун, уч шаҳар, битта буюк мерос
     </p>
     <div class="hero-meta">
       <div class="hero-meta-item">
         <span class="hero-meta-value">5</span>
-        <span class="hero-meta-label">Кун</span>
+        <span class="hero-meta-label" data-i18n="hero.meta.day">Кун</span>
       </div>
       <div class="hero-divider"></div>
       <div class="hero-meta-item">
         <span class="hero-meta-value">3</span>
-        <span class="hero-meta-label">Шаҳар</span>
+        <span class="hero-meta-label" data-i18n="hero.meta.city">Шаҳар</span>
       </div>
       <div class="hero-divider"></div>
       <div class="hero-meta-item">
         <span class="hero-meta-value">7+</span>
-        <span class="hero-meta-label">Ялпи мажлис</span>
+        <span class="hero-meta-label" data-i18n="hero.meta.session">Ялпи мажлис</span>
       </div>
       <div class="hero-divider"></div>
       <div class="hero-meta-item">
         <span class="hero-meta-value">3</span>
-        <span class="hero-meta-label">Конференция</span>
+        <span class="hero-meta-label" data-i18n="hero.meta.conference">Конференция</span>
       </div>
     </div>
   </div>
-  <div class="hero-slide-label" id="slideLabel">Тошкент</div>
+  <div class="hero-slide-label" id="slideLabel" data-i18n="city.tashkent">Тошкент</div>
   <div class="hero-dots">
     <button class="hero-dot active" onclick="goSlide(0)"></button>
     <button class="hero-dot" onclick="goSlide(1)"></button>
@@ -1642,10 +1676,10 @@
 <section class="maqsad" id="forum">
   <!-- LEFT: Text -->
   <div class="maqsad-left fade-up">
-    <p class="section-label">Форум ҳақида</p>
-    <h2 class="section-title">Цивилизацияларни боғлайдиган платформа</h2>
+    <p class="section-label" data-i18n="forum.label">Форум ҳақида</p>
+    <h2 class="section-title" data-i18n="forum.title">Цивилизацияларни боғлайдиган платформа</h2>
     <div class="gold-line"></div>
-    <p class="maqsad-lead">
+    <p class="maqsad-lead" data-i18n="forum.lead">
       I Халқаро Ислом Цивилизацияси Форуми Ўзбекистон Республикаси раҳбарияти
       ташаббуси билан ташкил этилади. Форум ислом цивилизациясининг бой маънавий
       ва интеллектуал меросини тадқиқ қилиш, тинчлик ва диалогни мустаҳкамлаш
@@ -1655,19 +1689,19 @@
     <div class="maqsad-stats">
       <div class="maqsad-stat">
         <span class="maqsad-stat-value">5</span>
-        <span class="maqsad-stat-label">Кун давомида</span>
+        <span class="maqsad-stat-label" data-i18n="maqsad.stat.day">Кун давомида</span>
       </div>
       <div class="maqsad-stat">
         <span class="maqsad-stat-value">3</span>
-        <span class="maqsad-stat-label">Шаҳар</span>
+        <span class="maqsad-stat-label" data-i18n="hero.meta.city">Шаҳар</span>
       </div>
       <div class="maqsad-stat">
         <span class="maqsad-stat-value">7+</span>
-        <span class="maqsad-stat-label">Ялпи мажлис</span>
+        <span class="maqsad-stat-label" data-i18n="hero.meta.session">Ялпи мажлис</span>
       </div>
       <div class="maqsad-stat">
         <span class="maqsad-stat-value">3</span>
-        <span class="maqsad-stat-label">Халқаро конференция</span>
+        <span class="maqsad-stat-label" data-i18n="maqsad.stat.conference">Халқаро конференция</span>
       </div>
     </div>
   </div>
@@ -1681,29 +1715,29 @@
         <div class="maqsad-cap-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         </div>
-        <span class="maqsad-cap-title">Илм–Фан</span>
-        <span class="maqsad-cap-sub">Интеллектуал мерос</span>
+        <span class="maqsad-cap-title" data-i18n="maqsad.cap.science.title">Илм–Фан</span>
+        <span class="maqsad-cap-sub" data-i18n="maqsad.cap.science.sub">Интеллектуал мерос</span>
       </div>
       <div class="maqsad-cap-item">
         <div class="maqsad-cap-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
-        <span class="maqsad-cap-title">Тинчлик</span>
-        <span class="maqsad-cap-sub">Маданиятлар мулоқоти</span>
+        <span class="maqsad-cap-title" data-i18n="maqsad.cap.peace.title">Тинчлик</span>
+        <span class="maqsad-cap-sub" data-i18n="maqsad.cap.peace.sub">Маданиятлар мулоқоти</span>
       </div>
       <div class="maqsad-cap-item">
         <div class="maqsad-cap-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <span class="maqsad-cap-title">Бирлик</span>
-        <span class="maqsad-cap-sub">Халқаро олимлар</span>
+        <span class="maqsad-cap-title" data-i18n="maqsad.cap.unity.title">Бирлик</span>
+        <span class="maqsad-cap-sub" data-i18n="maqsad.cap.unity.sub">Халқаро олимлар</span>
       </div>
       <div class="maqsad-cap-item">
         <div class="maqsad-cap-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <span class="maqsad-cap-title">Мерос</span>
-        <span class="maqsad-cap-sub">Ислом санъати</span>
+        <span class="maqsad-cap-title" data-i18n="maqsad.cap.heritage.title">Мерос</span>
+        <span class="maqsad-cap-sub" data-i18n="maqsad.cap.heritage.sub">Ислом санъати</span>
       </div>
     </div>
   </div>
@@ -1714,8 +1748,8 @@
 <section class="journey" id="shaharlar">
   <div class="journey-inner">
     <div class="journey-header fade-up">
-      <p class="section-label">Маршрут</p>
-      <h2 class="section-title">Уч Шаҳар — Бир Сафар</h2>
+      <p class="section-label" data-i18n="journey.label">Маршрут</p>
+      <h2 class="section-title" data-i18n="journey.title">Уч Шаҳар — Бир Сафар</h2>
       <div class="gold-line"></div>
     </div>
   </div>
@@ -1731,13 +1765,13 @@
           <div class="city-card-content">
             <div class="city-card-num">01</div>
             <div>
-              <div class="city-card-date">6–8 Июль · 1–3 кун</div>
-              <div class="city-card-name">Тошкент</div>
-              <div class="city-card-desc">Форумнинг асосий маскани. Ислом цивилизацияси маркази биносида ялпи мажлислар ва расмий очилиш маросими.</div>
+              <div class="city-card-date" data-i18n="city1.date">6–8 Июль · 1–3 кун</div>
+              <div class="city-card-name" data-i18n="city.tashkent">Тошкент</div>
+              <div class="city-card-desc" data-i18n="city1.desc">Форумнинг асосий маскани. Ислом цивилизацияси маркази биносида ялпи мажлислар ва расмий очилиш маросими.</div>
               <div class="city-card-tags">
-                <span>7 Ялпи мажлис</span>
-                <span>Расмий очилиш</span>
-                <span>Маданий дастур</span>
+                <span data-i18n="city1.tag1">7 Ялпи мажлис</span>
+                <span data-i18n="city1.tag2">Расмий очилиш</span>
+                <span data-i18n="city1.tag3">Маданий дастур</span>
               </div>
             </div>
           </div>
@@ -1745,16 +1779,16 @@
       
         <div class="card-back">
           <div class="map-container">
-            <div class="map-overlay">Xaritani faollashtirish uchun bosing</div>
+            <div class="map-overlay" data-i18n="common.mapOverlay">Xaritani faollashtirish uchun bosing</div>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.991686680664!2d69.23780587609275!3d41.33527557130657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b12574d13c3%3A0x15ca4a2e8ac7f5a2!2sIslom%20sivilizatsiya%20Markazi!5e1!3m2!1sru!2s!4v1782743522459!5m2!1sru!2s" style="border:0; width:100%; height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
         
           <div class="card-back-footer">
             <div>
-              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;">Ислом цивилизацияси маркази</h4>
-              <p style="color: #a3a3a3; margin: 0; font-size: 13px;">Тошкент ш., Олмазор тумани</p>
+              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;" data-i18n="city1.mapTitle">Ислом цивилизацияси маркази</h4>
+              <p style="color: #a3a3a3; margin: 0; font-size: 13px;" data-i18n="city1.mapAddr">Тошкент ш., Олмазор тумани</p>
             </div>
-            <button class="btn-route">Yopish</button>
+            <button class="btn-route" data-i18n="common.close">Yopish</button>
           </div>
         </div>
       
@@ -1771,13 +1805,13 @@
           <div class="city-card-content">
             <div class="city-card-num">02</div>
             <div>
-              <div class="city-card-date">9–10 Июль · 4–5 кун</div>
-              <div class="city-card-name">Самарқанд</div>
-              <div class="city-card-desc">Имом Бухорий ва Имом Мотуридийга бағишланган халқаро конференциялар. "Боқий шаҳар" мажмуаси.</div>
+              <div class="city-card-date" data-i18n="city2.date">9–10 Июль · 4–5 кун</div>
+              <div class="city-card-name" data-i18n="city.samarqand">Самарқанд</div>
+              <div class="city-card-desc" data-i18n="city2.desc">Имом Бухорий ва Имом Мотуридийга бағишланган халқаро конференциялар. "Боқий шаҳар" мажмуаси.</div>
               <div class="city-card-tags">
-                <span>2 Конференция</span>
-                <span>Имом Бухорий мажмуаси</span>
-                <span>Чокардиза</span>
+                <span data-i18n="city2.tag1">2 Конференция</span>
+                <span data-i18n="city2.tag2">Имом Бухорий мажмуаси</span>
+                <span data-i18n="city2.tag3">Чокардиза</span>
               </div>
             </div>
           </div>
@@ -1785,16 +1819,16 @@
       
         <div class="card-back">
           <div class="map-container">
-            <div class="map-overlay">Xaritani faollashtirish uchun bosing</div>
+            <div class="map-overlay" data-i18n="common.mapOverlay">Xaritani faollashtirish uchun bosing</div>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1785.359308701752!2d66.9445891339544!3d39.813731752892494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4d150003c9b52b%3A0xbc36f91ae339200!2z0JDQuyDQkdGD0YXQvtGA0LjQuSDQt9C40ZHRgNCw0YLQs9C-0YXQuA!5e1!3m2!1sru!2s!4v1782743815872!5m2!1sru!2s" style="border:0; width:100%; height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
         
           <div class="card-back-footer">
             <div>
-              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;">"Боқий шаҳар" мажмуаси</h4>
-              <p style="color: #a3a3a3; margin: 0; font-size: 13px;">Самарқанд ш., Боқий шаҳар кўчаси</p>
+              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;" data-i18n="city2.mapTitle">"Боқий шаҳар" мажмуаси</h4>
+              <p style="color: #a3a3a3; margin: 0; font-size: 13px;" data-i18n="city2.mapAddr">Самарқанд ш., Боқий шаҳар кўчаси</p>
             </div>
-            <button class="btn-route">Yopish</button>
+            <button class="btn-route" data-i18n="common.close">Yopish</button>
           </div>
         </div>
       
@@ -1811,13 +1845,13 @@
           <div class="city-card-content">
             <div class="city-card-num">03</div>
             <div>
-              <div class="city-card-date">11 Июль · 6-кун</div>
-              <div class="city-card-name">Термиз</div>
-              <div class="city-card-desc">Термиз ҳадис мактаби ва Имом Термизий меросига бағишланган илмий анжуманлар. Ҳаким Термизий мажмуаси зиёрати.</div>
+              <div class="city-card-date" data-i18n="city3.date">11 Июль · 6-кун</div>
+              <div class="city-card-name" data-i18n="city.termiz">Термиз</div>
+              <div class="city-card-desc" data-i18n="city3.desc">Термиз ҳадис мактаби ва Имом Термизий меросига бағишланган илмий анжуманлар. Ҳаким Термизий мажмуаси зиёрати.</div>
               <div class="city-card-tags">
-                <span>Илмий анжуман</span>
-                <span>Ҳаким Термизий</span>
-                <span>Термиз ДУ</span>
+                <span data-i18n="city3.tag1">Илмий анжуман</span>
+                <span data-i18n="city3.tag2">Ҳаким Термизий</span>
+                <span data-i18n="city3.tag3">Термиз ДУ</span>
               </div>
             </div>
           </div>
@@ -1825,16 +1859,16 @@
       
         <div class="card-back">
           <div class="map-container">
-            <div class="map-overlay">Xaritani faollashtirish uchun bosing</div>
+            <div class="map-overlay" data-i18n="common.mapOverlay">Xaritani faollashtirish uchun bosing</div>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.520696455008!2d67.25492651579624!3d37.23462032916733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f3531d0805a6dcd%3A0xc0eba9cfc7d48fc5!2sImom%20Termiziy%20Islom%20Instituti!5e1!3m2!1suz!2sus!4v1782743996274!5m2!1suz!2sus" style="border:0; width:100%; height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
         
           <div class="card-back-footer">
             <div>
-              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;">Термиз Давлат Университети</h4>
-              <p style="color: #a3a3a3; margin: 0; font-size: 13px;">Термиз ш., Баркамол авлод кўчаси</p>
+              <h4 style="color: #d4af37; margin: 0 0 5px 0; font-size: 18px;" data-i18n="city3.mapTitle">Термиз Давлат Университети</h4>
+              <p style="color: #a3a3a3; margin: 0; font-size: 13px;" data-i18n="city3.mapAddr">Термиз ш., Баркамол авлод кўчаси</p>
             </div>
-            <button class="btn-route">Yopish</button>
+            <button class="btn-route" data-i18n="common.close">Yopish</button>
           </div>
         </div>
       
@@ -1847,11 +1881,11 @@
   <div class="dastur-inner">
     <div class="dastur-header fade-up">
       <div class="dastur-header-left">
-        <p class="section-label">Тафсилий жадвал</p>
-        <h2 class="section-title">Форум Дастури</h2>
+        <p class="section-label" data-i18n="dastur.label">Тафсилий жадвал</p>
+        <h2 class="section-title" data-i18n="dastur.title">Форум Дастури</h2>
         <div class="gold-line"></div>
       </div>
-      <div class="dastur-header-right">
+      <div class="dastur-header-right" data-i18n="dastur.headerRight">
         2026 йил 6–11 июль кунлари<br>
         Тошкент · Самарқанд · Термиз<br>
         Ислом цивилизацияси маркази
@@ -1862,28 +1896,28 @@
       <!-- Vertical day tabs -->
       <div class="days-sidebar">
         <button class="day-tab active" onclick="showDay('day1', this)">
-          1-кун
-          <span class="day-tab-date">6 Июль · Тошкент</span>
+          <span data-i18n="day.1.tab">1-кун</span>
+          <span class="day-tab-date" data-i18n="day.1.date">6 Июль · Тошкент</span>
         </button>
         <button class="day-tab" onclick="showDay('day2', this)">
-          2-кун
-          <span class="day-tab-date">7 Июль · Тошкент</span>
+          <span data-i18n="day.2.tab">2-кун</span>
+          <span class="day-tab-date" data-i18n="day.2.date">7 Июль · Тошкент</span>
         </button>
         <button class="day-tab" onclick="showDay('day3', this)">
-          3-кун
-          <span class="day-tab-date">8 Июль · Тошкент</span>
+          <span data-i18n="day.3.tab">3-кун</span>
+          <span class="day-tab-date" data-i18n="day.3.date">8 Июль · Тошкент</span>
         </button>
         <button class="day-tab" onclick="showDay('day4', this)">
-          4-кун
-          <span class="day-tab-date">9 Июль · Самарқанд / Термиз</span>
+          <span data-i18n="day.4.tab">4-кун</span>
+          <span class="day-tab-date" data-i18n="day.4.date">9 Июль · Самарқанд / Термиз</span>
         </button>
         <button class="day-tab" onclick="showDay('day5', this)">
-          5-кун
-          <span class="day-tab-date">10 Июль · Зиёратгоҳлар</span>
+          <span data-i18n="day.5.tab">5-кун</span>
+          <span class="day-tab-date" data-i18n="day.5.date">10 Июль · Зиёратгоҳлар</span>
         </button>
         <button class="day-tab" onclick="showDay('day6', this)">
-          6-кун
-          <span class="day-tab-date">11 Июль · Кузатиш</span>
+          <span data-i18n="day.6.tab">6-кун</span>
+          <span class="day-tab-date" data-i18n="day.6.date">11 Июль · Кузатиш</span>
         </button>
       </div>
 
@@ -1892,15 +1926,15 @@
         <div class="day-panel active" id="day1">
           <div class="day-location">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>6 Июль, 2026 · Тошкент шаҳри</span>
+            <span data-i18n="day.1.location">6 Июль, 2026 · Тошкент шаҳри</span>
           </div>
           <div class="schedule-list">
-            <div class="schedule-item"><div class="schedule-time">Жадвал б-ча</div><div class="schedule-event">Иштирокчиларни Тошкент халқаро аэропортида кутиб олиш. Меҳмонхонага жойлаштириш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">Кун давомида</div><div class="schedule-event">Иштирокчиларни Ислом цивилизацияси маркази музей экспозицияси билан таништириш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">12:00–20:00</div><div class="schedule-event">Форум иштирокчиларини рўйхатдан ўтказиш ва ОАВни аккредитация қилиш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">15:00–17:00</div><div class="schedule-event">Ташкилотчилар ва халқаро ҳамкорларнинг мувофиқлаштирувчи йиғилиши.</div></div>
-            <div class="schedule-item"><div class="schedule-time">18:00–19:00</div><div class="schedule-event">Икки томонлама учрашувлар ва музокаралар.</div></div>
-            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Расмий қабул маросими</strong>Ташкилотчилар номидан расмий қабул маросими.</div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d1.1.time">Жадвал б-ча</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d1.1.event">Иштирокчиларни Тошкент халқаро аэропортида кутиб олиш. Меҳмонхонага жойлаштириш.</div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d1.2.time">Кун давомида</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d1.2.event">Иштирокчиларни Ислом цивилизацияси маркази музей экспозицияси билан таништириш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">12:00–20:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d1.3.event">Форум иштирокчиларини рўйхатдан ўтказиш ва ОАВни аккредитация қилиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">15:00–17:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d1.4.event">Ташкилотчилар ва халқаро ҳамкорларнинг мувофиқлаштирувчи йиғилиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">18:00–19:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d1.5.event">Икки томонлама учрашувлар ва музокаралар.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d1.6.event"><strong>Расмий қабул маросими</strong>Ташкилотчилар номидан расмий қабул маросими.</div></div>
           </div>
         </div>
 
@@ -1908,20 +1942,20 @@
         <div class="day-panel" id="day2">
           <div class="day-location">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>7 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази</span>
+            <span data-i18n="day.2.location">7 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази</span>
           </div>
           <div class="schedule-list">
-            <div class="schedule-item"><div class="schedule-time">08:30–09:00</div><div class="schedule-event">Иштирокчиларни рўйхатдан ўтказиш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">09:00–09:20</div><div class="schedule-event"><strong>🎖 Тантанали очилиш маросими</strong>Ўзбекистон Республикаси Президентининг Форум иштирокчиларига табриги.</div></div>
-            <div class="schedule-item"><div class="schedule-time">09:20–09:30</div><div class="schedule-event">Тақдимот фильми намойиши.</div></div>
-            <div class="schedule-item"><div class="schedule-time">09:30–10:00</div><div class="schedule-event">Табрик сўзлари.</div></div>
-            <div class="schedule-item"><div class="schedule-time">10:30–12:00</div><div class="schedule-event"><span class="session-badge">I Ялпи мажлис</span><strong>"Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.</div></div>
-            <div class="schedule-item"><div class="schedule-time">12:30–13:00</div><div class="schedule-event">Пешин намози. "Ҳазрати Имом жоме" масжиди.</div></div>
-            <div class="schedule-item"><div class="schedule-time">13:00–14:00</div><div class="schedule-event">Тушлик.</div></div>
-            <div class="schedule-item"><div class="schedule-time">14:00–15:40</div><div class="schedule-event"><span class="session-badge">II Ялпи мажлис</span><strong>"Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси"</strong>Илмий, маънавий ва маданий мерос трансформацияси.</div></div>
-            <div class="schedule-item"><div class="schedule-time">16:00–17:00</div><div class="schedule-event"><span class="session-badge">III Ялпи мажлис</span><strong>"Ислом цивилизациясининг маънавий мероси"</strong>Ҳадис, фиқҳ, илоҳиёт ва маърифат.</div></div>
-            <div class="schedule-item"><div class="schedule-time">17:00–18:00</div><div class="schedule-event"><span class="session-badge">IV Ялпи мажлис</span><strong>"Ислом цивилизациясида инклюзив интеллектуал салоҳият"</strong>Тарихий моделлар ва замонавий талқинлари.</div></div>
-            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Тантанали қабул маросими</strong>Ўзбекистондаги Ислом цивилизацияси маркази номидан.</div></div>
+            <div class="schedule-item"><div class="schedule-time">08:30–09:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.1.event">Иштирокчиларни рўйхатдан ўтказиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">09:00–09:20</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.2.event"><strong>🎖 Тантанали очилиш маросими</strong>Ўзбекистон Республикаси Президентининг Форум иштирокчиларига табриги.</div></div>
+            <div class="schedule-item"><div class="schedule-time">09:20–09:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.3.event">Тақдимот фильми намойиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">09:30–10:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.4.event">Табрик сўзлари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">10:30–12:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.5.event"><span class="session-badge">I Ялпи мажлис</span><strong>"Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">12:30–13:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.6.event">Пешин намози. "Ҳазрати Имом жоме" масжиди.</div></div>
+            <div class="schedule-item"><div class="schedule-time">13:00–14:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.7.event">Тушлик.</div></div>
+            <div class="schedule-item"><div class="schedule-time">14:00–15:40</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.8.event"><span class="session-badge">II Ялпи мажлис</span><strong>"Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси"</strong>Илмий, маънавий ва маданий мерос трансформацияси.</div></div>
+            <div class="schedule-item"><div class="schedule-time">16:00–17:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.9.event"><span class="session-badge">III Ялпи мажлис</span><strong>"Ислом цивилизациясининг маънавий мероси"</strong>Ҳадис, фиқҳ, илоҳиёт ва маърифат.</div></div>
+            <div class="schedule-item"><div class="schedule-time">17:00–18:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.10.event"><span class="session-badge">IV Ялпи мажлис</span><strong>"Ислом цивилизациясида инклюзив интеллектуал салоҳият"</strong>Тарихий моделлар ва замонавий талқинлари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.11.event"><strong>Тантанали қабул маросими</strong>Ўзбекистондаги Ислом цивилизацияси маркази номидан.</div></div>
           </div>
         </div>
 
@@ -1929,19 +1963,19 @@
         <div class="day-panel" id="day3">
           <div class="day-location">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>8 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази</span>
+            <span data-i18n="day.3.location">8 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази</span>
           </div>
           <div class="schedule-list">
-            <div class="schedule-item"><div class="schedule-time">09:00–10:40</div><div class="schedule-event"><span class="session-badge">V Ялпи мажлис</span><strong>"Ислом цивилизациясида илм–фан, таълим ва интеллектуал мерос"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.</div></div>
-            <div class="schedule-item"><div class="schedule-time">11:00–12:30</div><div class="schedule-event"><span class="session-badge">VI Ялпи мажлис</span><strong>"Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида"</strong></div></div>
-            <div class="schedule-item"><div class="schedule-time">12:30–14:00</div><div class="schedule-event">Тушлик.</div></div>
-            <div class="schedule-item"><div class="schedule-time">14:00–15:40</div><div class="schedule-event"><span class="session-badge">VII Ялпи мажлис</span><strong>"Замонавий медиамаконда ислом цивилизацияси"</strong>Маданиятлар мулоқоти, рақамли коммуникация ва ижтимоий маърифат.</div></div>
-            <div class="schedule-item"><div class="schedule-time">16:00–17:30</div><div class="schedule-event"><span class="session-badge">VIII Ялпи мажлис</span><strong>"Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари"</strong></div></div>
-            <div class="schedule-item"><div class="schedule-time">17:30–17:40</div><div class="schedule-event">Форум якунларига бағишланган фильм намойиши.</div></div>
-            <div class="schedule-item"><div class="schedule-time">17:40–18:20</div><div class="schedule-event"><strong>📜 Меморандум ва битимларни имзолаш маросими</strong></div></div>
-            <div class="schedule-item"><div class="schedule-time">18:20–18:40</div><div class="schedule-event">Ўзбекистон Президентига йўлланган мурожаатни ўқиб эшиттириш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">18:40–19:00</div><div class="schedule-event"><strong>🏁 Форумнинг ёпилиши</strong></div></div>
-            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Маданий дастур</strong>Ўзбекистоннинг бой миллий анъаналари, мусиқаси, ҳунармандчилиги ва гастрономиясига бағишланган дастур.</div></div>
+            <div class="schedule-item"><div class="schedule-time">09:00–10:40</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.1.event"><span class="session-badge">V Ялпи мажлис</span><strong>"Ислом цивилизациясида илм–фан, таълим ва интеллектуал мерос"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.</div></div>
+            <div class="schedule-item"><div class="schedule-time">11:00–12:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.2.event"><span class="session-badge">VI Ялпи мажлис</span><strong>"Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида"</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">12:30–14:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.3.event">Тушлик.</div></div>
+            <div class="schedule-item"><div class="schedule-time">14:00–15:40</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.4.event"><span class="session-badge">VII Ялпи мажлис</span><strong>"Замонавий медиамаконда ислом цивилизацияси"</strong>Маданиятлар мулоқоти, рақамли коммуникация ва ижтимоий маърифат.</div></div>
+            <div class="schedule-item"><div class="schedule-time">16:00–17:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.5.event"><span class="session-badge">VIII Ялпи мажлис</span><strong>"Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари"</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">17:30–17:40</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.6.event">Форум якунларига бағишланган фильм намойиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">17:40–18:20</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.7.event"><strong>📜 Меморандум ва битимларни имзолаш маросими</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">18:20–18:40</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.8.event">Ўзбекистон Президентига йўлланган мурожаатни ўқиб эшиттириш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">18:40–19:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.9.event"><strong>🏁 Форумнинг ёпилиши</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d3.10.event"><strong>Маданий дастур</strong>Ўзбекистоннинг бой миллий анъаналари, мусиқаси, ҳунармандчилиги ва гастрономиясига бағишланган дастур.</div></div>
           </div>
         </div>
 
@@ -1949,14 +1983,14 @@
         <div class="day-panel" id="day4">
           <div class="day-location">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>9 Июль, 2026 · Самарқанд ва Термиз шаҳарлари</span>
+            <span data-i18n="day.4.location">9 Июль, 2026 · Самарқанд ва Термиз шаҳарлари</span>
           </div>
           <div class="schedule-list">
-            <div class="schedule-item"><div class="schedule-time">06:10–08:23</div><div class="schedule-event">Самарқандга жўнаб кетиш. Меҳмонхонага етиб бориш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">10:00–17:30</div><div class="schedule-event"><span class="session-badge">I Халқаро конференция · Самарқанд</span><strong>"Имом ал-Бухорийнинг "ал-Жомиъ ас-Саҳиҳ" асари – уммат китоби"</strong>"Боқий шаҳар" мажмуаси. 5 та шўъба йиғилиши.</div></div>
-            <div class="schedule-item"><div class="schedule-time">10:00–17:30</div><div class="schedule-event"><span class="session-badge">II Халқаро конференция · Самарқанд</span><strong>"Имом Мотуридий мероси: ислом цивилизациясининг мўътадиллик ва ақл–идрок пойдевори"</strong>"Минион" меҳмонхонаси. Мотуридийлик бўйича халқаро танлов ғолибларини тақдирлаш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">06:30–17:30</div><div class="schedule-event"><span class="session-badge">III Халқаро конференция · Термиз</span><strong>"Термиз ҳадис мактаби: алломалар мероси ва замонавий тадқиқотлар"</strong>Термиз Давлат Университети. 3 та шўъба йиғилиши.</div></div>
-            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Расмий қабуллар</strong>Самарқанд вилояти ҳокими ва Сурхондарё вилояти ҳокими номидан.</div></div>
+            <div class="schedule-item"><div class="schedule-time">06:10–08:23</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d4.1.event">Самарқандга жўнаб кетиш. Меҳмонхонага етиб бориш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">10:00–17:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d4.2.event"><span class="session-badge">I Халқаро конференция · Самарқанд</span><strong>"Имом ал-Бухорийнинг "ал-Жомиъ ас-Саҳиҳ" асари – уммат китоби"</strong>"Боқий шаҳар" мажмуаси. 5 та шўъба йиғилиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">10:00–17:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d4.3.event"><span class="session-badge">II Халқаро конференция · Самарқанд</span><strong>"Имом Мотуридий мероси: ислом цивилизациясининг мўътадиллик ва ақл–идрок пойдевори"</strong>"Минион" меҳмонхонаси. Мотуридийлик бўйича халқаро танлов ғолибларини тақдирлаш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">06:30–17:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d4.4.event"><span class="session-badge">III Халқаро конференция · Термиз</span><strong>"Термиз ҳадис мактаби: алломалар мероси ва замонавий тадқиқотлар"</strong>Термиз Давлат Университети. 3 та шўъба йиғилиши.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d4.5.event"><strong>Расмий қабуллар</strong>Самарқанд вилояти ҳокими ва Сурхондарё вилояти ҳокими номидан.</div></div>
           </div>
         </div>
 
@@ -1964,14 +1998,14 @@
         <div class="day-panel" id="day5">
           <div class="day-location">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>10 Июль, 2026 · Самарқанд ва Сурхондарё вилоятлари</span>
+            <span data-i18n="day.5.location">10 Июль, 2026 · Самарқанд ва Сурхондарё вилоятлари</span>
           </div>
           <div class="schedule-list">
-            <div class="schedule-item"><div class="schedule-time">08:00–13:30</div><div class="schedule-event"><span class="session-badge">Самарқанд вилояти</span><strong>Имом Бухорий мажмуасига зиёрат</strong>Инновацион музей экскурсияси. Ҳадис илми мактаби билан танишув.</div></div>
-            <div class="schedule-item"><div class="schedule-time">14:30–16:00</div><div class="schedule-event"><strong>"Чокардиза" зиёратгоҳи</strong>Имом Мотуридий мақбараси зиёрати.</div></div>
-            <div class="schedule-item"><div class="schedule-time">08:00–16:00</div><div class="schedule-event"><span class="session-badge">Сурхондарё вилояти</span><strong>Ҳаким Термизий ва Имом Термизий зиёратгоҳлари</strong>Имом Термизий халқаро илмий–тадқиқот маркази фаолияти билан танишиш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">16:30–18:00</div><div class="schedule-event">Меҳмонларни Тошкент шаҳрига кузатиш.</div></div>
-            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><strong>Якунловчи маданий дастур ва кечки овқат</strong></div></div>
+            <div class="schedule-item"><div class="schedule-time">08:00–13:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d5.1.event"><span class="session-badge">Самарқанд вилояти</span><strong>Имом Бухорий мажмуасига зиёрат</strong>Инновацион музей экскурсияси. Ҳадис илми мактаби билан танишув.</div></div>
+            <div class="schedule-item"><div class="schedule-time">14:30–16:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d5.2.event"><strong>"Чокардиза" зиёратгоҳи</strong>Имом Мотуридий мақбараси зиёрати.</div></div>
+            <div class="schedule-item"><div class="schedule-time">08:00–16:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d5.3.event"><span class="session-badge">Сурхондарё вилояти</span><strong>Ҳаким Термизий ва Имом Термизий зиёратгоҳлари</strong>Имом Термизий халқаро илмий–тадқиқот маркази фаолияти билан танишиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">16:30–18:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d5.4.event">Меҳмонларни Тошкент шаҳрига кузатиш.</div></div>
+            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d5.5.event"><strong>Якунловчи маданий дастур ва кечки овқат</strong></div></div>
           </div>
         </div>
 
@@ -1979,10 +2013,10 @@
         <div class="day-panel" id="day6">
           <div class="day-location">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>11 Июль, 2026 · Тошкент ва Самарқанд шаҳарлари</span>
+            <span data-i18n="day.6.location">11 Июль, 2026 · Тошкент ва Самарқанд шаҳарлари</span>
           </div>
           <div class="schedule-list">
-            <div class="schedule-item"><div class="schedule-time">Жадвал б-ча</div><div class="schedule-event"><strong>Хорижлик меҳмонларни кузатиш</strong>Тошкент халқаро аэропорти ва Тошкент Шимолий вокзалида кузатиш маросими.</div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d6.1.time">Жадвал б-ча</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d6.1.event"><strong>Хорижлик меҳмонларни кузатиш</strong>Тошкент халқаро аэропорти ва Тошкент Шимолий вокзалида кузатиш маросими.</div></div>
           </div>
         </div>
       </div>
@@ -1995,11 +2029,11 @@
   <div class="sessions-inner">
     <div class="sessions-header fade-up">
       <div>
-        <p class="section-label">Асосий мавзулар</p>
-        <h2 class="section-title">Ялпи Мажлис Сессиялари</h2>
+        <p class="section-label" data-i18n="sessions.label">Асосий мавзулар</p>
+        <h2 class="section-title" data-i18n="sessions.title">Ялпи Мажлис Сессиялари</h2>
         <div class="gold-line"></div>
       </div>
-      <div class="sessions-header-right">
+      <div class="sessions-header-right" data-i18n="sessions.headerRight">
         Тошкент<br>
         7–8 Июль 2026<br>
         Ислом Цивилизацияси Маркази
@@ -2014,9 +2048,9 @@
             <span class="s-card-roman">I</span>
             <div class="s-card-dot"></div>
           </div>
-          <div class="s-card-title">Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси</div>
+          <div class="s-card-title" data-i18n="sessions.s1.title">Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси</div>
         </div>
-        <div class="s-card-footer">Тошкент · 7 Июль · Эрталаб</div>
+        <div class="s-card-footer" data-i18n="sessions.footer.d7morning">Тошкент · 7 Июль · Эрталаб</div>
       </div>
 
       <div class="s-card s-card-wide fade-up">
@@ -2025,9 +2059,9 @@
             <span class="s-card-roman">II</span>
             <div class="s-card-dot"></div>
           </div>
-          <div class="s-card-title">Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси: илмий, маънавий ва маданий мерос трансформацияси</div>
+          <div class="s-card-title" data-i18n="sessions.s2.title">Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси: илмий, маънавий ва маданий мерос трансформацияси</div>
         </div>
-        <div class="s-card-footer">Тошкент · 7 Июль · Тушдан кейин</div>
+        <div class="s-card-footer" data-i18n="sessions.footer.d7afternoon">Тошкент · 7 Июль · Тушдан кейин</div>
       </div>
 
       <!-- Narrow cards (span 2) -->
@@ -2037,9 +2071,9 @@
             <span class="s-card-roman">III</span>
             <div class="s-card-dot"></div>
           </div>
-          <div class="s-card-title">Ислом цивилизациясининг маънавий мероси: ҳадис, фиқҳ, илоҳиёт ва маърифат</div>
+          <div class="s-card-title" data-i18n="sessions.s3.title">Ислом цивилизациясининг маънавий мероси: ҳадис, фиқҳ, илоҳиёт ва маърифат</div>
         </div>
-        <div class="s-card-footer">Тошкент · 7 Июль</div>
+        <div class="s-card-footer" data-i18n="sessions.footer.d7">Тошкент · 7 Июль</div>
       </div>
 
       <div class="s-card s-card-narrow fade-up">
@@ -2048,9 +2082,9 @@
             <span class="s-card-roman">IV</span>
             <div class="s-card-dot"></div>
           </div>
-          <div class="s-card-title">Ислом цивилизациясида инклюзив интеллектуал салоҳият: тарихий моделлар ва замонавий талқинлари</div>
+          <div class="s-card-title" data-i18n="sessions.s4.title">Ислом цивилизациясида инклюзив интеллектуал салоҳият: тарихий моделлар ва замонавий талқинлари</div>
         </div>
-        <div class="s-card-footer">Тошкент · 7–8 Июль</div>
+        <div class="s-card-footer" data-i18n="sessions.footer.d78">Тошкент · 7–8 Июль</div>
       </div>
 
       <div class="s-card s-card-narrow fade-up">
@@ -2059,9 +2093,9 @@
             <span class="s-card-roman">V</span>
             <div class="s-card-dot"></div>
           </div>
-          <div class="s-card-title">Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида</div>
+          <div class="s-card-title" data-i18n="sessions.s5.title">Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида</div>
         </div>
-        <div class="s-card-footer">Тошкент · 8 Июль</div>
+        <div class="s-card-footer" data-i18n="sessions.footer.d8">Тошкент · 8 Июль</div>
       </div>
 
       <div class="s-card s-card-narrow fade-up">
@@ -2070,9 +2104,9 @@
             <span class="s-card-roman">VI</span>
             <div class="s-card-dot"></div>
           </div>
-          <div class="s-card-title">Замонавий медиамаконда ислом цивилизацияси: маданиятлар мулоқоти ва рақамли коммуникация</div>
+          <div class="s-card-title" data-i18n="sessions.s6.title">Замонавий медиамаконда ислом цивилизацияси: маданиятлар мулоқоти ва рақамли коммуникация</div>
         </div>
-        <div class="s-card-footer">Тошкент · 8 Июль</div>
+        <div class="s-card-footer" data-i18n="sessions.footer.d8">Тошкент · 8 Июль</div>
       </div>
 
       <div class="s-card s-card-narrow fade-up">
@@ -2081,9 +2115,9 @@
             <span class="s-card-roman">VII</span>
             <div class="s-card-dot"></div>
           </div>
-          <div class="s-card-title">Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари</div>
+          <div class="s-card-title" data-i18n="sessions.s7.title">Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари</div>
         </div>
-        <div class="s-card-footer">Тошкент · 8 Июль</div>
+        <div class="s-card-footer" data-i18n="sessions.footer.d8">Тошкент · 8 Июль</div>
       </div>
     </div>
   </div>
@@ -2091,10 +2125,10 @@
 <!-- ORBITAL JOURNEY MAP -->
 <section class="orbital-section-wrap" id="harakat-xaritasi">
   <div class="orbital-section-header">
-    <p class="section-label" style="text-align:center">Глобал йўналиш</p>
-    <h2 class="section-title" style="text-align:center">Форум Иштирокчиларининг Ҳаракатланиш Харитаси</h2>
+    <p class="section-label" style="text-align:center" data-i18n="orbital.label">Глобал йўналиш</p>
+    <h2 class="section-title" style="text-align:center" data-i18n="orbital.title">Форум Иштирокчиларининг Ҳаракатланиш Харитаси</h2>
   </div>
-  <p class="orbital-subtitle">40+ мамлакатдан меҳмонлар — уч шаҳар бўйлаб бир йўналиш</p>
+  <p class="orbital-subtitle" data-i18n="orbital.subtitle">40+ мамлакатдан меҳмонлар — уч шаҳар бўйлаб бир йўналиш</p>
 
   <div class="orbital-section">
     <div class="orbital-stage">
@@ -2128,29 +2162,29 @@
           <g class="city-point" id="cityTashkent">
             <circle class="pulse" cx="225" cy="55" r="6"/>
             <circle class="core" cx="225" cy="55" r="4"/>
-            <text class="city-label" x="234" y="52">Тошкент</text>
+            <text class="city-label" x="234" y="52" data-i18n="city.tashkent">Тошкент</text>
           </g>
 
           <g class="city-point" id="citySamarqand">
             <circle class="pulse" cx="150" cy="100" r="6"/>
             <circle class="core" cx="150" cy="100" r="4"/>
-            <text class="city-label" x="159" y="97">Самарқанд</text>
+            <text class="city-label" x="159" y="97" data-i18n="city.samarqand">Самарқанд</text>
           </g>
 
           <g class="city-point" id="cityTermiz">
             <circle class="pulse" cx="160" cy="150" r="6"/>
             <circle class="core" cx="160" cy="150" r="4"/>
-            <text class="city-label" x="169" y="158">Термиз</text>
+            <text class="city-label" x="169" y="158" data-i18n="city.termiz">Термиз</text>
           </g>
         </svg>
       </div>
     </div>
 
     <div class="stage-tabs">
-      <button class="stage-tab active" onclick="setStage(1, this)">1–3 кун · Тошкентга</button>
-      <button class="stage-tab" onclick="setStage(2, this)">4–5 кун · Самарқандга</button>
-      <button class="stage-tab" onclick="setStage(3, this)">6 кун · Термизга</button>
-      <button class="stage-tab" onclick="setStage(4, this)">7 кун · Қайтиш</button>
+      <button class="stage-tab active" onclick="setStage(1, this)" data-i18n="orbital.stage1">1–3 кун · Тошкентга</button>
+      <button class="stage-tab" onclick="setStage(2, this)" data-i18n="orbital.stage2">4–5 кун · Самарқандга</button>
+      <button class="stage-tab" onclick="setStage(3, this)" data-i18n="orbital.stage3">6 кун · Термизга</button>
+      <button class="stage-tab" onclick="setStage(4, this)" data-i18n="orbital.stage4">7 кун · Қайтиш</button>
     </div>
 
     <div class="stage-caption" id="stageCaption"></div>
@@ -2161,8 +2195,8 @@
   <!-- Epigraph -->
   <div class="footer-quote fade-up">
     <p class="footer-quote-text">
-      "Ислом цивилизацияси — <em>тинчлик, бағрикенглик</em> ва илм–маърифат йўли.
-      Бу мерос бутун башариятнинг умумий бойлигидир."
+      <span data-i18n="footer.quote">"Ислом цивилизацияси — <em>тинчлик, бағрикенглик</em> ва илм–маърифат йўли.
+      Бу мерос бутун башариятнинг умумий бойлигидир."</span>
     </p>
   </div>
 
@@ -2171,11 +2205,11 @@
     <div class="footer-col-wrap fade-up">
       <div class="footer-logo-wrap">
         <img src="assets/logo.png" alt="Forum logotipi" class="footer-logo-img">
-        <div class="footer-logo-title">
+        <div class="footer-logo-title" data-i18n="nav.brand">
           Ислом Цивилизацияси<br>I Халқаро Форуми
         </div>
       </div>
-      <p class="footer-brand-desc">
+      <p class="footer-brand-desc" data-i18n="footer.brandDesc">
         "Ислом цивилизацияси: тинчлик, бағрикенглик ва илм–маърифат йўли" мавзусидаги
         халқаро форум 2026 йил 7–11 июль кунлари Ўзбекистоннинг уч шаҳрида бўлиб ўтади.
       </p>
@@ -2205,46 +2239,46 @@
             font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.5px;
-        ">7–11 Июль 2026</span>
+        " data-i18n="nav.date">7–11 Июль 2026</span>
       </div>
     </div>
 
     <div class="footer-col-wrap fade-up">
-      <div class="footer-col-title">Асосий жойлар</div>
+      <div class="footer-col-title" data-i18n="footer.col1.title">Асосий жойлар</div>
       <ul class="footer-col-list">
-        <li>Ислом цивилизацияси маркази · Тошкент</li>
-        <li>"Боқий шаҳар" мажмуаси · Самарқанд</li>
-        <li>Термиз Давлат Университети</li>
-        <li>Имом Бухорий мажмуаси</li>
-        <li>Чокардиза зиёратгоҳи</li>
-        <li>Ҳаким Термизий мажмуаси</li>
+        <li data-i18n="footer.col1.li1">Ислом цивилизацияси маркази · Тошкент</li>
+        <li data-i18n="footer.col1.li2">"Боқий шаҳар" мажмуаси · Самарқанд</li>
+        <li data-i18n="footer.col1.li3">Термиз Давлат Университети</li>
+        <li data-i18n="footer.col1.li4">Имом Бухорий мажмуаси</li>
+        <li data-i18n="footer.col1.li5">Чокардиза зиёратгоҳи</li>
+        <li data-i18n="footer.col1.li6">Ҳаким Термизий мажмуаси</li>
       </ul>
     </div>
 
     <div class="footer-col-wrap fade-up">
-      <div class="footer-col-title">Конференциялар</div>
+      <div class="footer-col-title" data-i18n="footer.col2.title">Конференциялар</div>
       <ul class="footer-col-list">
-        <li>Имом Бухорий: ал-Жомиъ ас-Саҳиҳ</li>
-        <li>Имом Мотуридий мероси</li>
-        <li>Термиз ҳадис мактаби</li>
+        <li data-i18n="footer.col2.li1">Имом Бухорий: ал-Жомиъ ас-Саҳиҳ</li>
+        <li data-i18n="footer.col2.li2">Имом Мотуридий мероси</li>
+        <li data-i18n="footer.col2.li3">Термиз ҳадис мактаби</li>
       </ul>
       <br>
-      <div class="footer-col-title">Натижалар</div>
+      <div class="footer-col-title" data-i18n="footer.col2b.title">Натижалар</div>
       <ul class="footer-col-list">
-        <li>7+ Ялпи мажлис</li>
-        <li>Меморандум имзолаш</li>
-        <li>Халқаро танлов тақдири</li>
+        <li data-i18n="footer.col2b.li1">7+ Ялпи мажлис</li>
+        <li data-i18n="footer.col2b.li2">Меморандум имзолаш</li>
+        <li data-i18n="footer.col2b.li3">Халқаро танлов тақдири</li>
       </ul>
     </div>
 
     <div class="footer-col-wrap fade-up">
-      <div class="footer-col-title">Ташкилотчилар</div>
+      <div class="footer-col-title" data-i18n="footer.col3.title">Ташкилотчилар</div>
       <ul class="footer-col-list">
-        <li>Ўзбекистон Республикаси</li>
-        <li>Ислом Цивилизацияси Маркази</li>
-        <li>Дини Ишлар Қўмитаси</li>
-        <li>Самарқанд вилояти ҳокимлиги</li>
-        <li>Сурхондарё вилояти ҳокимлиги</li>
+        <li data-i18n="footer.col3.li1">Ўзбекистон Республикаси</li>
+        <li data-i18n="footer.col3.li2">Ислом Цивилизацияси Маркази</li>
+        <li data-i18n="footer.col3.li3">Дини Ишлар Қўмитаси</li>
+        <li data-i18n="footer.col3.li4">Самарқанд вилояти ҳокимлиги</li>
+        <li data-i18n="footer.col3.li5">Сурхондарё вилояти ҳокимлиги</li>
       </ul>
     </div>
   </div>
@@ -2252,10 +2286,10 @@
   <!-- Bottom bar -->
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      © 2026 · I Халқаро Ислом Цивилизацияси Форуми · Барча ҳуқуқлар ҳимояланган
+      <span data-i18n="footer.bottomLeft">© 2026 · I Халқаро Ислом Цивилизацияси Форуми · Барча ҳуқуқлар ҳимояланган</span>
     </div>
     <div class="footer-bottom-right">
-      <div class="footer-bottom-flag">Ўзбекистон Республикаси</div>
+      <div class="footer-bottom-flag" data-i18n="footer.bottomFlag">Ўзбекистон Республикаси</div>
     </div>
   </div>
 </footer>
@@ -2271,7 +2305,7 @@
     <div class="kiosk-header">
       <div class="live-indicator">
         <span class="live-dot"></span>
-        <span id="kiosk-status-text">Форум ҳолати</span>
+        <span id="kiosk-status-text" data-i18n="kiosk.statusDefault">Форум ҳолати</span>
       </div>
       <button id="close-kiosk-btn" style="background: transparent; border: none; color: #666; cursor: pointer; font-size: 16px;">&times;</button>
     </div>
@@ -2279,15 +2313,683 @@
     <div id="kiosk-body" class="kiosk-body"></div>
     
     <div class="kiosk-footer">
-      <span class="gold-accent">✦</span> Тошкент · Самарқанд · Термиз
+      <span class="gold-accent">✦</span> <span data-i18n="kiosk.footerCities">Тошкент · Самарқанд · Термиз</span>
     </div>
   </div>
+
+<script>
+  // ══════════ I18N TRANSLATIONS ══════════
+  const TRANSLATIONS = {
+    uz: {
+      "city.samarqand": "Самарқанд",
+      "city.surxondaryo": "Сурхондарё",
+      "city.tashkent": "Тошкент",
+      "city.termiz": "Термиз",
+      "city1.date": "6–8 Июль · 1–3 кун",
+      "city1.desc": "Форумнинг асосий маскани. Ислом цивилизацияси маркази биносида ялпи мажлислар ва расмий очилиш маросими.",
+      "city1.mapAddr": "Тошкент ш., Олмазор тумани",
+      "city1.mapTitle": "Ислом цивилизацияси маркази",
+      "city1.tag1": "7 Ялпи мажлис",
+      "city1.tag2": "Расмий очилиш",
+      "city1.tag3": "Маданий дастур",
+      "city2.date": "9–10 Июль · 4–5 кун",
+      "city2.desc": "Имом Бухорий ва Имом Мотуридийга бағишланган халқаро конференциялар. \"Боқий шаҳар\" мажмуаси.",
+      "city2.mapAddr": "Самарқанд ш., Боқий шаҳар кўчаси",
+      "city2.mapTitle": "\"Боқий шаҳар\" мажмуаси",
+      "city2.tag1": "2 Конференция",
+      "city2.tag2": "Имом Бухорий мажмуаси",
+      "city2.tag3": "Чокардиза",
+      "city3.date": "11 Июль · 6-кун",
+      "city3.desc": "Термиз ҳадис мактаби ва Имом Термизий меросига бағишланган илмий анжуманлар. Ҳаким Термизий мажмуаси зиёрати.",
+      "city3.mapAddr": "Термиз ш., Баркамол авлод кўчаси",
+      "city3.mapTitle": "Термиз Давлат Университети",
+      "city3.tag1": "Илмий анжуман",
+      "city3.tag2": "Ҳаким Термизий",
+      "city3.tag3": "Термиз ДУ",
+      "common.close": "Yopish",
+      "common.mapOverlay": "Xaritani faollashtirish uchun bosing",
+      "dastur.headerRight": "2026 йил 6–11 июль кунлари<br/>\n        Тошкент · Самарқанд · Термиз<br/>\n        Ислом цивилизацияси маркази",
+      "dastur.label": "Тафсилий жадвал",
+      "dastur.title": "Форум Дастури",
+      "day.1.date": "6 Июль · Тошкент",
+      "day.1.location": "6 Июль, 2026 · Тошкент шаҳри",
+      "day.1.tab": "1-кун",
+      "day.2.date": "7 Июль · Тошкент",
+      "day.2.location": "7 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази",
+      "day.2.tab": "2-кун",
+      "day.3.date": "8 Июль · Тошкент",
+      "day.3.location": "8 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази",
+      "day.3.tab": "3-кун",
+      "day.4.date": "9 Июль · Самарқанд / Термиз",
+      "day.4.location": "9 Июль, 2026 · Самарқанд ва Термиз шаҳарлари",
+      "day.4.tab": "4-кун",
+      "day.5.date": "10 Июль · Зиёратгоҳлар",
+      "day.5.location": "10 Июль, 2026 · Самарқанд ва Сурхондарё вилоятлари",
+      "day.5.tab": "5-кун",
+      "day.6.date": "11 Июль · Кузатиш",
+      "day.6.location": "11 Июль, 2026 · Тошкент ва Самарқанд шаҳарлари",
+      "day.6.tab": "6-кун",
+      "footer.bottomFlag": "Ўзбекистон Республикаси",
+      "footer.bottomLeft": "© 2026 · I Халқаро Ислом Цивилизацияси Форуми · Барча ҳуқуқлар ҳимояланган",
+      "footer.brandDesc": "\"Ислом цивилизацияси: тинчлик, бағрикенглик ва илм–маърифат йўли\" мавзусидаги\n        халқаро форум 2026 йил 7–11 июль кунлари Ўзбекистоннинг уч шаҳрида бўлиб ўтади.",
+      "footer.col1.li1": "Ислом цивилизацияси маркази · Тошкент",
+      "footer.col1.li2": "\"Боқий шаҳар\" мажмуаси · Самарқанд",
+      "footer.col1.li3": "Термиз Давлат Университети",
+      "footer.col1.li4": "Имом Бухорий мажмуаси",
+      "footer.col1.li5": "Чокардиза зиёратгоҳи",
+      "footer.col1.li6": "Ҳаким Термизий мажмуаси",
+      "footer.col1.title": "Асосий жойлар",
+      "footer.col2.li1": "Имом Бухорий: ал-Жомиъ ас-Саҳиҳ",
+      "footer.col2.li2": "Имом Мотуридий мероси",
+      "footer.col2.li3": "Термиз ҳадис мактаби",
+      "footer.col2.title": "Конференциялар",
+      "footer.col2b.li1": "7+ Ялпи мажлис",
+      "footer.col2b.li2": "Меморандум имзолаш",
+      "footer.col2b.li3": "Халқаро танлов тақдири",
+      "footer.col2b.title": "Натижалар",
+      "footer.col3.li1": "Ўзбекистон Республикаси",
+      "footer.col3.li2": "Ислом Цивилизацияси Маркази",
+      "footer.col3.li3": "Дини Ишлар Қўмитаси",
+      "footer.col3.li4": "Самарқанд вилояти ҳокимлиги",
+      "footer.col3.li5": "Сурхондарё вилояти ҳокимлиги",
+      "footer.col3.title": "Ташкилотчилар",
+      "footer.quote": "\"Ислом цивилизацияси — <em>тинчлик, бағрикенглик</em> ва илм–маърифат йўли.\n      Бу мерос бутун башариятнинг умумий бойлигидир.\"",
+      "forum.label": "Форум ҳақида",
+      "forum.lead": "I Халқаро Ислом Цивилизацияси Форуми Ўзбекистон Республикаси раҳбарияти\n      ташаббуси билан ташкил этилади. Форум ислом цивилизациясининг бой маънавий\n      ва интеллектуал меросини тадқиқ қилиш, тинчлик ва диалогни мустаҳкамлаш\n      мақсадида дунёнинг турли мамлакатларидан олимлар, мутахассислар ва давлат\n      арбобларини бир жойга тўплайди.",
+      "forum.title": "Цивилизацияларни боғлайдиган платформа",
+      "hero.badge": "I Халқаро Форум · Ўзбекистон · 2026",
+      "hero.meta.city": "Шаҳар",
+      "hero.meta.conference": "Конференция",
+      "hero.meta.day": "Кун",
+      "hero.meta.session": "Ялпи мажлис",
+      "hero.subtitle": "Тошкент · Самарқанд · Термиз — беш кун, уч шаҳар, битта буюк мерос",
+      "hero.title": "Ислом Цивилизацияси:<br/>\n<em>Тинчлик, Бағрикенглик</em><br/>\n      ва Илм–маърифат йўли",
+      "journey.label": "Маршрут",
+      "journey.title": "Уч Шаҳар — Бир Сафар",
+      "kiosk.beforeStatus": "Форум бошланишига:",
+      "kiosk.days": "кун",
+      "kiosk.endedDesc": "Форум муваффақиятли якунланди. <br>Материаллар тез орада жойлаштирилади.",
+      "kiosk.endedStatus": "ЯКУНЛАНДИ",
+      "kiosk.footerCities": "Тошкент · Самарқанд · Термиз",
+      "kiosk.hours": "соат",
+      "kiosk.liveDesc": "Ҳозирда Ислом цивилизацияси марказида расмий шўъба мажлислари бўлиб ўтмоқда.",
+      "kiosk.liveStatus": "ЖОНЛИ ЭФИР",
+      "kiosk.liveTitle": "ФОРУМ КЕТМОҚДА",
+      "kiosk.minutes": "мин",
+      "kiosk.seconds": "сек",
+      "kiosk.statusDefault": "Форум ҳолати",
+      "maqsad.cap.heritage.sub": "Ислом санъати",
+      "maqsad.cap.heritage.title": "Мерос",
+      "maqsad.cap.peace.sub": "Маданиятлар мулоқоти",
+      "maqsad.cap.peace.title": "Тинчлик",
+      "maqsad.cap.science.sub": "Интеллектуал мерос",
+      "maqsad.cap.science.title": "Илм–Фан",
+      "maqsad.cap.unity.sub": "Халқаро олимлар",
+      "maqsad.cap.unity.title": "Бирлик",
+      "maqsad.stat.conference": "Халқаро конференция",
+      "maqsad.stat.day": "Кун давомида",
+      "nav.brand": "Ислом Цивилизацияси<br/>I Халқаро Форуми",
+      "nav.cities": "Шаҳарлар",
+      "nav.date": "7–11 Июль 2026",
+      "nav.forum": "Форум",
+      "nav.program": "Дастур",
+      "nav.sessions": "Сессиялар",
+      "orbital.label": "Глобал йўналиш",
+      "orbital.stage1": "1–3 кун · Тошкентга",
+      "orbital.stage2": "4–5 кун · Самарқандга",
+      "orbital.stage3": "6 кун · Термизга",
+      "orbital.stage4": "7 кун · Қайтиш",
+      "orbital.subtitle": "40+ мамлакатдан меҳмонлар — уч шаҳар бўйлаб бир йўналиш",
+      "orbital.title": "Форум Иштирокчиларининг Ҳаракатланиш Харитаси",
+      "sched.d1.1.event": "Иштирокчиларни Тошкент халқаро аэропортида кутиб олиш. Меҳмонхонага жойлаштириш.",
+      "sched.d1.1.time": "Жадвал б-ча",
+      "sched.d1.2.event": "Иштирокчиларни Ислом цивилизацияси маркази музей экспозицияси билан таништириш.",
+      "sched.d1.2.time": "Кун давомида",
+      "sched.d1.3.event": "Форум иштирокчиларини рўйхатдан ўтказиш ва ОАВни аккредитация қилиш.",
+      "sched.d1.4.event": "Ташкилотчилар ва халқаро ҳамкорларнинг мувофиқлаштирувчи йиғилиши.",
+      "sched.d1.5.event": "Икки томонлама учрашувлар ва музокаралар.",
+      "sched.d1.6.event": "<strong>Расмий қабул маросими</strong>Ташкилотчилар номидан расмий қабул маросими.",
+      "sched.d2.1.event": "Иштирокчиларни рўйхатдан ўтказиш.",
+      "sched.d2.10.event": "<span class=\"session-badge\">IV Ялпи мажлис</span><strong>\"Ислом цивилизациясида инклюзив интеллектуал салоҳият\"</strong>Тарихий моделлар ва замонавий талқинлари.",
+      "sched.d2.11.event": "<strong>Тантанали қабул маросими</strong>Ўзбекистондаги Ислом цивилизацияси маркази номидан.",
+      "sched.d2.2.event": "<strong>🎖 Тантанали очилиш маросими</strong>Ўзбекистон Республикаси Президентининг Форум иштирокчиларига табриги.",
+      "sched.d2.3.event": "Тақдимот фильми намойиши.",
+      "sched.d2.4.event": "Табрик сўзлари.",
+      "sched.d2.5.event": "<span class=\"session-badge\">I Ялпи мажлис</span><strong>\"Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси\"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.",
+      "sched.d2.6.event": "Пешин намози. \"Ҳазрати Имом жоме\" масжиди.",
+      "sched.d2.7.event": "Тушлик.",
+      "sched.d2.8.event": "<span class=\"session-badge\">II Ялпи мажлис</span><strong>\"Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси\"</strong>Илмий, маънавий ва маданий мерос трансформацияси.",
+      "sched.d2.9.event": "<span class=\"session-badge\">III Ялпи мажлис</span><strong>\"Ислом цивилизациясининг маънавий мероси\"</strong>Ҳадис, фиқҳ, илоҳиёт ва маърифат.",
+      "sched.d3.1.event": "<span class=\"session-badge\">V Ялпи мажлис</span><strong>\"Ислом цивилизациясида илм–фан, таълим ва интеллектуал мерос\"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.",
+      "sched.d3.10.event": "<strong>Маданий дастур</strong>Ўзбекистоннинг бой миллий анъаналари, мусиқаси, ҳунармандчилиги ва гастрономиясига бағишланган дастур.",
+      "sched.d3.2.event": "<span class=\"session-badge\">VI Ялпи мажлис</span><strong>\"Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида\"</strong>",
+      "sched.d3.3.event": "Тушлик.",
+      "sched.d3.4.event": "<span class=\"session-badge\">VII Ялпи мажлис</span><strong>\"Замонавий медиамаконда ислом цивилизацияси\"</strong>Маданиятлар мулоқоти, рақамли коммуникация ва ижтимоий маърифат.",
+      "sched.d3.5.event": "<span class=\"session-badge\">VIII Ялпи мажлис</span><strong>\"Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари\"</strong>",
+      "sched.d3.6.event": "Форум якунларига бағишланган фильм намойиши.",
+      "sched.d3.7.event": "<strong>📜 Меморандум ва битимларни имзолаш маросими</strong>",
+      "sched.d3.8.event": "Ўзбекистон Президентига йўлланган мурожаатни ўқиб эшиттириш.",
+      "sched.d3.9.event": "<strong>🏁 Форумнинг ёпилиши</strong>",
+      "sched.d4.1.event": "Самарқандга жўнаб кетиш. Меҳмонхонага етиб бориш.",
+      "sched.d4.2.event": "<span class=\"session-badge\">I Халқаро конференция · Самарқанд</span><strong>\"Имом ал-Бухорийнинг \"ал-Жомиъ ас-Саҳиҳ\" асари – уммат китоби\"</strong>\"Боқий шаҳар\" мажмуаси. 5 та шўъба йиғилиши.",
+      "sched.d4.3.event": "<span class=\"session-badge\">II Халқаро конференция · Самарқанд</span><strong>\"Имом Мотуридий мероси: ислом цивилизациясининг мўътадиллик ва ақл–идрок пойдевори\"</strong>\"Минион\" меҳмонхонаси. Мотуридийлик бўйича халқаро танлов ғолибларини тақдирлаш.",
+      "sched.d4.4.event": "<span class=\"session-badge\">III Халқаро конференция · Термиз</span><strong>\"Термиз ҳадис мактаби: алломалар мероси ва замонавий тадқиқотлар\"</strong>Термиз Давлат Университети. 3 та шўъба йиғилиши.",
+      "sched.d4.5.event": "<strong>Расмий қабуллар</strong>Самарқанд вилояти ҳокими ва Сурхондарё вилояти ҳокими номидан.",
+      "sched.d5.1.event": "<span class=\"session-badge\">Самарқанд вилояти</span><strong>Имом Бухорий мажмуасига зиёрат</strong>Инновацион музей экскурсияси. Ҳадис илми мактаби билан танишув.",
+      "sched.d5.2.event": "<strong>\"Чокардиза\" зиёратгоҳи</strong>Имом Мотуридий мақбараси зиёрати.",
+      "sched.d5.3.event": "<span class=\"session-badge\">Сурхондарё вилояти</span><strong>Ҳаким Термизий ва Имом Термизий зиёратгоҳлари</strong>Имом Термизий халқаро илмий–тадқиқот маркази фаолияти билан танишиш.",
+      "sched.d5.4.event": "Меҳмонларни Тошкент шаҳрига кузатиш.",
+      "sched.d5.5.event": "<strong>Якунловчи маданий дастур ва кечки овқат</strong>",
+      "sched.d6.1.event": "<strong>Хорижлик меҳмонларни кузатиш</strong>Тошкент халқаро аэропорти ва Тошкент Шимолий вокзалида кузатиш маросими.",
+      "sched.d6.1.time": "Жадвал б-ча",
+      "sessions.footer.d7": "Тошкент · 7 Июль",
+      "sessions.footer.d78": "Тошкент · 7–8 Июль",
+      "sessions.footer.d7afternoon": "Тошкент · 7 Июль · Тушдан кейин",
+      "sessions.footer.d7morning": "Тошкент · 7 Июль · Эрталаб",
+      "sessions.footer.d8": "Тошкент · 8 Июль",
+      "sessions.headerRight": "Тошкент<br/>\n        7–8 Июль 2026<br/>\n        Ислом Цивилизацияси Маркази",
+      "sessions.label": "Асосий мавзулар",
+      "sessions.s1.title": "Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси",
+      "sessions.s2.title": "Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси: илмий, маънавий ва маданий мерос трансформацияси",
+      "sessions.s3.title": "Ислом цивилизациясининг маънавий мероси: ҳадис, фиқҳ, илоҳиёт ва маърифат",
+      "sessions.s4.title": "Ислом цивилизациясида инклюзив интеллектуал салоҳият: тарихий моделлар ва замонавий талқинлари",
+      "sessions.s5.title": "Музейлар, кутубхоналар ва қўлёзма манбалар ислом меросини сақлаш воситаси сифатида",
+      "sessions.s6.title": "Замонавий медиамаконда ислом цивилизацияси: маданиятлар мулоқоти ва рақамли коммуникация",
+      "sessions.s7.title": "Ислом санъатини ўрганиш соҳасидаги фаолият истиқболлари",
+      "sessions.title": "Ялпи Мажлис Сессиялари",
+      orbital: { captions: {
+        1: "Дунёнинг 40+ мамлакатидан меҳмонлар <strong>Тошкентга</strong> йўл олмоқда — форумнинг очилиши ва асосий ялпи мажлислар.",
+        2: "Карвон йўли давом этади: <strong>Тошкентдан Самарқандга</strong> — Имом Бухорий ва Имом Мотуридий конференциялари.",
+        3: "<strong>Самарқанддан Термизга</strong> — Термиз ҳадис мактаби анъаналари давом эттирилмоқда.",
+        4: "Сафар якунланмоқда: <strong>Термиздан Тошкентга</strong>, сўнгра меҳмонлар ўз юртларига қайтишади.",
+      } },
+      kiosk: {
+        "beforeStatus": "Форум бошланишига:",
+        "days": "кун",
+        "endedDesc": "Форум муваффақиятли якунланди. <br>Материаллар тез орада жойлаштирилади.",
+        "endedStatus": "ЯКУНЛАНДИ",
+        "footerCities": "Тошкент · Самарқанд · Термиз",
+        "hours": "соат",
+        "liveDesc": "Ҳозирда Ислом цивилизацияси марказида расмий шўъба мажлислари бўлиб ўтмоқда.",
+        "liveStatus": "ЖОНЛИ ЭФИР",
+        "liveTitle": "ФОРУМ КЕТМОҚДА",
+        "minutes": "мин",
+        "seconds": "сек",
+        "statusDefault": "Форум ҳолати",
+      },
+      city: {
+        "tashkent": "Тошкент",
+        "samarqand": "Самарқанд",
+        "termiz": "Термиз",
+        "surxondaryo": "Сурхондарё",
+      },
+    },
+    ru: {
+      "city.samarqand": "Самарканд",
+      "city.surxondaryo": "Сурхандарья",
+      "city.tashkent": "Ташкент",
+      "city.termiz": "Термез",
+      "city1.date": "6–8 июля · 1–3 день",
+      "city1.desc": "Главная площадка форума. Пленарные заседания и официальная церемония открытия в здании Центра исламской цивилизации.",
+      "city1.mapAddr": "г. Ташкент, Алмазарский район",
+      "city1.mapTitle": "Центр исламской цивилизации",
+      "city1.tag1": "7 пленарных заседаний",
+      "city1.tag2": "Официальное открытие",
+      "city1.tag3": "Культурная программа",
+      "city2.date": "9–10 июля · 4–5 день",
+      "city2.desc": "Международные конференции, посвящённые имаму аль-Бухари и имаму аль-Матуриди. Комплекс «Вечный город».",
+      "city2.mapAddr": "г. Самарканд, ул. Боқий шаҳар",
+      "city2.mapTitle": "Комплекс «Вечный город»",
+      "city2.tag1": "2 конференции",
+      "city2.tag2": "Комплекс имама аль-Бухари",
+      "city2.tag3": "Чокардиза",
+      "city3.date": "11 июля · 6-й день",
+      "city3.desc": "Научные конференции, посвящённые термезской школе хадисоведения и наследию имама ат-Термизи. Посещение комплекса Хакима ат-Термизи.",
+      "city3.mapAddr": "г. Термез, ул. Баркамол авлод",
+      "city3.mapTitle": "Термезский государственный университет",
+      "city3.tag1": "Научная конференция",
+      "city3.tag2": "Хаким ат-Термизи",
+      "city3.tag3": "ТермГУ",
+      "common.close": "Закрыть",
+      "common.mapOverlay": "Нажмите, чтобы активировать карту",
+      "dastur.headerRight": "6–11 июля 2026 года<br/>\n        Ташкент · Самарканд · Термез<br/>\n        Центр исламской цивилизации",
+      "dastur.label": "Подробное расписание",
+      "dastur.title": "Программа форума",
+      "day.1.date": "6 июля · Ташкент",
+      "day.1.location": "6 июля 2026 г. · город Ташкент",
+      "day.1.tab": "День 1",
+      "day.2.date": "7 июля · Ташкент",
+      "day.2.location": "7 июля 2026 г. · Ташкент · Центр исламской цивилизации",
+      "day.2.tab": "День 2",
+      "day.3.date": "8 июля · Ташкент",
+      "day.3.location": "8 июля 2026 г. · Ташкент · Центр исламской цивилизации",
+      "day.3.tab": "День 3",
+      "day.4.date": "9 июля · Самарканд / Термез",
+      "day.4.location": "9 июля 2026 г. · города Самарканд и Термез",
+      "day.4.tab": "День 4",
+      "day.5.date": "10 июля · Места паломничества",
+      "day.5.location": "10 июля 2026 г. · Самаркандская и Сурхандарьинская области",
+      "day.5.tab": "День 5",
+      "day.6.date": "11 июля · Проводы",
+      "day.6.location": "11 июля 2026 г. · города Ташкент и Самарканд",
+      "day.6.tab": "День 6",
+      "footer.bottomFlag": "Республика Узбекистан",
+      "footer.bottomLeft": "© 2026 · I Международный форум исламской цивилизации · Все права защищены",
+      "footer.brandDesc": "Международный форум на тему «Исламская цивилизация: путь мира, толерантности и просвещения» пройдёт 7–11 июля 2026 года в трёх городах Узбекистана.",
+      "footer.col1.li1": "Центр исламской цивилизации · Ташкент",
+      "footer.col1.li2": "Комплекс «Вечный город» · Самарканд",
+      "footer.col1.li3": "Термезский государственный университет",
+      "footer.col1.li4": "Комплекс имама аль-Бухари",
+      "footer.col1.li5": "Место паломничества Чокардиза",
+      "footer.col1.li6": "Комплекс Хакима ат-Термизи",
+      "footer.col1.title": "Основные площадки",
+      "footer.col2.li1": "Имам аль-Бухари: «Аль-Джами ас-Сахих»",
+      "footer.col2.li2": "Наследие имама аль-Матуриди",
+      "footer.col2.li3": "Термезская школа хадисоведения",
+      "footer.col2.title": "Конференции",
+      "footer.col2b.li1": "7+ пленарных заседаний",
+      "footer.col2b.li2": "Подписание меморандума",
+      "footer.col2b.li3": "Итоги международного конкурса",
+      "footer.col2b.title": "Итоги",
+      "footer.col3.li1": "Республика Узбекистан",
+      "footer.col3.li2": "Центр исламской цивилизации",
+      "footer.col3.li3": "Комитет по делам религий",
+      "footer.col3.li4": "Хокимият Самаркандской области",
+      "footer.col3.li5": "Хокимият Сурхандарьинской области",
+      "footer.col3.title": "Организаторы",
+      "footer.quote": "«Исламская цивилизация — <em>путь мира, толерантности</em> и просвещения.\n      Это наследие — общее достояние всего человечества».",
+      "forum.label": "О форуме",
+      "forum.lead": "I Международный форум исламской цивилизации организуется по инициативе руководства Республики Узбекистан. Форум объединяет учёных, экспертов и государственных деятелей из разных стран мира с целью изучения богатого духовного и интеллектуального наследия исламской цивилизации, укрепления мира и диалога.",
+      "forum.title": "Платформа, объединяющая цивилизации",
+      "hero.badge": "I Международный форум · Узбекистан · 2026",
+      "hero.meta.city": "Города",
+      "hero.meta.conference": "Конференции",
+      "hero.meta.day": "Дней",
+      "hero.meta.session": "Пленарных заседаний",
+      "hero.subtitle": "Ташкент · Самарканд · Термез — пять дней, три города, одно великое наследие",
+      "hero.title": "Исламская цивилизация:<br/>\n<em>Мир, толерантность</em><br/>\n      и путь просвещения",
+      "journey.label": "Маршрут",
+      "journey.title": "Три города — одно путешествие",
+      "kiosk.beforeStatus": "До начала форума:",
+      "kiosk.days": "дней",
+      "kiosk.endedDesc": "Форум успешно завершён. <br>Материалы будут размещены в ближайшее время.",
+      "kiosk.endedStatus": "ЗАВЕРШЁН",
+      "kiosk.footerCities": "Ташкент · Самарканд · Термез",
+      "kiosk.hours": "часов",
+      "kiosk.liveDesc": "В настоящее время в Центре исламской цивилизации проходят официальные секционные заседания.",
+      "kiosk.liveStatus": "ПРЯМОЙ ЭФИР",
+      "kiosk.liveTitle": "ФОРУМ ИДЁТ",
+      "kiosk.minutes": "мин",
+      "kiosk.seconds": "сек",
+      "kiosk.statusDefault": "Статус форума",
+      "maqsad.cap.heritage.sub": "Исламское искусство",
+      "maqsad.cap.heritage.title": "Наследие",
+      "maqsad.cap.peace.sub": "Диалог культур",
+      "maqsad.cap.peace.title": "Мир",
+      "maqsad.cap.science.sub": "Интеллектуальное наследие",
+      "maqsad.cap.science.title": "Наука",
+      "maqsad.cap.unity.sub": "Учёные со всего мира",
+      "maqsad.cap.unity.title": "Единство",
+      "maqsad.stat.conference": "Международных конференций",
+      "maqsad.stat.day": "Дней подряд",
+      "nav.brand": "Исламская цивилизация<br/>I Международный форум",
+      "nav.cities": "Города",
+      "nav.date": "7–11 июля 2026",
+      "nav.forum": "Форум",
+      "nav.program": "Программа",
+      "nav.sessions": "Сессии",
+      "orbital.label": "Глобальный маршрут",
+      "orbital.stage1": "1–3 день · В Ташкент",
+      "orbital.stage2": "4–5 день · В Самарканд",
+      "orbital.stage3": "6 день · В Термез",
+      "orbital.stage4": "7 день · Возвращение",
+      "orbital.subtitle": "40+ стран-гостей — единый маршрут по трём городам",
+      "orbital.title": "Карта передвижения участников форума",
+      "sched.d1.1.event": "Встреча участников в международном аэропорту Ташкента. Размещение в гостинице.",
+      "sched.d1.1.time": "По расписанию",
+      "sched.d1.2.event": "Ознакомление участников с музейной экспозицией Центра исламской цивилизации.",
+      "sched.d1.2.time": "В течение дня",
+      "sched.d1.3.event": "Регистрация участников форума и аккредитация СМИ.",
+      "sched.d1.4.event": "Координационное совещание организаторов и международных партнёров.",
+      "sched.d1.5.event": "Двусторонние встречи и переговоры.",
+      "sched.d1.6.event": "<strong>Официальная церемония приёма</strong>Официальный приём от имени организаторов.",
+      "sched.d2.1.event": "Регистрация участников.",
+      "sched.d2.10.event": "<span class=\"session-badge\">Заседание IV</span><strong>«Инклюзивный интеллектуальный потенциал в исламской цивилизации»</strong>Исторические модели и современные трактовки.",
+      "sched.d2.11.event": "<strong>Торжественный приём</strong>От имени Центра исламской цивилизации Узбекистана.",
+      "sched.d2.2.event": "<strong>🎖 Торжественная церемония открытия</strong>Приветственное слово Президента Республики Узбекистан участникам форума.",
+      "sched.d2.3.event": "Показ презентационного фильма.",
+      "sched.d2.4.event": "Приветственные слова.",
+      "sched.d2.5.event": "<span class=\"session-badge\">Заседание I</span><strong>«Центр исламской цивилизации в Узбекистане – международная платформа инновационных научно-просветительских идей»</strong>Доклады отечественных и зарубежных спикеров.",
+      "sched.d2.6.event": "Полуденный намаз. Мечеть «Хазрати Имам».",
+      "sched.d2.7.event": "Обед.",
+      "sched.d2.8.event": "<span class=\"session-badge\">Заседание II</span><strong>«Вклад тюркских народов в исламскую цивилизацию»</strong>Трансформация научного, духовного и культурного наследия.",
+      "sched.d2.9.event": "<span class=\"session-badge\">Заседание III</span><strong>«Духовное наследие исламской цивилизации»</strong>Хадис, фикх, богословие и просвещение.",
+      "sched.d3.1.event": "<span class=\"session-badge\">Заседание V</span><strong>«Наука, образование и интеллектуальное наследие исламской цивилизации»</strong>Доклады отечественных и зарубежных спикеров.",
+      "sched.d3.10.event": "<strong>Культурная программа</strong>Программа, посвящённая богатым национальным традициям, музыке, ремёслам и гастрономии Узбекистана.",
+      "sched.d3.2.event": "<span class=\"session-badge\">Заседание VI</span><strong>«Музеи, библиотеки и рукописные источники как средство сохранения исламского наследия»</strong>",
+      "sched.d3.3.event": "Обед.",
+      "sched.d3.4.event": "<span class=\"session-badge\">Заседание VII</span><strong>«Исламская цивилизация в современном медиапространстве»</strong>Диалог культур, цифровая коммуникация и общественное просвещение.",
+      "sched.d3.5.event": "<span class=\"session-badge\">Заседание VIII</span><strong>«Перспективы деятельности в сфере изучения исламского искусства»</strong>",
+      "sched.d3.6.event": "Показ фильма, посвящённого итогам форума.",
+      "sched.d3.7.event": "<strong>📜 Церемония подписания меморандума и соглашений</strong>",
+      "sched.d3.8.event": "Оглашение обращения к Президенту Узбекистана.",
+      "sched.d3.9.event": "<strong>🏁 Закрытие форума</strong>",
+      "sched.d4.1.event": "Отправление в Самарканд. Прибытие в гостиницу.",
+      "sched.d4.2.event": "<span class=\"session-badge\">I Международная конференция · Самарканд</span><strong>«Труд имама аль-Бухари „Аль-Джами ас-Сахих“ — книга уммы»</strong>Комплекс «Вечный город». 5 секционных заседаний.",
+      "sched.d4.3.event": "<span class=\"session-badge\">II Международная конференция · Самарканд</span><strong>«Наследие имама аль-Матуриди: основа умеренности и рационализма исламской цивилизации»</strong>Гостиница «Minion». Награждение победителей международного конкурса по матуридизму.",
+      "sched.d4.4.event": "<span class=\"session-badge\">III Международная конференция · Термез</span><strong>«Термезская школа хадисоведения: наследие учёных и современные исследования»</strong>Термезский государственный университет. 3 секционных заседания.",
+      "sched.d4.5.event": "<strong>Официальные приёмы</strong>От имени хокима Самаркандской и хокима Сурхандарьинской областей.",
+      "sched.d5.1.event": "<span class=\"session-badge\">Самаркандская область</span><strong>Посещение комплекса имама аль-Бухари</strong>Инновационная музейная экскурсия. Знакомство со школой хадисоведения.",
+      "sched.d5.2.event": "<strong>Место паломничества «Чокардиза»</strong>Посещение мавзолея имама аль-Матуриди.",
+      "sched.d5.3.event": "<span class=\"session-badge\">Сурхандарьинская область</span><strong>Места паломничества Хакима ат-Термизи и имама ат-Термизи</strong>Знакомство с деятельностью Международного научно-исследовательского центра имама ат-Термизи.",
+      "sched.d5.4.event": "Проводы гостей в город Ташкент.",
+      "sched.d5.5.event": "<strong>Заключительная культурная программа и ужин</strong>",
+      "sched.d6.1.event": "<strong>Проводы зарубежных гостей</strong>Церемония проводов в международном аэропорту Ташкента и на вокзале «Ташкент Северный».",
+      "sched.d6.1.time": "По расписанию",
+      "sessions.footer.d7": "Ташкент · 7 июля",
+      "sessions.footer.d78": "Ташкент · 7–8 июля",
+      "sessions.footer.d7afternoon": "Ташкент · 7 июля · После полудня",
+      "sessions.footer.d7morning": "Ташкент · 7 июля · Утро",
+      "sessions.footer.d8": "Ташкент · 8 июля",
+      "sessions.headerRight": "Ташкент<br/>\n        7–8 июля 2026<br/>\n        Центр исламской цивилизации",
+      "sessions.label": "Основные темы",
+      "sessions.s1.title": "Центр исламской цивилизации – международная платформа инновационных научно-просветительских идей",
+      "sessions.s2.title": "Вклад тюркских народов в исламскую цивилизацию: трансформация научного, духовного и культурного наследия",
+      "sessions.s3.title": "Духовное наследие исламской цивилизации: хадис, фикх, богословие и просвещение",
+      "sessions.s4.title": "Инклюзивный интеллектуальный потенциал в исламской цивилизации: исторические модели и современные трактовки",
+      "sessions.s5.title": "Музеи, библиотеки и рукописные источники как средство сохранения исламского наследия",
+      "sessions.s6.title": "Исламская цивилизация в современном медиапространстве: диалог культур и цифровая коммуникация",
+      "sessions.s7.title": "Перспективы деятельности в сфере изучения исламского искусства",
+      "sessions.title": "Сессии пленарных заседаний",
+      orbital: { captions: {
+        1: "Гости из более чем 40 стран мира направляются <strong>в Ташкент</strong> — открытие форума и основные пленарные заседания.",
+        2: "Путь продолжается: <strong>из Ташкента в Самарканд</strong> — конференции, посвящённые имаму аль-Бухари и имаму аль-Матуриди.",
+        3: "<strong>Из Самарканда в Термез</strong> — продолжаются традиции термезской школы хадисоведения.",
+        4: "Путешествие завершается: <strong>из Термеза в Ташкент</strong>, после чего гости возвращаются на родину.",
+      } },
+      kiosk: {
+        "beforeStatus": "До начала форума:",
+        "days": "дней",
+        "endedDesc": "Форум успешно завершён. <br>Материалы будут размещены в ближайшее время.",
+        "endedStatus": "ЗАВЕРШЁН",
+        "footerCities": "Ташкент · Самарканд · Термез",
+        "hours": "часов",
+        "liveDesc": "В настоящее время в Центре исламской цивилизации проходят официальные секционные заседания.",
+        "liveStatus": "ПРЯМОЙ ЭФИР",
+        "liveTitle": "ФОРУМ ИДЁТ",
+        "minutes": "мин",
+        "seconds": "сек",
+        "statusDefault": "Статус форума",
+      },
+      city: {
+        "samarqand": "Самарканд",
+        "tashkent": "Ташкент",
+        "termiz": "Термез",
+        "surxondaryo": "Сурхандарья",
+      },
+    },
+    en: {
+      "city.samarqand": "Samarkand",
+      "city.surxondaryo": "Surkhandarya",
+      "city.tashkent": "Tashkent",
+      "city.termiz": "Termez",
+      "city1.date": "Jul 6–8 · Days 1–3",
+      "city1.desc": "The forum's main venue. Plenary sessions and the official opening ceremony at the Islamic Civilization Center building.",
+      "city1.mapAddr": "Tashkent, Almazar district",
+      "city1.mapTitle": "Islamic Civilization Center",
+      "city1.tag1": "7 plenary sessions",
+      "city1.tag2": "Official opening",
+      "city1.tag3": "Cultural program",
+      "city2.date": "Jul 9–10 · Days 4–5",
+      "city2.desc": "International conferences dedicated to Imam al-Bukhari and Imam al-Maturidi. The \"Eternal City\" complex.",
+      "city2.mapAddr": "Samarkand, Boqiy Shahar street",
+      "city2.mapTitle": "\"Eternal City\" complex",
+      "city2.tag1": "2 conferences",
+      "city2.tag2": "Imam al-Bukhari complex",
+      "city2.tag3": "Chokardiza",
+      "city3.date": "Jul 11 · Day 6",
+      "city3.desc": "Academic conferences dedicated to the Termez school of hadith studies and the legacy of Imam at-Termizi. Visit to the Hakim at-Termizi complex.",
+      "city3.mapAddr": "Termez, Barkamol Avlod street",
+      "city3.mapTitle": "Termez State University",
+      "city3.tag1": "Academic conference",
+      "city3.tag2": "Hakim at-Termizi",
+      "city3.tag3": "Termez SU",
+      "common.close": "Close",
+      "common.mapOverlay": "Click to activate the map",
+      "dastur.headerRight": "6–11 July 2026<br/>\n        Tashkent · Samarkand · Termez<br/>\n        Islamic Civilization Center",
+      "dastur.label": "Detailed schedule",
+      "dastur.title": "Forum Program",
+      "day.1.date": "Jul 6 · Tashkent",
+      "day.1.location": "July 6, 2026 · Tashkent city",
+      "day.1.tab": "Day 1",
+      "day.2.date": "Jul 7 · Tashkent",
+      "day.2.location": "July 7, 2026 · Tashkent · Islamic Civilization Center",
+      "day.2.tab": "Day 2",
+      "day.3.date": "Jul 8 · Tashkent",
+      "day.3.location": "July 8, 2026 · Tashkent · Islamic Civilization Center",
+      "day.3.tab": "Day 3",
+      "day.4.date": "Jul 9 · Samarkand / Termez",
+      "day.4.location": "July 9, 2026 · Samarkand and Termez cities",
+      "day.4.tab": "Day 4",
+      "day.5.date": "Jul 10 · Pilgrimage sites",
+      "day.5.location": "July 10, 2026 · Samarkand and Surkhandarya regions",
+      "day.5.tab": "Day 5",
+      "day.6.date": "Jul 11 · Departure",
+      "day.6.location": "July 11, 2026 · Tashkent and Samarkand cities",
+      "day.6.tab": "Day 6",
+      "footer.bottomFlag": "Republic of Uzbekistan",
+      "footer.bottomLeft": "© 2026 · I International Forum on Islamic Civilization · All rights reserved",
+      "footer.brandDesc": "The international forum \"Islamic Civilization: The Path of Peace, Tolerance and Enlightenment\" will be held on July 7–11, 2026 in three cities of Uzbekistan.",
+      "footer.col1.li1": "Islamic Civilization Center · Tashkent",
+      "footer.col1.li2": "\"Eternal City\" complex · Samarkand",
+      "footer.col1.li3": "Termez State University",
+      "footer.col1.li4": "Imam al-Bukhari complex",
+      "footer.col1.li5": "Chokardiza shrine",
+      "footer.col1.li6": "Hakim at-Termizi complex",
+      "footer.col1.title": "Main venues",
+      "footer.col2.li1": "Imam al-Bukhari: Al-Jami as-Sahih",
+      "footer.col2.li2": "Legacy of Imam al-Maturidi",
+      "footer.col2.li3": "Termez school of hadith studies",
+      "footer.col2.title": "Conferences",
+      "footer.col2b.li1": "7+ plenary sessions",
+      "footer.col2b.li2": "Memorandum signing",
+      "footer.col2b.li3": "International contest results",
+      "footer.col2b.title": "Outcomes",
+      "footer.col3.li1": "Republic of Uzbekistan",
+      "footer.col3.li2": "Islamic Civilization Center",
+      "footer.col3.li3": "Committee on Religious Affairs",
+      "footer.col3.li4": "Samarkand Region Administration",
+      "footer.col3.li5": "Surkhandarya Region Administration",
+      "footer.col3.title": "Organizers",
+      "footer.quote": "\"Islamic civilization is <em>a path of peace, tolerance</em> and enlightenment.\n      This heritage is the shared treasure of all humanity.\"",
+      "forum.label": "About the forum",
+      "forum.lead": "The I International Forum on Islamic Civilization is organized on the initiative of the leadership of the Republic of Uzbekistan. The forum brings together scholars, experts and statesmen from around the world to study the rich spiritual and intellectual heritage of Islamic civilization and to strengthen peace and dialogue.",
+      "forum.title": "A platform connecting civilizations",
+      "hero.badge": "I International Forum · Uzbekistan · 2026",
+      "hero.meta.city": "Cities",
+      "hero.meta.conference": "Conferences",
+      "hero.meta.day": "Days",
+      "hero.meta.session": "Plenary sessions",
+      "hero.subtitle": "Tashkent · Samarkand · Termez — five days, three cities, one great heritage",
+      "hero.title": "Islamic Civilization:<br/>\n<em>The Path of Peace, Tolerance</em><br/>\n      and Enlightenment",
+      "journey.label": "Route",
+      "journey.title": "Three Cities — One Journey",
+      "kiosk.beforeStatus": "Forum starts in:",
+      "kiosk.days": "days",
+      "kiosk.endedDesc": "The forum has successfully concluded. <br>Materials will be posted soon.",
+      "kiosk.endedStatus": "CONCLUDED",
+      "kiosk.footerCities": "Tashkent · Samarkand · Termez",
+      "kiosk.hours": "hours",
+      "kiosk.liveDesc": "Official sectional meetings are currently taking place at the Islamic Civilization Center.",
+      "kiosk.liveStatus": "LIVE",
+      "kiosk.liveTitle": "FORUM IN PROGRESS",
+      "kiosk.minutes": "min",
+      "kiosk.seconds": "sec",
+      "kiosk.statusDefault": "Forum status",
+      "maqsad.cap.heritage.sub": "Islamic art",
+      "maqsad.cap.heritage.title": "Heritage",
+      "maqsad.cap.peace.sub": "Dialogue of cultures",
+      "maqsad.cap.peace.title": "Peace",
+      "maqsad.cap.science.sub": "Intellectual heritage",
+      "maqsad.cap.science.title": "Science",
+      "maqsad.cap.unity.sub": "International scholars",
+      "maqsad.cap.unity.title": "Unity",
+      "maqsad.stat.conference": "International conferences",
+      "maqsad.stat.day": "Days running",
+      "nav.brand": "Islamic Civilization<br/>I International Forum",
+      "nav.cities": "Cities",
+      "nav.date": "Jul 7–11, 2026",
+      "nav.forum": "Forum",
+      "nav.program": "Program",
+      "nav.sessions": "Sessions",
+      "orbital.label": "Global route",
+      "orbital.stage1": "Days 1–3 · To Tashkent",
+      "orbital.stage2": "Days 4–5 · To Samarkand",
+      "orbital.stage3": "Day 6 · To Termez",
+      "orbital.stage4": "Day 7 · Return",
+      "orbital.subtitle": "Guests from 40+ countries — one route across three cities",
+      "orbital.title": "Map of Forum Participants' Movement",
+      "sched.d1.1.event": "Welcoming participants at Tashkent International Airport. Hotel check-in.",
+      "sched.d1.1.time": "As scheduled",
+      "sched.d1.2.event": "Introducing participants to the museum exhibition of the Islamic Civilization Center.",
+      "sched.d1.2.time": "During the day",
+      "sched.d1.3.event": "Registration of forum participants and media accreditation.",
+      "sched.d1.4.event": "Coordination meeting of organizers and international partners.",
+      "sched.d1.5.event": "Bilateral meetings and negotiations.",
+      "sched.d1.6.event": "<strong>Official reception ceremony</strong>Official reception on behalf of the organizers.",
+      "sched.d2.1.event": "Registration of participants.",
+      "sched.d2.10.event": "<span class=\"session-badge\">Plenary IV</span><strong>\"Inclusive Intellectual Potential in Islamic Civilization\"</strong>Historical models and contemporary interpretations.",
+      "sched.d2.11.event": "<strong>Formal reception</strong>On behalf of the Islamic Civilization Center of Uzbekistan.",
+      "sched.d2.2.event": "<strong>🎖 Grand opening ceremony</strong>Greeting message from the President of the Republic of Uzbekistan to forum participants.",
+      "sched.d2.3.event": "Screening of the presentation film.",
+      "sched.d2.4.event": "Welcome remarks.",
+      "sched.d2.5.event": "<span class=\"session-badge\">Plenary I</span><strong>\"The Islamic Civilization Center in Uzbekistan – an international platform for innovative scientific and educational ideas\"</strong>Presentations by local and international speakers.",
+      "sched.d2.6.event": "Midday prayer. \"Hazrati Imam\" mosque.",
+      "sched.d2.7.event": "Lunch.",
+      "sched.d2.8.event": "<span class=\"session-badge\">Plenary II</span><strong>\"The contribution of Turkic peoples to Islamic civilization\"</strong>Transformation of scientific, spiritual and cultural heritage.",
+      "sched.d2.9.event": "<span class=\"session-badge\">Plenary III</span><strong>\"The spiritual heritage of Islamic civilization\"</strong>Hadith, fiqh, theology and enlightenment.",
+      "sched.d3.1.event": "<span class=\"session-badge\">Plenary V</span><strong>\"Science, education and intellectual heritage in Islamic civilization\"</strong>Presentations by local and international speakers.",
+      "sched.d3.10.event": "<strong>Cultural program</strong>A program dedicated to Uzbekistan's rich national traditions, music, crafts and gastronomy.",
+      "sched.d3.2.event": "<span class=\"session-badge\">Plenary VI</span><strong>\"Museums, libraries and manuscript sources as a means of preserving Islamic heritage\"</strong>",
+      "sched.d3.3.event": "Lunch.",
+      "sched.d3.4.event": "<span class=\"session-badge\">Plenary VII</span><strong>\"Islamic civilization in the modern media space\"</strong>Dialogue of cultures, digital communication and social enlightenment.",
+      "sched.d3.5.event": "<span class=\"session-badge\">Plenary VIII</span><strong>\"Prospects for work in the study of Islamic art\"</strong>",
+      "sched.d3.6.event": "Screening of a film dedicated to the forum's results.",
+      "sched.d3.7.event": "<strong>📜 Signing ceremony for the memorandum and agreements</strong>",
+      "sched.d3.8.event": "Reading of the address to the President of Uzbekistan.",
+      "sched.d3.9.event": "<strong>🏁 Closing of the forum</strong>",
+      "sched.d4.1.event": "Departure to Samarkand. Arrival at the hotel.",
+      "sched.d4.2.event": "<span class=\"session-badge\">International Conference I · Samarkand</span><strong>\"Imam al-Bukhari's 'Al-Jami as-Sahih' — the book of the ummah\"</strong>\"Eternal City\" complex. 5 sectional meetings.",
+      "sched.d4.3.event": "<span class=\"session-badge\">International Conference II · Samarkand</span><strong>\"The legacy of Imam al-Maturidi: the foundation of moderation and rationalism in Islamic civilization\"</strong>\"Minion\" hotel. Awarding of the winners of the international competition on Maturidism.",
+      "sched.d4.4.event": "<span class=\"session-badge\">International Conference III · Termez</span><strong>\"The Termez school of hadith studies: the legacy of scholars and contemporary research\"</strong>Termez State University. 3 sectional meetings.",
+      "sched.d4.5.event": "<strong>Official receptions</strong>On behalf of the Governor of Samarkand Region and the Governor of Surkhandarya Region.",
+      "sched.d5.1.event": "<span class=\"session-badge\">Samarkand region</span><strong>Visit to the Imam al-Bukhari complex</strong>Innovative museum tour. Introduction to the school of hadith studies.",
+      "sched.d5.2.event": "<strong>\"Chokardiza\" shrine</strong>Visit to the mausoleum of Imam al-Maturidi.",
+      "sched.d5.3.event": "<span class=\"session-badge\">Surkhandarya region</span><strong>Shrines of Hakim at-Termizi and Imam at-Termizi</strong>Introduction to the work of the Imam at-Termizi International Research Center.",
+      "sched.d5.4.event": "Seeing off guests to Tashkent.",
+      "sched.d5.5.event": "<strong>Closing cultural program and dinner</strong>",
+      "sched.d6.1.event": "<strong>Seeing off foreign guests</strong>Farewell ceremony at Tashkent International Airport and Tashkent North railway station.",
+      "sched.d6.1.time": "As scheduled",
+      "sessions.footer.d7": "Tashkent · Jul 7",
+      "sessions.footer.d78": "Tashkent · Jul 7–8",
+      "sessions.footer.d7afternoon": "Tashkent · Jul 7 · Afternoon",
+      "sessions.footer.d7morning": "Tashkent · Jul 7 · Morning",
+      "sessions.footer.d8": "Tashkent · Jul 8",
+      "sessions.headerRight": "Tashkent<br/>\n        Jul 7–8, 2026<br/>\n        Islamic Civilization Center",
+      "sessions.label": "Key topics",
+      "sessions.s1.title": "The Islamic Civilization Center – an international platform for innovative scientific and educational ideas",
+      "sessions.s2.title": "The contribution of Turkic peoples to Islamic civilization: transformation of scientific, spiritual and cultural heritage",
+      "sessions.s3.title": "The spiritual heritage of Islamic civilization: hadith, fiqh, theology and enlightenment",
+      "sessions.s4.title": "Inclusive intellectual potential in Islamic civilization: historical models and contemporary interpretations",
+      "sessions.s5.title": "Museums, libraries and manuscript sources as a means of preserving Islamic heritage",
+      "sessions.s6.title": "Islamic civilization in the modern media space: dialogue of cultures and digital communication",
+      "sessions.s7.title": "Prospects for work in the study of Islamic art",
+      "sessions.title": "Plenary Session Tracks",
+      orbital: { captions: {
+        1: "Guests from 40+ countries are heading <strong>to Tashkent</strong> — the forum's opening and main plenary sessions.",
+        2: "The journey continues: <strong>from Tashkent to Samarkand</strong> — conferences on Imam al-Bukhari and Imam al-Maturidi.",
+        3: "<strong>From Samarkand to Termez</strong> — continuing the traditions of the Termez school of hadith studies.",
+        4: "The journey concludes: <strong>from Termez to Tashkent</strong>, after which guests return home.",
+      } },
+      kiosk: {
+        "beforeStatus": "Forum starts in:",
+        "days": "days",
+        "endedDesc": "The forum has successfully concluded. <br>Materials will be posted soon.",
+        "endedStatus": "CONCLUDED",
+        "footerCities": "Tashkent · Samarkand · Termez",
+        "hours": "hours",
+        "liveDesc": "Official sectional meetings are currently taking place at the Islamic Civilization Center.",
+        "liveStatus": "LIVE",
+        "liveTitle": "FORUM IN PROGRESS",
+        "minutes": "min",
+        "seconds": "sec",
+        "statusDefault": "Forum status",
+      },
+      city: {
+        "samarqand": "Samarkand",
+        "tashkent": "Tashkent",
+        "termiz": "Termez",
+        "surxondaryo": "Surkhandarya",
+      },
+    },
+  };
+  let currentLang = localStorage.getItem('forumLang') || 'uz';
+  function T() { return TRANSLATIONS[currentLang]; }
+
+  function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = T()[key];
+      if (val === undefined) return;
+      if (el.tagName.toLowerCase() === 'text') {
+        el.textContent = val;
+      } else {
+        el.innerHTML = val;
+      }
+    });
+    const htmlRoot = document.getElementById('html-root');
+    if (htmlRoot) htmlRoot.setAttribute('lang', currentLang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    });
+  }
+
+  const PAGE_TITLES = {
+    uz: 'I Халқаро Ислом Цивилизацияси Форуми · 2026',
+    ru: 'I Международный форум исламской цивилизации · 2026',
+    en: 'I International Forum on Islamic Civilization · 2026'
+  };
+
+  function setLanguage(lang) {
+    if (!TRANSLATIONS[lang]) return;
+    currentLang = lang;
+    localStorage.setItem('forumLang', lang);
+    applyTranslations();
+    document.title = PAGE_TITLES[lang];
+    // refresh dynamic bits that aren't plain data-i18n elements
+    labels = slideLabels();
+    if (typeof labelEl !== 'undefined' && labelEl && typeof current !== 'undefined') {
+      labelEl.textContent = labels[current];
+    }
+    if (typeof updateKiosk === 'function') updateKiosk();
+    if (typeof activeStage !== 'undefined' && typeof setStage === 'function') {
+      const activeTab = document.querySelector('.stage-tab.active');
+      setStage(activeStage, activeTab);
+    }
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+
+</script>
 
 <script>
   // Carousel
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.hero-dot');
-  const labels = ['Тошкент', 'Самарқанд', 'Сурхондарё'];
+  function slideLabels() { return [T().city.tashkent, T().city.samarqand, T().city.surxondaryo]; }
+  let labels = slideLabels();
   const labelEl = document.getElementById('slideLabel');
   let current = 0;
   let timer;
@@ -2419,7 +3121,8 @@
       
       // 1. Forum boshlanishidan oldingi holat
       if (now < startDate) {
-        statusTextEl.innerText = "Форум бошланишига:";
+        const k = T().kiosk;
+        statusTextEl.innerText = k.beforeStatus;
         const diff = startDate - now;
         
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -2429,36 +3132,38 @@
         
         bodyEl.innerHTML = `
           <div class="countdown-wrapper">
-            <div class="time-block"><span class="time-num">${days}</span><span class="time-label">кун</span></div>
-            <div class="time-block"><span class="time-num">${hours}</span><span class="time-label">соат</span></div>
-            <div class="time-block"><span class="time-num">${minutes}</span><span class="time-label">мин</span></div>
-            <div class="time-block"><span class="time-num">${seconds}</span><span class="time-label">сек</span></div>
+            <div class="time-block"><span class="time-num">${days}</span><span class="time-label">${k.days}</span></div>
+            <div class="time-block"><span class="time-num">${hours}</span><span class="time-label">${k.hours}</span></div>
+            <div class="time-block"><span class="time-num">${minutes}</span><span class="time-label">${k.minutes}</span></div>
+            <div class="time-block"><span class="time-num">${seconds}</span><span class="time-label">${k.seconds}</span></div>
           </div>
         `;
       } 
       // 2. Forum davom etayotgan vaqt (Live)
       else if (now >= startDate && now <= endDate) {
-        statusTextEl.innerText = "ЖОНЛИ ЭФИР";
+        const k = T().kiosk;
+        statusTextEl.innerText = k.liveStatus;
         statusTextEl.style.color = "#10b981";
         if (dotEl) dotEl.classList.add("active");
         
         bodyEl.innerHTML = `
           <div class="kiosk-live-msg">
-            <b style="color: #10b981;">● ФОРУМ КЕТМОҚДА</b><br>
-            <span style="font-size: 13px; color: #ccc;">Ҳозирда Ислом цивилизацияси марказида расмий шўъба мажлислари бўлиб ўтмоқда.</span>
+            <b style="color: #10b981;">● ${k.liveTitle}</b><br>
+            <span style="font-size: 13px; color: #ccc;">${k.liveDesc}</span>
           </div>
         `;
       } 
       // 3. Forum yakunlangandan keyin
       else {
-        statusTextEl.innerText = "ЯКУНЛАНДИ";
+        const k = T().kiosk;
+        statusTextEl.innerText = k.endedStatus;
         if (dotEl) {
           dotEl.style.backgroundColor = "#666";
           dotEl.style.boxShadow = "none";
         }
         bodyEl.innerHTML = `
           <div class="kiosk-live-msg" style="color: #888; font-size: 13px;">
-            Форум муваффақиятли якунланди. <br>Материаллар тез орада жойлаштирилади.
+            ${k.endedDesc}
           </div>
         `;
       }
@@ -2529,12 +3234,7 @@
       termiz: { x: 160, y: 150 }
     };
 
-    const stageCaptions = {
-      1: 'Дунёнинг 40+ мамлакатидан меҳмонлар <strong>Тошкентга</strong> йўл олмоқда — форумнинг очилиши ва асосий ялпи мажлислар.',
-      2: 'Карвон йўли давом этади: <strong>Тошкентдан Самарқандга</strong> — Имом Бухорий ва Имом Мотуридий конференциялари.',
-      3: '<strong>Самарқанддан Термизга</strong> — Термиз ҳадис мактаби анъаналари давом эттирилмоқда.',
-      4: 'Сафар якунланмоқда: <strong>Термиздан Тошкентга</strong>, сўнгра меҳмонлар ўз юртларига қайтишади.'
-    };
+    function stageCaptions() { return T().orbital.captions; }
 
     function clearJourneyCityStates() {
       document.querySelectorAll('.city-point').forEach(p => p.classList.remove('active', 'dim'));
@@ -2548,11 +3248,13 @@
       routeEl.setAttribute('d', `M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`);
     }
 
+    let activeStage = 1;
     function setStage(n, btnEl) {
+      activeStage = n;
       document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
       if (btnEl) btnEl.classList.add('active');
       const captionEl = document.getElementById('stageCaption');
-      if (captionEl) captionEl.innerHTML = stageCaptions[n];
+      if (captionEl) captionEl.innerHTML = stageCaptions()[n];
     
       const ringEl = document.getElementById('orbitalRing');
       const raysEl = document.getElementById('inboundRays');
@@ -2628,6 +3330,9 @@
 
     setInterval(updateKiosk, 1000);
     updateKiosk();
+
+    // Apply saved/default language on load
+    setLanguage(currentLang);
   });
 </script>
 </body>
