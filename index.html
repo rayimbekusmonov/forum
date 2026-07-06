@@ -1820,6 +1820,25 @@
     .flag-chip { width: 20px; height: 20px; margin: -10px 0 0 -10px; font-size: 9px; }
     .stage-tab { padding: 0.4rem 0.6rem; font-size: 0.52rem; }
   }
+
+  /* RTL Styles for Arabic support */
+  html[dir="rtl"] body {
+    direction: rtl;
+    text-align: right;
+  }
+  html[dir="rtl"] .lang-dropdown-item {
+    text-align: right;
+  }
+  html[dir="rtl"] .lang-switch {
+    margin-left: 0;
+    margin-right: 1.2rem;
+  }
+  @media (max-width: 900px) {
+    html[dir="rtl"] .lang-switch {
+      margin-left: 0;
+      margin-right: 0.4rem;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1932,6 +1951,18 @@
             </svg>
           </span>
           <span class="lang-text">English</span>
+        </button>
+      </li>
+      <li>
+        <button class="lang-dropdown-item" data-lang="ar">
+          <span class="flag-wrapper">
+            <svg class="flag-icon" viewBox="0 0 24 16">
+              <rect width="24" height="16" fill="#006C35" />
+              <path d="M 6 6 C 8 5, 10 7, 12 6 C 14 5, 16 7, 18 6" stroke="#ffffff" stroke-width="1.2" fill="none" stroke-linecap="round" />
+              <path d="M 7 10 H 17 M 9 9 V 11" stroke="#ffffff" stroke-width="1" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="lang-text">العربية</span>
         </button>
       </li>
     </ul>
@@ -2262,17 +2293,18 @@
             <span data-i18n="day.2.location">7 Июль, 2026 · Тошкент · Ислом Цивилизацияси Маркази</span>
           </div>
           <div class="schedule-list">
-            <div class="schedule-item"><div class="schedule-time">08:30–09:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.1.event">Иштирокчиларни рўйхатдан ўтказиш.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">09:00–09:20</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.2.event"><strong>🎖 Тантанали очилиш маросими</strong>Ўзбекистон Республикаси Президентининг Форум иштирокчиларига табриги.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">09:20–09:30</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.3.event">Тақдимот фильми намойиши.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">09:30–10:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.4.event">Табрик сўзлари.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">10:30–12:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.5.event"><span class="session-badge">I Ялпи мажлис</span><strong>"Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">12:30–13:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.6.event">Пешин намози. "Ҳазрати Имом жоме" масжиди.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">13:00–14:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.7.event">Тушлик.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">14:00–15:40</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.8.event"><span class="session-badge">II Ялпи мажлис</span><strong>"Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси"</strong>Илмий, маънавий ва маданий мерос трансформацияси.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">16:00–17:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.9.event"><span class="session-badge">III Ялпи мажлис</span><strong>"Ислом цивилизациясининг маънавий мероси"</strong>Ҳадис, фиқҳ, илоҳиёт ва маърифат.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">17:00–18:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.10.event"><span class="session-badge">IV Ялпи мажлис</span><strong>"Ислом цивилизациясида инклюзив интеллектуал салоҳият"</strong>Тарихий моделлар ва замонавий талқинлари.</div></div></div>
-            <div class="schedule-item"><div class="schedule-time">19:00–21:00</div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.11.event"><strong>Тантанали қабул маросими</strong>Ўзбекистондаги Ислом цивилизацияси маркази номидан.</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.1.time">08:30-09:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.1.event">Иштирокчиларни рўйхатдан ўтказиш.</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.2.time">09:00-11:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.2.event"><strong>Анжуманнинг расмий очилиши</strong><br/>• Қуръони карим тиловати ва тақдимот фильми намойиши.<br/>• Ўзбекистон Республикаси Президентининг табриги (Хайриддин Султонов ўқиб эшиттиради).<br/>• Маҳаллий ва халқаро спикерларнинг чиқишлари: Музаффар Камилов, Салим ал-Малик, Шайх Нуриддин Холиқназар, Шайхулислом Оллошукур Пошозода, Абдулкарим ал-Иссо (видеомурожаат), Абдураҳмон ибн Абдуллоҳ Зайд, Султан Раев, Куршад Зорлу, Маҳмуд Эрол Қилич, Фарит Мухаметшин, Фарҳан Низами (видеомурожаат).<br/>• Жамоавий суратга тушиш.</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.3.time">11:00-12:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.3.event"><span class="session-badge">I Ялпи мажлис</span> <strong>“Ислом цивилизациясининг маънавий мероси: ҳадис, фиқҳ, илоҳиёт ва маърифат”</strong><br/>• Маҳаллий ва халқаро спикерларнинг маърузалари (Муфтийлар шўъбаси: Шайх Нуриддин Холиқназар, Шайх Назир Муҳаммад Айяд, Шайх Аҳмад Ҳасанот, Шайх Талгат Тажуддин, Шайх Наврўзбой Тағанули, Шайх Абдулазиз Зокиров, Шайх Саидмукаррам Абдулқодирзода).</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.4.time">12:00-13:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.4.event"><span class="session-badge">II Ялпи мажлис</span> <strong>“Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси”</strong><br/>• Маҳаллий ва халқаро спикерларнинг мавзу бўйича чиқишлари (Маданият вазирлари шўъбаси: Озодбек Назарбеков, Шер Аҳмад Хаққоний, Аврангзеб Хон Хичи, Имад Абдуллоҳ Ҳамдан, Станко Благоевич).</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.5.time">13:00-14:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.5.event"><strong>Тушлик</strong><br/>(Ўзбекистондаги Ислом цивилизацияси маркази биноси ва «Khan Ahmad» ресторани).</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.6.time">14:00-15:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.6.event"><span class="session-badge">III Ялпи мажлис</span> <strong>“Янги Ўзбекистонда диний-маърифий соҳадаги ислоҳотлар: Учинчи Ренессанснинг инновацион ғоялари ва стратегик йўналишлари”</strong><br/>• Маҳаллий ва халқаро спикерларнинг чиқишлари (Дин ишлари бўйича вазирлар шўъбаси: Аҳмад Тавфиқ (видеомурожаат), Содиқжон Тошбоев, Усома Азҳарий, Рамин Мамедов, Зулкифли Ҳасан, Талантбек Ташибеков, Сулаймон Давлатзода).</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.7.time">15:00-16:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.7.event"><span class="session-badge">IV Ялпи мажлис</span> <strong>“Ўтмишнинг буюк мероси – маърифатли келажак асоси”</strong><br/>• Маҳаллий ва халқаро спикерларнинг чиқишлари (Халқаро ташкилотлар раҳбарлари шўъбаси: Азамат Зиё, Шоҳин Мустафоев, Тоҳа Айҳан, Абдулфаттоҳ Сулаймон Абдуллоҳ, Ақтоти Раимқулова, Ториқ Али Бахит (видеомурожаат)).</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.8.time">16:00-17:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.8.event"><span class="session-badge">V Ялпи мажлис</span> <strong>“Ислом меросини сақлашда таълим, кутубхоналар ва қўлёзма манбаларнинг ўрни”</strong><br/>• Маҳаллий ва халқаро спикерларнинг маърузалари (Нуфузли олимлар ва экспертлар шўъбаси: Ҳомиджон Ишматбеков, Муҳаммад Зайтун Расмин, Муҳаммад Шаҳим Али Саид, Абдулазиз Консова, Муҳаммад Абулхайр Шукрий, Амр ал-Лайсий).</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.9.time">17:00-18:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.9.event"><span class="session-badge">VI Ялпи мажлис</span> <strong>“Ислом цивилизациясида интеллектуал салоҳият: тарихий моделлар ва замонавий талқинлари”</strong><br/>• Маҳаллий ва халқаро спикерларнинг маърузалари (Турли ташкилот раҳбарлари шўъбаси: Ҳабибулло Садибақосев, Шайх Муҳаммад Дувайний, Музеффер Шекер, Дамир Мухетдинов, Муҳаммад Аъзам Муҳаммад Одил, Гюлтен Бедретдин, Муҳаммад Саид Амур ал-Ҳажарий).</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.10.time">18:00-18:30</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.10.event">Форум биринчи куни якунлари.</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.11.time">18:30-20:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.11.event">Эркин дастур бўйича.</div></div></div>
+            <div class="schedule-item"><div class="schedule-time"><span data-i18n="sched.d2.12.time">20:00-22:00</span></div><div class="schedule-event"><div class="schedule-event" data-i18n="sched.d2.12.event"><strong>Тантанали қабул маросими</strong><br/>Ўзбекистон Республикаси Ҳукумати номидан расмий қабул. 3D Мэппинг шоу.<br/>(Ўзбекистондаги Ислом цивилизацияси маркази «Хоразм» портали олдида очиқ осмон остида)</div></div></div>
           </div>
         </div>
 
@@ -2931,17 +2963,30 @@
       "sched.d1.8.event": "Ташкилотчилар номидан кечки зиёфат.<br/>(Ўзбекистондаги Ислом цивилизацияси маркази биноси терассасида)",
       "sched.d1.9.time": "22:00",
       "sched.d1.9.event": "Меҳмонхонага трансфер ва дам олиш.",
+      "sched.d2.1.time": "08:30-09:00",
       "sched.d2.1.event": "Иштирокчиларни рўйхатдан ўтказиш.",
-      "sched.d2.10.event": "<span class=\"session-badge\">IV Ялпи мажлис</span><strong>\"Ислом цивилизациясида инклюзив интеллектуал салоҳият\"</strong>Тарихий моделлар ва замонавий талқинлари.",
-      "sched.d2.11.event": "<strong>Тантанали қабул маросими</strong>Ўзбекистондаги Ислом цивилизацияси маркази номидан.",
-      "sched.d2.2.event": "<strong>🎖 Тантанали очилиш маросими</strong>Ўзбекистон Республикаси Президентининг Форум иштирокчиларига табриги.",
-      "sched.d2.3.event": "Тақдимот фильми намойиши.",
-      "sched.d2.4.event": "Табрик сўзлари.",
-      "sched.d2.5.event": "<span class=\"session-badge\">I Ялпи мажлис</span><strong>\"Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси\"</strong>Маҳаллий ва халқаро спикерларнинг маърузалари.",
-      "sched.d2.6.event": "Пешин намози. \"Ҳазрати Имом жоме\" масжиди.",
-      "sched.d2.7.event": "Тушлик.",
-      "sched.d2.8.event": "<span class=\"session-badge\">II Ялпи мажлис</span><strong>\"Туркий халқларнинг ислом цивилизациясига қўшган ҳиссаси\"</strong>Илмий, маънавий ва маданий мерос трансформацияси.",
-      "sched.d2.9.event": "<span class=\"session-badge\">III Ялпи мажлис</span><strong>\"Ислом цивилизациясининг маънавий мероси\"</strong>Ҳадис, фиқҳ, илоҳиёт ва маърифат.",
+      "sched.d2.2.time": "09:00-11:00",
+      "sched.d2.2.event": "<strong>Анжуманнинг расмий очилиши</strong><br/>• Қуръони карим тиловати ва тақдимот фильми намойиши.<br/>• Ўзбекистон Республикаси Президентининг табриги (Хайриддин Султонов ўқиб эшиттиради).<br/>• Маҳаллий ва халқаро спикерларнинг чиқишлари: Музаффар Камилов, Салим ал-Малик, Шайх Нуриддин Холиқназар, Шайхулислом Оллошукур Пошозода, Абдулкарим ал-Иссо (видеомурожаат), Абдураҳмон ибн Абдуллоҳ Зайд, Султан Раев, Куршад Зорлу, Маҳмуд Эрол Қилич, Фарит Мухаметшин, Фарҳан Низами (видеомурожаат).<br/>• Жамоавий суратга тушиш.",
+      "sched.d2.3.time": "11:00-12:00",
+      "sched.d2.3.event": "<span class=\"session-badge\">I Ялпи мажлис</span> <strong>“Ислом цивилизациясининг маънавий мероси: ҳадис, фиқҳ, илоҳиёт ва маърифат”</strong><br/>• Маҳаллий ва халқаро спикерларнинг маърузалари (Муфтийлар шўъбаси: Шайх Нуриддин Холиқназар, Шайх Назир Муҳаммад Айяд, Шайх Аҳмад Ҳасанот, Шайх Талгат Тажуддин, Шайх Наврўзбой Тағанули, Шайх Абдулазиз Зокиров, Шайх Саидмукаррам Абдулқодирзода).",
+      "sched.d2.4.time": "12:00-13:00",
+      "sched.d2.4.event": "<span class=\"session-badge\">II Ялпи мажлис</span> <strong>“Ўзбекистондаги Ислом цивилизацияси маркази – инновацион илмий–маърифий ғояларнинг халқаро платформаси”</strong><br/>• Маҳаллий ва халқаро спикерларнинг мавзу бўйича чиқишлари (Маданият вазирлари шўъбаси: Озодбек Назарбеков, Шер Аҳмад Хаққоний, Аврангзеб Хон Хичи, Имад Абдуллоҳ Ҳамдан, Станко Благоевич).",
+      "sched.d2.5.time": "13:00-14:00",
+      "sched.d2.5.event": "<strong>Тушлик</strong><br/>(Ўзбекистондаги Ислом цивилизацияси маркази биноси ва «Khan Ahmad» ресторани).",
+      "sched.d2.6.time": "14:00-15:00",
+      "sched.d2.6.event": "<span class=\"session-badge\">III Ялпи мажлис</span> <strong>“Янги Ўзбекистонда диний-маърифий соҳадаги ислоҳотлар: Учинчи Ренессанснинг инновацион ғоялари ва стратегик йўналишлари”</strong><br/>• Маҳаллий ва халқаро спикерларнинг чиқишлари (Дин ишлари бўйича вазирлар шўъбаси: Аҳмад Тавфиқ (видеомурожаат), Содиқжон Тошбоев, Усома Азҳарий, Рамин Мамедов, Зулкифли Ҳасан, Талантбек Ташибеков, Сулаймон Давлатзода).",
+      "sched.d2.7.time": "15:00-16:00",
+      "sched.d2.7.event": "<span class=\"session-badge\">IV Ялпи мажлис</span> <strong>“Ўтмишнинг буюк мероси – маърифатли келажак асоси”</strong><br/>• Маҳаллий ва халқаро спикерларнинг чиқишлари (Халқаро ташкилотлар раҳбарлари шўъбаси: Азамат Зиё, Шоҳин Мустафоев, Тоҳа Айҳан, Абдулфаттоҳ Сулаймон Абдуллоҳ, Ақтоти Раимқулова, Ториқ Али Бахит (видеомурожаат)).",
+      "sched.d2.8.time": "16:00-17:00",
+      "sched.d2.8.event": "<span class=\"session-badge\">V Ялпи мажлис</span> <strong>“Ислом меросини сақлашда таълим, кутубхоналар ва қўлёзма манбаларнинг ўрни”</strong><br/>• Маҳаллий ва халқаро спикерларнинг маърузалари (Нуфузли олимлар ва экспертлар шўъбаси: Ҳомиджон Ишматбеков, Муҳаммад Зайтун Расмин, Муҳаммад Шаҳим Али Саид, Абдулазиз Консова, Муҳаммад Абулхайр Шукрий, Амр ал-Лайсий).",
+      "sched.d2.9.time": "17:00-18:00",
+      "sched.d2.9.event": "<span class=\"session-badge\">VI Ялпи мажлис</span> <strong>“Ислом цивилизациясида интеллектуал салоҳият: тарихий моделлар ва замонавий талқинлари”</strong><br/>• Маҳаллий ва халқаро спикерларнинг маърузалари (Турли ташкилот раҳбарлари шўъбаси: Ҳабибулло Садибақосев, Шайх Муҳаммад Дувайний, Музеффер Шекер, Дамир Мухетдинов, Муҳаммад Аъзам Муҳаммад Одил, Гюлтен Бедретдин, Муҳаммад Саид Амур ал-Ҳажарий).",
+      "sched.d2.10.time": "18:00-18:30",
+      "sched.d2.10.event": "Форум биринчи куни якунлари.",
+      "sched.d2.11.time": "18:30-20:00",
+      "sched.d2.11.event": "Эркин дастур бўйича.",
+      "sched.d2.12.time": "20:00-22:00",
+      "sched.d2.12.event": "<strong>Тантанали қабул маросими</strong><br/>Ўзбекистон Республикаси Ҳукумати номидан расмий қабул. 3D Мэппинг шоу.<br/>(Ўзбекистондаги Ислом цивилизацияси маркази «Хоразм» портали олдида очиқ осмон остида),",
       "sched.d3.1.time": "08:30-09:00",
       "sched.d3.1.event": "Иштирокчиларни рўйхатдан ўтказиш.",
       "sched.d3.2.time": "09:00-09:10",
@@ -3283,17 +3328,30 @@
       "sched.d1.8.event": "Вечерний прием от имени организаторов.<br/>(На террасе здания Центра исламской цивилизации в Узбекистане)",
       "sched.d1.9.time": "22:00",
       "sched.d1.9.event": "Трансфер в гостиницу и отдых.",
+      "sched.d2.1.time": "08:30-09:00",
       "sched.d2.1.event": "Регистрация участников.",
-      "sched.d2.10.event": "<span class=\"session-badge\">Заседание IV</span><strong>«Инклюзивный интеллектуальный потенциал в исламской цивилизации»</strong>Исторические модели и современные трактовки.",
-      "sched.d2.11.event": "<strong>Торжественный приём</strong>От имени Центра исламской цивилизации Узбекистана.",
-      "sched.d2.2.event": "<strong>🎖 Торжественная церемония открытия</strong>Приветственное слово Президента Республики Узбекистан участникам форума.",
-      "sched.d2.3.event": "Показ презентационного фильма.",
-      "sched.d2.4.event": "Приветственные слова.",
-      "sched.d2.5.event": "<span class=\"session-badge\">Заседание I</span><strong>«Центр исламской цивилизации в Узбекистане – международная платформа инновационных научно-просветительских идей»</strong>Доклады отечественных и зарубежных спикеров.",
-      "sched.d2.6.event": "Полуденный намаз. Мечеть «Хазрати Имам».",
-      "sched.d2.7.event": "Обед.",
-      "sched.d2.8.event": "<span class=\"session-badge\">Заседание II</span><strong>«Вклад тюркских народов в исламскую цивилизацию»</strong>Трансформация научного, духовного и культурного наследия.",
-      "sched.d2.9.event": "<span class=\"session-badge\">Заседание III</span><strong>«Духовное наследие исламской цивилизации»</strong>Хадис, фикх, богословие и просвещение.",
+      "sched.d2.2.time": "09:00-11:00",
+      "sched.d2.2.event": "<strong>Официальное открытие конференции</strong><br/>• Чтение Священного Корана и показ презентационного фильма.<br/>• Приветствие Президента Республики Узбекистан (зачитывает Хайриддин Султонов).<br/>• Выступления местных и международных спикеров: Музаффар Камилов, Салим аль-Малик, Шейх Нуриддин Холикназар, Шейхульислам Аллахшукюр Пашазаде, Абдулкарим аль-Исса (видеообращение), Абдурахман ибн Абдулла Зайд, Султан Раев, Куршад Зорлу, Махмуд Эрол Кылыч, Фарит Мухаметшин, Фархан Низами (видеообращение).<br/>• Коллективное фото.",
+      "sched.d2.3.time": "11:00-12:00",
+      "sched.d2.3.event": "<span class=\"session-badge\">I Пленарное заседание</span> <strong>«Духовное наследие исламской цивилизации: хадис, фикх, теология и просвещение»</strong><br/>• Доклады местных и международных спикеров (Секция муфтиев: Шейх Нуриддин Холикназар, Шейх Назир Мухаммад Аяд, Шейх Ахмад Хасанат, Шейх Талгат Тажуддин, Шейх Наурызбай Таганулы, Шейх Абдулазиз Закиров, Шейх Саидмукаррам Абдулкодирзода).",
+      "sched.d2.4.time": "12:00-13:00",
+      "sched.d2.4.event": "<span class=\"session-badge\">II Пленарное заседание</span> <strong>«Центр исламской цивилизации в Узбекистане — международная платформа инновационных научно-просветительских идей»</strong><br/>• Выступления местных и международных спикеров по теме (Секция министров культуры: Озодбек Назарбеков, Шер Ахмад Хаккани, Аврангзеб Хан Хичи, Имад Абдулла Хамдан, Станко Благоевич).",
+      "sched.d2.5.time": "13:00-14:00",
+      "sched.d2.5.event": "<strong>Обед</strong><br/>(В здании Центра исламской цивилизации и ресторане «Khan Ahmad»).",
+      "sched.d2.6.time": "14:00-15:00",
+      "sched.d2.6.event": "<span class=\"session-badge\">III Пленарное заседание</span> <strong>«Реформы в религиозно-просветительской сфере в Новом Узбекистане: инновационные идеи и стратегические направления Третьего Ренессанса»</strong><br/>• Выступления местных и международных спикеров (Секция министров по делам религий: Ахмад Тавфик (видеообращение), Содикжон Тошбоев, Усома Азхари, Рамин Мамедов, Зулкифли Хасан, Талантбек Ташибеков, Сулеймон Давлатзода).",
+      "sched.d2.7.time": "15:00-16:00",
+      "sched.d2.7.event": "<span class=\"session-badge\">IV Пленарное заседание</span> <strong>«Великое наследие прошлого — основа просвещенного будущего»</strong><br/>• Выступления местных и международных спикеров (Секция руководителей международных организаций: Азамат Зиё, Шохин Мустафаев, Тоха Айхан, Абдулфаттах Сулейман Абдулла, Актоти Раимкулова, Торик Али Бахит (видеообращение)).",
+      "sched.d2.8.time": "16:00-17:00",
+      "sched.d2.8.event": "<span class=\"session-badge\">V Пленарное заседание</span> <strong>«Роль образования, библиотек и рукописных источников в сохранении исламского наследия»</strong><br/>• Доклады местных и международных спикеров (Секция авторитетных ученых и экспертов: Хомиджон Ишматбеков, Мухаммад Зайтун Расмин, Мухаммад Шахим Али Саид, Абдулазиз Консова, Мухаммад Абулхайр Шукри, Амр аль-Лайси).",
+      "sched.d2.9.time": "17:00-18:00",
+      "sched.d2.9.event": "<span class=\"session-badge\">VI Пленарное заседание</span> <strong>«Интеллектуальный потенциал исламской цивилизации: исторические модели и современные интерпретации»</strong><br/>• Доклады местных и международных спикеров (Секция руководителей различных организаций: Хабибулло Садибакосев, Шейх Мухаммад Дувайни, Музеффер Шекер, Дамир Мухетдинов, Мухаммад Азам Мухаммад Адиль, Гюлтен Бедретдин, Мухаммад Саид Амур аль-Хаджари).",
+      "sched.d2.10.time": "18:00-18:30",
+      "sched.d2.10.event": "Итоги первого дня форума.",
+      "sched.d2.11.time": "18:30-20:00",
+      "sched.d2.11.event": "Свободная программа.",
+      "sched.d2.12.time": "20:00-22:00",
+      "sched.d2.12.event": "<strong>Торжественный прием</strong><br/>Официальный прием от имени Правительства Республики Узбекистан. 3D Мэппинг шоу.<br/>(Под открытым небом перед порталом «Хорезм» Центра исламской цивилизации в Узбекистане),",
       "sched.d3.1.time": "08:30-09:00",
       "sched.d3.1.event": "Регистрация участников.",
       "sched.d3.2.time": "09:00-09:10",
@@ -3635,17 +3693,30 @@
       "sched.d1.8.event": "Dinner on behalf of the Organizing Committee.<br/>(On the terrace of the Center of Islamic Civilization building in Uzbekistan)",
       "sched.d1.9.time": "22:00",
       "sched.d1.9.event": "Transfer to the hotel and overnight stay.",
+      "sched.d2.1.time": "08:30-09:00",
       "sched.d2.1.event": "Registration of participants.",
-      "sched.d2.10.event": "<span class=\"session-badge\">Plenary IV</span><strong>\"Inclusive Intellectual Potential in Islamic Civilization\"</strong>Historical models and contemporary interpretations.",
-      "sched.d2.11.event": "<strong>Formal reception</strong>On behalf of the Islamic Civilization Center of Uzbekistan.",
-      "sched.d2.2.event": "<strong>🎖 Grand opening ceremony</strong>Greeting message from the President of the Republic of Uzbekistan to forum participants.",
-      "sched.d2.3.event": "Screening of the presentation film.",
-      "sched.d2.4.event": "Welcome remarks.",
-      "sched.d2.5.event": "<span class=\"session-badge\">Plenary I</span><strong>\"The Islamic Civilization Center in Uzbekistan – an international platform for innovative scientific and educational ideas\"</strong>Presentations by local and international speakers.",
-      "sched.d2.6.event": "Midday prayer. \"Hazrati Imam\" mosque.",
-      "sched.d2.7.event": "Lunch.",
-      "sched.d2.8.event": "<span class=\"session-badge\">Plenary II</span><strong>\"The contribution of Turkic peoples to Islamic civilization\"</strong>Transformation of scientific, spiritual and cultural heritage.",
-      "sched.d2.9.event": "<span class=\"session-badge\">Plenary III</span><strong>\"The spiritual heritage of Islamic civilization\"</strong>Hadith, fiqh, theology and enlightenment.",
+      "sched.d2.2.time": "09:00-11:00",
+      "sched.d2.2.event": "<strong>Official Opening of the Conference</strong><br/>• Recitation of the Holy Quran and screening of a presentation film.<br/>• Congratulatory address of the President of the Republic of Uzbekistan (read by Khayriddin Sultanov).<br/>• Speeches by local and international speakers: Muzaffar Kamilov, Salim al-Malik, Sheikh Nuriddin Kholiknazar, Sheikhul Islam Allahshukur Pashazade, Abdulkarim al-Issa (video message), Abdurakhman ibn Abdullah Zayd, Sultan Raev, Kursad Zorlu, Mahmud Erol Kilic, Farit Mukhametshin, Farhan Nizami (video message).<br/>• Group photo.",
+      "sched.d2.3.time": "11:00-12:00",
+      "sched.d2.3.event": "<span class=\"session-badge\">Plenary Session I</span> <strong>“Spiritual Heritage of Islamic Civilization: Hadith, Fiqh, Theology and Enlightenment”</strong><br/>• Reports of local and international speakers (Muftis Section: Sheikh Nuriddin Kholiknazar, Sheikh Nazir Muhammad Ayyad, Sheikh Ahmad Hasanat, Sheikh Talgat Tazhuddin, Sheikh Nawryzbay Taganuly, Sheikh Abdulaziz Zokirov, Sheikh Saidmukarram Abdulqodirzoda).",
+      "sched.d2.4.time": "12:00-13:00",
+      "sched.d2.4.event": "<span class=\"session-badge\">Plenary Session II</span> <strong>“Center of Islamic Civilization in Uzbekistan — an International Platform for Innovative Scientific and Educational Ideas”</strong><br/>• Speeches by local and international speakers on the topic (Ministers of Culture Section: Ozodbek Nazarbekov, Sher Ahmad Haqqani, Aurangzeb Khan Khichi, Imad Abdullah Hamdan, Stanko Blagojevic).",
+      "sched.d2.5.time": "13:00-14:00",
+      "sched.d2.5.event": "<strong>Lunch</strong><br/>(At the Center of Islamic Civilization building and 'Khan Ahmad' Restaurant).",
+      "sched.d2.6.time": "14:00-15:00",
+      "sched.d2.6.event": "<span class=\"session-badge\">Plenary Session III</span> <strong>“Reforms in the Religious and Educational Sphere in New Uzbekistan: Innovative Ideas and Strategic Directions of the Third Renaissance”</strong><br/>• Speeches by local and international speakers (Ministers of Religious Affairs Section: Ahmad Tawfiq (video message), Sodiqjon Toshboyev, Usoma Azhari, Ramin Mammadov, Zulkifli Hasan, Talantbek Tashibekov, Sulaymon Davlatzoda).",
+      "sched.d2.7.time": "15:00-16:00",
+      "sched.d2.7.event": "<span class=\"session-badge\">Plenary Session IV</span> <strong>“Great Heritage of the Past — the Foundation of an Enlightened Future”</strong><br/>• Speeches by local and international speakers (Heads of International Organizations Section: Azamat Ziyo, Shahin Mustafayev, Taha Ayhan, Abdulfattah Suleiman Abdullah, Aktoty Raimkulova, Tariq Ali Bakhit (video message)).",
+      "sched.d2.8.time": "16:00-17:00",
+      "sched.d2.8.event": "<span class=\"session-badge\">Plenary Session V</span> <strong>“The Role of Education, Libraries and Manuscript Sources in Preserving Islamic Heritage”</strong><br/>• Reports by local and international speakers (Influential Scholars and Experts Section: Homidjon Ishmatbekov, Muhammad Zaitun Rasmin, Muhammad Shahim Ali Saeed, Abdelaziz Konsowa, Muhammad Abulkhair Shukri, Amr al-Laithy).",
+      "sched.d2.9.time": "17:00-18:00",
+      "sched.d2.9.event": "<span class=\"session-badge\">Plenary Session VI</span> <strong>“Intellectual Potential in Islamic Civilization: Historical Models and Contemporary Interpretations”</strong><br/>• Reports by local and international speakers (Heads of Various Organizations Section: Habibullo Sadibaqosev, Sheikh Muhammad Duwayni, Muzeffer Seker, Damir Mukhetdinov, Muhammad Azam Muhammad Adil, Gulten Bedretin, Muhammad Said Amur al-Hajari).",
+      "sched.d2.10.time": "18:00-18:30",
+      "sched.d2.10.event": "Results of the first day of the forum.",
+      "sched.d2.11.time": "18:30-20:00",
+      "sched.d2.11.event": "Free program.",
+      "sched.d2.12.time": "20:00-22:00",
+      "sched.d2.12.event": "<strong>Official Reception Ceremony</strong><br/>Official reception on behalf of the Government of the Republic of Uzbekistan. 3D Mapping Show.<br/>(Open air in front of the 'Khwarazm' portal of the Center of Islamic Civilization in Uzbekistan),",
       "sched.d3.1.time": "08:30-09:00",
       "sched.d3.1.event": "Registration of participants.",
       "sched.d3.2.time": "09:00-09:10",
@@ -3840,6 +3911,164 @@
       },
     },
     ar: {
+      "city.samarqand": "سمرقند",
+      "city.surxondaryo": "سرخنداريا",
+      "city.tashkent": "طشقند",
+      "city.termiz": "ترمذ",
+      "city1.date": "6-8 يوليو · الأيام 1-3",
+      "city1.desc": "المقر الرئيسي للمنتدى. الجلسات العامة وحفل الافتتاح الرسمي في مبنى مركز الحضارة الإسلامية.",
+      "city1.mapAddr": "طشقند، منطقة ألمازار",
+      "city1.mapTitle": "مركز الحضارة الإسلامية",
+      "city1.tag1": "7 جلسات عامة",
+      "city1.tag2": "الافتتاح الرسمي",
+      "city1.tag3": "البرنامج الثقافي",
+      "city2.date": "9-10 يوليو · الأيام 4-5",
+      "city2.desc": "المؤتمرات الدولية المخصصة للإمام البخاري والإمام الماتريدي. مجمع \"المدينة الخالدة\".",
+      "city2.mapAddr": "سمرقند، شارع المدينة الخالدة",
+      "city2.mapTitle": "مجمع \"المدينة الخالدة\"",
+      "city2.tag1": "مؤتمران",
+      "city2.tag2": "مجمع الإمام البخاري",
+      "city2.tag3": "تشوكارديزا",
+      "city3.date": "11 يوليو · اليوم 6",
+      "city3.desc": "المؤتمرات العلمية المخصصة لمدرسة الترمذي للحديث وتراث الإمام الترمذي. زيارة مجمع الحكيم الترمذي.",
+      "city3.mapAddr": "ترمذ، شارع باركامول أفلود",
+      "city3.mapTitle": "جامعة ترمذ الحكومية",
+      "city3.tag1": "مؤتمر علمي",
+      "city3.tag2": "الحكيم الترمذي",
+      "city3.tag3": "جامعة ترمذ",
+      "common.close": "إغلاق",
+      "common.mapOverlay": "انقر لتفعيل الخريطة",
+      "dastur.headerRight": "6-11 يوليو 2026<br/>طشقند · سمرقند · ترمذ<br/>مركز الحضارة الإسلامية",
+      "dastur.label": "الجدول التفصيلي",
+      "dastur.title": "برنامج المنتدى",
+      "day.1.date": "6 يوليو · طشقند",
+      "day.1.location": "6 يوليو 2026 · مدينة طشقند",
+      "day.1.tab": "اليوم 1",
+      "day.2.date": "7 يوليو · طشقند",
+      "day.2.location": "7 يوليو 2026 · طشقند · مركز الحضارة الإسلامية",
+      "day.2.tab": "اليوم 2",
+      "day.3.date": "8 يوليو · طشقند",
+      "day.3.location": "8 يوليو 2026 · طشقند · مركز الحضارة الإسلامية",
+      "day.3.tab": "اليوم 3",
+      "day.4.date": "9 يوليو · سمرقند / ترمذ",
+      "day.4.location": "9 يوليو 2026 · مدينتا سمرقند وترمذ",
+      "day.4.tab": "اليوم 4",
+      "day.5.date": "10 يوليو · المزارات والمجمعات",
+      "day.5.location": "10 يوليو 2026 · محافظتا سمرقند وسرخنداريا",
+      "day.5.tab": "اليوم 5",
+      "day.6.date": "11 يوليو · التوديع",
+      "day.6.location": "11 يوليو 2026 · مدينتا طشقند وسمرقند",
+      "day.6.tab": "اليوم 6",
+      "footer.bottomFlag": "جمهورية أوزبكستان",
+      "footer.bottomLeft": "© 2026 · المنتدى الدولي الأول للحضارة الإسلامية · جميع الحقوق محفوظة",
+      "footer.brandDesc": "يعقد المنتدى الدولي \"الحضارة الإسلامية: مسار السلام والتسامح والتنوير\" في الفترة من 7 إلى 11 يوليو 2026 في ثلاث مدن في أوزبكستان.",
+      "footer.col1.li1": "مركز الحضارة الإسلامية · طشقند",
+      "footer.col1.li2": "مجمع \"المدينة الخالدة\" · سمرقند",
+      "footer.col1.li3": "جامعة ترمذ الحكومية",
+      "footer.col1.li4": "مجمع الإمام البخاري",
+      "footer.col1.li5": "ضريح تشوكارديزا",
+      "footer.col1.li6": "مجمع الحكيم الترمذي",
+      "footer.col1.title": "الأماكن الرئيسية",
+      "footer.col2.li1": "الإمام البخاري: الجامع الصحيح",
+      "footer.col2.li2": "تراث الإمام الماتريدي",
+      "footer.col2.li3": "مدرسة الترمذي للحديث",
+      "footer.col2.title": "المؤتمرات",
+      "footer.col2b.li1": "7+ جلسات عامة",
+      "footer.col2b.li2": "توقيع مذكرات التفاهم",
+      "footer.col2b.li3": "نتائج المسابقة الدولية",
+      "footer.col2b.title": "النتائج",
+      "footer.col3.li1": "جمهورية أوزبكستان",
+      "footer.col3.li2": "مركز الحضارة الإسلامية",
+      "footer.col3.li3": "لجنة الشؤون الدينية",
+      "footer.col3.li4": "إدارة محافظة سمرقند",
+      "footer.col3.li5": "إدارة محافظة سرخنداريا",
+      "footer.col3.title": "المنظمون",
+      "footer.quote": "\"الحضارة الإسلامية هي <em>مسار السلام والتسامح</em> والتنوير. هذا التراث هو كنز مشترك للبشرية جمعاء.\"",
+      "forum.label": "عن المنتدى",
+      "forum.lead": "ينظم المنتدى الدولي الأول للحضارة الإسلامية بمبادرة من قيادة جمهورية أوزبكستان. يجمع المنتدى العلماء والمتخصصين ورجال الدولة من جميع أنحاء العالم لدراسة التراث الروحي والفكري الغني للحضارة الإسلامية وتعزيز السلام والحوار.",
+      "forum.title": "منصة تربط بين الحضارات",
+      "hero.badge": "المنتدى الدولي الأول · أوزبكستان · 2026",
+      "hero.meta.city": "مدن",
+      "hero.meta.conference": "مؤتمرات",
+      "hero.meta.day": "أيام",
+      "hero.meta.session": "جلسات عامة",
+      "hero.subtitle": "طشقند · سمرقند · ترمذ — خمسة أيام، ثلاث مدن، تراث عظيم واحد",
+      "hero.title": "الحضارة الإسلامية:<br/>\n<em>مسار السلام والتسامح</em><br/>\n      والتنوير",
+      "journey.label": "المسار",
+      "journey.title": "ثلاث مدن — رحلة واحدة",
+      "maqsad.cap.heritage.sub": "الفن الإسلامي",
+      "maqsad.cap.heritage.title": "التراث",
+      "maqsad.cap.peace.sub": "حوار الثقافات",
+      "maqsad.cap.peace.title": "السلام",
+      "maqsad.cap.science.sub": "التراث الفكري",
+      "maqsad.cap.science.title": "العلوم",
+      "maqsad.cap.unity.sub": "علماء دوليون",
+      "maqsad.cap.unity.title": "الوحدة",
+      "maqsad.stat.conference": "مؤتمرات دولية",
+      "maqsad.stat.day": "أيام العمل",
+      "maqsad.stat.participants": "المشاركون",
+      "maqsad.stat.countries": "الدول",
+      "maqsad.stat.speakers": "المتحدثون الدوليون",
+      "maqsad.stat.media": "وسائل الإعلام العالمية",
+      "nav.brand": "الحضارة الإسلامية<br/>المنتدى الدولي الأول",
+      "nav.cities": "المدن",
+      "nav.date": "7–11 يوليو 2026",
+      "nav.forum": "المنتدى",
+      "nav.program": "البرنامج",
+      "nav.sessions": "الجلسات",
+      "nav.route": "الخريطة",
+      "legend.arrival": "الوصول",
+      "legend.route": "المسار",
+      "legend.return": "العودة",
+      "legend.city": "المدينة",
+      "orbital.label": "المسار العالمي",
+      "orbital.stage1": "الأيام 1-3 · إلى طشقند",
+      "orbital.stage2": "الأيام 4-5 · إلى سمرقند",
+      "orbital.stage3": "اليوم 6 · إلى ترمذ",
+      "orbital.stage4": "اليوم 7 · العودة",
+      "orbital.subtitle": "ضيوف من أكثر من 40 دولة — مسار واحد يربط ثلاث مدن",
+      "orbital.title": "خريطة حركة المشاركين في المنتدى",
+      "sessions.footer.d7": "طشقند · 7 يوليو",
+      "sessions.footer.d78": "طشقند · 7-8 يوليو",
+      "sessions.footer.d7afternoon": "طشقند · 7 يوليو · بعد الظهر",
+      "sessions.footer.d7morning": "طشقند · 7 يوليو · صباحاً",
+      "sessions.footer.d8": "طشقند · 8 يوليو",
+      "sessions.headerRight": "طشقند<br/>\n        7–8 يوليو 2026<br/>\n        مركز الحضارة الإسلامية",
+      "sessions.label": "المواضيع الرئيسية",
+      "sessions.s1.title": "مركز الحضارة الإسلامية في أوزبكستان – منصة دولية للأفكار العلمية والتعليمية المبتكرة",
+      "sessions.s2.title": "مساهمة الشعوب التركية في الحضارة الإسلامية: تحول التراث العلمي والروحي والثقافي",
+      "sessions.s3.title": "التراث الروحي للحضارة الإسلامية: الحديث، الفقه، علم الكلام والتنوير",
+      "sessions.s4.title": "القدرات الفكرية الشاملة في الحضارة الإسلامية: النماذج التاريخية والتفسيرات المعاصرة",
+      "sessions.s5.title": "المتاحف والمكتبات والمصادر المخطوطة كوسيلة للحفاظ على التراث الإسلامي",
+      "sessions.s6.title": "الحضارة الإسلامية في الفضاء الإعلامي المعاصر: حوار الثقافات والاتصال الرقمي",
+      "sessions.s7.title": "آفاق العمل في دراسة الفن الإسلامي",
+      "sessions.title": "مسارات الجلسات العامة",
+      orbital: { captions: {
+        1: "يتوجه الضيوف من أكثر من 40 دولة <strong>إلى طشقند</strong> — لحضور الافتتاح والجلسات العامة الرئيسية للمنتدى.",
+        2: "تستمر الرحلة: <strong>من طشقند إلى سمرقند</strong> — لحضور المؤتمرات المخصصة للإمام البخاري والإمام الماتريدي.",
+        3: "<strong>من سمرقند إلى ترمذ</strong> — مواصلة تقاليد مدرسة الترمذي لدراسات الحديث الشريف.",
+        4: "تختتم الرحلة: <strong>من ترمذ إلى طشقند</strong>، وبعدها يعود الضيوف إلى بلدانهم.",
+      } },
+      kiosk: {
+        "beforeStatus": "المتبقي على بداية المنتدى:",
+        "days": "يوم",
+        "endedDesc": "تم اختتام المنتدى بنجاح. <br>ستتوفر المواد قريباً.",
+        "endedStatus": "تم الاختتام",
+        "footerCities": "طشقند · سمرقند · ترمذ",
+        "hours": "ساعة",
+        "liveDesc": "تجري حالياً الجلسات الفرعية الرسمية في مركز الحضارة الإسلامية.",
+        "liveStatus": "مباشر",
+        "liveTitle": "المنتدى مستمر حالياً",
+        "minutes": "دقيقة",
+        "seconds": "ثانية",
+        "statusDefault": "حالة المنتدى",
+      },
+      city: {
+        "samarqand": "سمرقند",
+        "tashkent": "طشقند",
+        "termiz": "ترمذ",
+        "surxondaryo": "سرخنداريا",
+      },
       "sched.d1.1.time": "وفقاً للجدول الزمني",
       "sched.d1.1.event": "استقبال المشاركين في مطار طشقند الدولي. نقلهم إلى الفندق وتسكينهم.",
       "sched.d1.2.time": "طوال اليوم",
@@ -3858,6 +4087,30 @@
       "sched.d1.8.event": "عشاء رسمي من قبل المنظمين.<br/>(على شرفة مبنى مركز الحضارة الإسلامية في أوزبكستان)",
       "sched.d1.9.time": "22:00",
       "sched.d1.9.event": "نقل إلى الفندق والاستراحة.",
+      "sched.d2.1.time": "08:30-09:00",
+      "sched.d2.1.event": "تسجيل المشاركين.",
+      "sched.d2.2.time": "09:00-11:00",
+      "sched.d2.2.event": "<strong>الافتتاح الرسمي للمؤتمر</strong><br/>• تلاوة القرآن الكريم وعرض فيلم تعريفي.<br/>• رسالة تهنئة من رئيس جمهورية أوزبكستان (يلقيها خير الدين sultanov).<br/>• كلمات المتحدثين المحليين والدوليين: مظفر كاميلوف، سالم المالك، الشيخ نور الدين خالق نظر، شيخ الإسلام الله شكر باشازاده، عبد الكريم العيسى (رسالة فيديو)، عبد الرحمن بن عبد الله زايد، سلطان رايف، كورشاد زورلو، محمود إيرول قليج، فاريت محمد شين، فرحان نظامي (رسالة فيديو).<br/>• صورة جماعية.",
+      "sched.d2.3.time": "11:00-12:00",
+      "sched.d2.3.event": "<span class=\"session-badge\">الجلسة العامة الأولى</span> <strong>«التراث الروحي للحضارة الإسلامية: الحديث والفقه وعلم اللاهوت والتنوير»</strong><br/>• عروض المتحدثين المحليين والدوليين (قسم المفتين: الشيخ نور الدين خالق نظر، الشيخ نظير محمد عياد، الشيخ أحمد الحسنات، الشيخ طلعت تاجدين، الشيخ نوريزباي تاغانولي، الشيخ عبد العزيز ذاكيروف، الشيخ سعيد مكرم عبد القادر زاده).",
+      "sched.d2.4.time": "12:00-13:00",
+      "sched.d2.4.event": "<span class=\"session-badge\">الجلسة العامة الثانية</span> <strong>«مركز الحضارة الإسلامية في أوزبكستان — منصة دولية للأفكار العلمية والتعليمية المبتكرة»</strong><br/>• عروض المتحدثين المحليين والدوليين حول الموضوع (قسم وزراء الثقافة: أوزودبيك نزاربيكوف، شير أحمد حقاني، أورنغزيب خان خيتشي، عماد عبد الله حمدان، ستانكو بلاغويفيتش).",
+      "sched.d2.5.time": "13:00-14:00",
+      "sched.d2.5.event": "<strong>الغداء</strong><br/>(في مبنى مركز الحضارة الإسلامية ومطعم «Khan Ahmad»).",
+      "sched.d2.6.time": "14:00-15:00",
+      "sched.d2.6.event": "<span class=\"session-badge\">الجلسة العامة الثالثة</span> <strong>«الإصلاحات في المجال الديني والتعليمي في أوزبكستان الجديدة: الأفكار المبتكرة والتوجهات الاستراتيجية للنهضة الثالثة»</strong><br/>• عروض المتحدثين المحليين والدوليين (قسم وزراء الشؤون الدينية: أحمد التوفيق (رسالة فيديو)، صادق جان توشبويف، أسامة الأزهري، رامين ماميدوف، ذو الكفل حسن، تالانتبيك تاشيبيكوف، سليمان دولت زاده).",
+      "sched.d2.7.time": "15:00-16:00",
+      "sched.d2.7.event": "<span class=\"session-badge\">الجلسة العامة الرابعة</span> <strong>«التراث العظيم للماضي — أساس مستقبل مستنير»</strong><br/>• عروض المتحدثين المحليين والدوليين (قسم رؤساء المنظمات الدولية: عظمات زيو، شاهين مصطفى ييف، طه أيهان، عبد الفتاح سليمان عبد الله، أكتوتي رايمكولوفا، طارق علي بخيت (رسالة فيديو)).",
+      "sched.d2.8.time": "16:00-17:00",
+      "sched.d2.8.event": "<span class=\"session-badge\">الجلسة العامة الخامسة</span> <strong>«دور التعليم والمكتبات والمصادر المخطوطة في الحفاظ على التراث الإسلامي»</strong><br/>• عروض المتحدثين المحليين والدوليين (قسم العلماء والخبراء المرموقين: حميد جان إشما تبيكوف، محمد زيتون رسمين، محمد شاهيم علي سعيد، عبد العزيز قنصوه، محمد أبو الخير شكري، عمرو الليثي).",
+      "sched.d2.9.time": "17:00-18:00",
+      "sched.d2.9.event": "<span class=\"session-badge\">الجلسة العامة السادسة</span> <strong>«الإمكانات الفكرية في الحضارة الإسلامية: النماذج التاريخية والتفسيرات المعاصرة»</strong><br/>• عروض المتحدثين المحليين والدوليين (قسم رؤساء المنظمات المختلفة: حبيب الله ساديباقوسيف، الشيخ محمد دويني، مظفر شيكر، دامير محي الدينوف، محمد عزم محمد عادل، غولتن بدر الدين، محمد سعيد أمور الهجري).",
+      "sched.d2.10.time": "18:00-18:30",
+      "sched.d2.10.event": "نتائج اليوم الأول للمنتدى.",
+      "sched.d2.11.time": "18:30-20:00",
+      "sched.d2.11.event": "برنامج حر.",
+      "sched.d2.12.time": "20:00-22:00",
+      "sched.d2.12.event": "<strong>حفل الاستقبال الرسمي</strong><br/>استقبال رسمي نيابة عن حكومة جمهورية أوزبكستان. عرض خرائط ثلاثية الأبعاد.<br/>(في الهواء الطلق أمام بوابة «خوارزم» لمركز الحضارة الإسلامية في أوزبكستان)",
       "sched.d3.1.time": "08:30-09:00",
       "sched.d3.1.event": "تسجيل المشاركين.",
       "sched.d3.2.time": "09:00-09:10",
@@ -4042,7 +4295,14 @@
       }
     });
     const htmlRoot = document.getElementById('html-root');
-    if (htmlRoot) htmlRoot.setAttribute('lang', currentLang);
+    if (htmlRoot) {
+      htmlRoot.setAttribute('lang', currentLang);
+      if (currentLang === 'ar') {
+        htmlRoot.setAttribute('dir', 'rtl');
+      } else {
+        htmlRoot.setAttribute('dir', 'ltr');
+      }
+    }
     document.querySelectorAll('.lang-dropdown-item').forEach(item => {
       item.classList.toggle('active', item.dataset.lang === currentLang);
     });
@@ -4052,7 +4312,8 @@
   const PAGE_TITLES = {
     uz: 'I Халқаро Ислом Цивилизацияси Форуми · 2026',
     ru: 'I Международный форум исламской цивилизации · 2026',
-    en: 'I International Forum on Islamic Civilization · 2026'
+    en: 'I International Forum on Islamic Civilization · 2026',
+    ar: 'المنتدى الدولي الأول للحضارة الإسلامية · 2026'
   };
 
   function setLanguage(lang) {
