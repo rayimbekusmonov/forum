@@ -460,11 +460,95 @@
   border: 1px solid rgba(212, 175, 55, 0.25);
   border-radius: 20px;
   padding: 24px;
-  width: 340px;
+  width: 370px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
   font-family: 'Inter', 'Noto Sans', sans-serif;
   backdrop-filter: blur(10px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Live thumbnail player (file:// fallback) */
+.kiosk-thumb-player {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border: 1px solid rgba(212,175,55,0.3);
+  background: #000;
+  aspect-ratio: 16/9;
+  display: block;
+  text-decoration: none;
+}
+.kiosk-thumb-player img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  filter: brightness(0.8);
+}
+.kiosk-thumb-player:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.65);
+}
+.kiosk-thumb-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff0000;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(255,0,0,0.5);
+  animation: kiosk-badge-pulse 2s ease-in-out infinite;
+}
+.kiosk-thumb-badge::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  animation: kiosk-dot-blink 1.2s step-end infinite;
+}
+@keyframes kiosk-badge-pulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(255,0,0,0.5); }
+  50% { box-shadow: 0 2px 16px rgba(255,0,0,0.9); }
+}
+@keyframes kiosk-dot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.kiosk-thumb-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 52px;
+  height: 52px;
+  background: rgba(255,0,0,0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(255,0,0,0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.kiosk-thumb-player:hover .kiosk-thumb-play {
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 6px 28px rgba(255,0,0,0.8);
+}
+.kiosk-thumb-play svg {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+  margin-left: 4px;
 }
   
   /* Kiosk kichraygandagi holati (Klass JS orqali qo'shiladi) */
@@ -3271,6 +3355,8 @@
         "minutes": "мин",
         "seconds": "сек",
         "statusDefault": "Форум ҳолати",
+        "watchLive": "YouTube орқали жонли кузатиш",
+        "localFileWarning": "Маҳаллий файл режимида (file://) видеони кўриш учун локал серверни ишга туширинг ёки қуйидаги тугма орқали тўғридан-тўғри YouTube'да томоша қилинг.",
       },
       city: {
         "tashkent": "Тошкент",
@@ -3636,6 +3722,8 @@
         "minutes": "мин",
         "seconds": "сек",
         "statusDefault": "Статус форума",
+        "watchLive": "Смотреть трансляцию на YouTube",
+        "localFileWarning": "В режиме локального файла (file://) для просмотра видео запустите локальный веб-сервер или нажмите кнопку ниже для перехода на YouTube.",
       },
       city: {
         "samarqand": "Самарканд",
@@ -4001,6 +4089,8 @@
         "minutes": "min",
         "seconds": "sec",
         "statusDefault": "Forum status",
+        "watchLive": "Watch Live on YouTube",
+        "localFileWarning": "In local file mode (file://), please run a local web server to watch the video, or click the button below to watch on YouTube.",
       },
       city: {
         "samarqand": "Samarkand",
@@ -4161,6 +4251,8 @@
         "minutes": "دقيقة",
         "seconds": "ثانية",
         "statusDefault": "حالة المنتدى",
+        "watchLive": "شاهد البث المباشر على يوتيوب",
+        "localFileWarning": "في وضع الملف المحلي (file://)، يرجى تشغيل خادم محلي لمشاهدة الفيديو، أو النقر على الزر أدناه للمشاهدة على يوتيوب.",
       },
       city: {
         "samarqand": "سمرقند",
@@ -4640,10 +4732,57 @@
         statusTextEl.style.color = "#10b981";
         if (dotEl) dotEl.classList.add("active");
         
+        const isLocalFile = window.location.protocol === 'file:';
+        const YT_ID = 'F2E1B30WDBM';
+        let mediaHtml = '';
+        
+        if (isLocalFile) {
+          // Premium thumbnail player — works on file:// (no iframe restrictions)
+          mediaHtml = `
+            <a href="https://www.youtube.com/live/${YT_ID}?si=67sOCrYFNyCR03ig" target="_blank" class="kiosk-thumb-player" title="Watch live on YouTube">
+              <img
+                src="https://i.ytimg.com/vi/${YT_ID}/maxresdefault.jpg"
+                onerror="this.src='https://i.ytimg.com/vi/${YT_ID}/hqdefault.jpg'"
+                alt="Live stream thumbnail"
+              />
+              <span class="kiosk-thumb-badge">LIVE</span>
+              <span class="kiosk-thumb-play">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+            </a>
+          `;
+        } else {
+          mediaHtml = `
+            <div class="kiosk-video-wrap" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); margin-bottom: 12px; background: #000;">
+              <iframe 
+                src="https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=0" 
+                title="Live Translation" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+              </iframe>
+            </div>
+          `;
+        }
+        
         bodyEl.innerHTML = `
           <div class="kiosk-live-msg">
-            <b style="color: #10b981;">● ${k.liveTitle}</b><br>
-            <span style="font-size: 13px; color: #ccc;">${k.liveDesc}</span>
+            <b style="color: #10b981; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+              <span class="live-dot active" style="position: static; display: inline-block;"></span>
+              ${k.liveTitle}
+            </b>
+            <div style="font-size: 13px; color: #ccc; margin-bottom: 12px;">${k.liveDesc}</div>
+            
+            ${mediaHtml}
+            
+            <a href="https://www.youtube.com/watch?v=F2E1B30WDBM" target="_blank" class="kiosk-youtube-btn" 
+               onmouseover="this.style.background='#d90000'" 
+               onmouseout="this.style.background='#ff0000'"
+               style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #ff0000; color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; transition: background 0.3s; margin-top: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.107C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.388.511a3.002 3.002 0 0 0-2.11 2.107C0 8.053 0 12 0 12s0 3.947-.502 5.837a3.003 3.003 0 0 0 2.11 2.107C4.495 20.455 12 20.455 12 20.455s7.505 0 9.388-.511a3.003 3.003 0 0 0 2.11-2.107C24 15.947 24 12 24 12s0-3.947-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              <span>${k.watchLive}</span>
+            </a>
           </div>
         `;
       } 
