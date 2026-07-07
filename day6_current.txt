@@ -1,0 +1,12 @@
+﻿=== Language: uz ===
+3238:       "sched.d6.1.time": "Алоҳида дастур доирасида",
+3239:       "sched.d6.1.event": "Ислом цивилизацияси маркази биносида соҳа мутахассислари, талабалар учун хорижлик экспертлар иштирокида маъруза, семинар ва давра суҳбатлари ташкил этиш.",
+=== Language: ru ===
+3603:       "sched.d6.1.time": "В рамках отдельной программы",
+3604:       "sched.d6.1.event": "Организация лекций, семинаров и круглых столов с участием зарубежных экспертов для специалистов сферы и студентов в здании Центра исламской цивилизации.",
+=== Language: en ===
+3968:       "sched.d6.1.time": "As part of a special program",
+3969:       "sched.d6.1.event": "Organizing lectures, seminars, and round tables with the participation of foreign experts for industry specialists and students in the Center of Islamic Civilization building.",
+=== Language: ar ===
+4362:       "sched.d6.1.time": "في إطار برنامج خاص",
+4363:       "sched.d6.1.event": "تنظيم محاضرات وندوات وحلقات نقاشية بمشاركة خبراء أجانب للمتخصصين في المجال والطلاب في مبنى مركز الحضارة الإسلامية.",
